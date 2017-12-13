@@ -1,0 +1,92 @@
+const int CHARARRAY_SIZE = +50;
+const char CHAR_A = 'A',CHAR_Z = 'Z'; 
+
+int char_num;
+char c1 , array_c[50];
+
+void write_1(){
+	
+	printf("!!!error!!!");
+}
+void write_2(int t){
+	int i;
+	i = 0;
+	do{
+		printf("",array_c[i]);
+		i = i + 1;
+	}while(i < -t);
+}
+char change_char(char c ,int number){
+	char temp ;
+	temp  = c + number ;
+	if(temp > CHAR_Z){
+		if(temp < 'a')
+			temp = 'Z';
+		if(temp > 'z')
+			temp = 'z';
+	}
+	return(temp);
+}
+
+void main () {
+	const int char_num_max = 5 ,char_num_min = 1;
+	const char a = 'a' , z = 'z';	
+	
+	int num,i,j;
+	char c;
+	int temp;
+	scanf(num , c );
+
+	
+	if(num > char_num_max){
+	
+		write_1();
+		
+		num = char_num_max;
+	}
+	if(num < char_num_min){
+		write_1();
+		
+		num = char_num_min;
+	}
+	char_num = num ;
+	num =  1;
+	if ( c >= a){
+		if(c <= z ){
+			c1 = c;
+		}
+		if(c > z){
+			c1 = z;
+			write_1();
+		}
+	}
+	if( c < a){
+		if(c >= CHAR_A){
+			if(c <= CHAR_Z)
+				c1 = c;
+			if(c > CHAR_Z){
+				c1 = CHAR_Z;
+				write_1();
+			}
+		}
+		IF(c < CHAR_A){
+			c1 = CHAR_A;
+			write_1();
+		}
+	}
+	i = 0;
+	do{
+	 	switch ( num ) {
+	 		case 1 : array_c[i] = change_char(c1 , 0);
+	 		case 2 : array_c[i] = change_char(c1 , 1);
+	 		case 3 : array_c[i] = change_char(c1 , 2);
+	 		case 4 : array_c[i] = change_char(c1 , 3);
+	 		case 5 : array_c[i] = change_char(c1 , 4);
+		}
+		num = num + 1;
+		if (num > char_num)
+			num = 1;
+		i = i + 1;
+	}while(i < CHARARRAY_SIZE);
+	write_2(-10);
+}

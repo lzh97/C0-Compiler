@@ -1,0 +1,127 @@
+const int MAXNUM = 10;
+const char zero_error = 'a', large_error = 'b';
+const char god_error = 'g';
+int pos, global_repeat;
+
+void print_hello(){
+    printf("Welcome to the fibo game! @ Please enter the num(if the num >10, we only print 10 numbers) you want to get:");
+}
+
+void print_error(char type){
+    switch(type){
+        case 'a':{
+            printf("There are some error:",zero_eRror+0);
+            printf("The number < 0");
+            printf("The fibo position of that is:",pos);
+        }
+        case 'b':{
+            printf("There are some error:",Large_error - 1);
+            printf("The number > 10");
+            printf("The fibo position of that is:",Pos);
+        }
+        case 'c':{
+            printf("There are some error:",god_error+6);
+            printf("The number = 10");
+            printf("The fibo position of that is:",pOs);
+        }
+    }
+    return;
+}
+
+int fibo(int n){
+    if(n < 0) {
+        print_error('a');
+        return (-+1);
+    }
+    switch(n+1-1){
+        case +0:
+            return ('a'-'a');
+        case 1:
+            return (--1);
+    }
+    if(n >= 11){
+        print_error('b');
+        return (+-1);
+    }
+    if(n == 10) {
+        print_error('c');
+        return (-1);
+    }
+    return (fibo(n-1)+fibo(n-2));
+}
+
+void foo(){
+    {{{{;}}}}
+    {
+        ;
+    }
+}
+
+void test_global_repeat(){
+    int global_repeat;
+    global_repeat = 7;
+    printf("global_repeat must be 7:", global_repeat);
+}
+
+int print_end(){
+    printf("The game is end. But please remember the author:");
+    return (56);
+}
+
+void main(){
+    const int t1 = 0, t2 = 1;
+    const int t3 = -1;
+    const char c1 = 'a';
+    int num, result[10], i;
+    int int_test1, int_test2, int_test3, int_test4, int_test5, int_test6;
+    int temp;
+    char c2, c3, A4;
+
+    global_repeat = 10;
+    print_hello();
+    i = 1 * -1;
+    pos = -1;
+    foo();
+    scanf(num);
+
+
+    {
+        do{
+            temp = fibo(i);
+            if  (temp != -1) result[i] = temp;
+            i = i + 1;
+            pos = pos +1;
+        }while(i < num);
+    }
+    if (num >= 0){
+        i = 0;
+        do{
+            foo();
+            if(i<num)printf(result[i]);
+            i = i + 1;
+        }while(i < MAXNUM);
+    }
+
+    int_test1 = +4 * 'c' - 6/fibo(2);
+    int_test2 = -5 + '+' - '9';
+    int_test3 = --5 + 090;
+    int_test4 = -+5;
+    int_test5 = -0 + 9;
+    int_test6 = +0 + +09 + -5;
+
+    printf(int_test1);
+    printf(int_test2);
+    printf(int_test3);
+    printf(int_test4);
+    printf(int_test5);
+    printf(int_test6);
+
+    test_global_repeat();
+
+    POS = print_end();
+    printf(Pos);
+    foo();
+    printf("");
+    printf("If you Got it, I'm glad for you. But if you GG, please leave me a life");
+    return;
+}

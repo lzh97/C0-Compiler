@@ -1,0 +1,100 @@
+const int MAX = 100, MIN = 002;
+const char a = 'a', z = 'z';
+
+int base[200], exp[200];
+int cnt;
+
+
+int mod(int x, int y){
+	return (x - x / y * y);
+}
+
+void init(){
+	int tag[1005];
+	int i, j;
+	i = min;
+	cnt = 0;
+	do{
+		tag[i] = 1;
+		i = i + 1;
+	}while(i <= max);
+	i = min;
+	do{
+		if(tag[i]){
+			base[cnt] = i;
+			exp[cnt] = 0;
+			cnt = cnt + 1;
+			j = 2;
+			if(i * j <= max)
+				do{
+					tag[i * j] = 0;
+					j = j + 1;
+				}while(i * j <= max);
+		}
+		i = i + 1;
+	}while(i <= max);
+}
+
+void resolve(int num, int pos){
+	if(num == 1)
+		return;
+	if(mod(num, base[pos]) == 0){
+		exp[pos] = exp[pos] + 1;
+		resolve(num / base[pos], pos);
+		return;
+	}
+	resolve(num, pos + 1);
+}
+
+void main(){
+	char func;
+	int num, i, j;
+	init();
+	scanf(func, num);
+	switch(func){
+		case 'r':{ 
+			if(num < min){
+				printf("Number is out of range.");
+				return;
+			}
+			if(num > max){
+				printf("Number is out of range.");
+				return;
+			}
+			resolve(num, 0);
+			printf(num);
+			printf("=");
+			j = 0;
+			i = 0;
+			do{
+				if(exp[i] > 0){
+					if(j)
+						printf("*");
+					printf(base[i]);
+					if(exp[i] > 1)
+						printf("^", exp[i]);
+					j = 1;
+				}
+				i = i + 1;
+			}while(i < cnt);
+		}
+		case 't':{
+			if(num < min){
+				printf("Number is out of range.");
+				return;
+			}
+			if(num > max){
+				printf("Number is out of range.");
+				return;
+			}
+			printf("Prime numbers:");
+			i = 0;
+			do{
+				printf(" ", base[i]);
+				i = i + 1;
+				if(i >= cnt)
+					return;
+			}while(base[i] <= num);
+		}
+	}
+}

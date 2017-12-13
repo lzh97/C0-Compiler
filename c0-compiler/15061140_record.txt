@@ -1,0 +1,367 @@
+<Program>
+  IntSym      int
+  <ConstantDeclare>
+  </ConstantDeclare>
+  <VariableDeclare>
+    <VariableDefine>(Maybe)
+      Identity    num1
+      Semic       ;
+    </VariableDefine>(Right)
+    IntSym      int
+    <VariableDefine>(Maybe)
+      Identity    mod
+      LPare       (
+    </VariableDefine>(Wrong)
+  </VariableDeclare>
+  <FunctionDeclare or ProcedureDeclare>
+    <FunctionDefine>
+      IntSym      int
+      <ParameterTable>
+        Identity    x
+        Comma       ,
+        IntSym      int
+        Identity    y
+        RPare       )
+      </ParameterTable>
+      LBrac       {
+      ReturnSym   return
+      <CompoundStatement>
+        <ConstantDeclare>
+        </ConstantDeclare>
+        <VariableDeclare>
+          <VariableDefine>
+          </VariableDefine>
+        </VariableDeclare>
+        <Statements>
+          <Statement>
+            <ReturnStatement>
+              LPare       (
+              Identity    x
+              <Expression>
+                <Term>
+                  <Factor>
+                    Minus       -
+                  </Factor>
+                </Term>
+                Identity    x
+                <Term>
+                  <Factor>
+                    Divide      /
+                  </Factor>
+                  Identity    y
+                  <Factor>
+                    Times       *
+                  </Factor>
+                  Identity    y
+                  <Factor>
+                    RPare       )
+                  </Factor>
+                </Term>
+              </Expression>
+              Semic       ;
+            </ReturnStatement>
+            RBrac       }
+          </Statement>
+        </Statements>
+      </CompoundStatement>
+      IntSym      int
+    </FunctionDefine>
+    <FunctionDefine>
+      Identity    gcd
+      LPare       (
+      IntSym      int
+      <ParameterTable>
+        Identity    x
+        Comma       ,
+        IntSym      int
+        Identity    y
+        RPare       )
+      </ParameterTable>
+      LBrac       {
+      IfSym       if
+      <CompoundStatement>
+        <ConstantDeclare>
+        </ConstantDeclare>
+        <VariableDeclare>
+          <VariableDefine>
+          </VariableDefine>
+        </VariableDeclare>
+        <Statements>
+          <Statement>
+            <IfStatement>
+              LPare       (
+              Identity    y
+              <Condition>
+                <Expression>
+                  <Term>
+                    <Factor>
+                      Equ         ==
+                    </Factor>
+                  </Term>
+                </Expression>
+                IntConst    0
+                <Expression>
+                  <Term>
+                    <Factor>
+                      <Integer>
+                        RPare       )
+                      </Integer>
+                    </Factor>
+                  </Term>
+                </Expression>
+              </Condition>
+              ReturnSym   return
+              <Statement>
+                <ReturnStatement>
+                  LPare       (
+                  Identity    x
+                  <Expression>
+                    <Term>
+                      <Factor>
+                        RPare       )
+                      </Factor>
+                    </Term>
+                  </Expression>
+                  Semic       ;
+                </ReturnStatement>
+                ReturnSym   return
+              </Statement>
+            </IfStatement>
+          </Statement>
+          <Statement>
+            <ReturnStatement>
+              LPare       (
+              Identity    gcd
+              <Expression>
+                <Term>
+                  <Factor>
+                    LPare       (
+                    Identity    y
+                    <FunctionCallStatement>
+                      <ValueParameterTable>
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              Comma       ,
+                            </Factor>
+                          </Term>
+                        </Expression>
+                        Identity    mod
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              LPare       (
+                              Identity    x
+                              <FunctionCallStatement>
+                                <ValueParameterTable>
+                                  <Expression>
+                                    <Term>
+                                      <Factor>
+                                        Comma       ,
+                                      </Factor>
+                                    </Term>
+                                  </Expression>
+                                  Identity    y
+                                  <Expression>
+                                    <Term>
+                                      <Factor>
+                                        RPare       )
+                                      </Factor>
+                                    </Term>
+                                  </Expression>
+                                </ValueParameterTable>
+                                RPare       )
+                              </FunctionCallStatement>
+                            </Factor>
+                          </Term>
+                        </Expression>
+                      </ValueParameterTable>
+                      RPare       )
+                    </FunctionCallStatement>
+                  </Factor>
+                </Term>
+              </Expression>
+              Semic       ;
+            </ReturnStatement>
+            RBrac       }
+          </Statement>
+        </Statements>
+      </CompoundStatement>
+      VoidSym     void
+    </FunctionDefine>
+    <ProcedureDefine>
+      MainSym     main
+    </ProcedureDefine>
+  </FunctionDeclare or ProcedureDeclare>
+  <MainDefine>
+    LPare       (
+    RPare       )
+    LBrac       {
+    IntSym      int
+    <CompoundStatement>
+      <ConstantDeclare>
+      </ConstantDeclare>
+      <VariableDeclare>
+        <VariableDefine>
+          Identity    num2
+          Semic       ;
+        </VariableDefine>
+        PrintfSym   printf
+        <VariableDefine>
+        </VariableDefine>
+      </VariableDeclare>
+      <Statements>
+        <Statement>
+          <PrintfStatement>
+            LPare       (
+            StringConst input two numbers(>0):
+            RPare       )
+            Semic       ;
+          </PrintfStatement>
+          ScanfSym    scanf
+        </Statement>
+        <Statement>
+          <ScanfStatement>
+            LPare       (
+            Identity    num1
+            Comma       ,
+            Identity    num2
+            RPare       )
+            Semic       ;
+          </ScanfStatement>
+          IfSym       if
+        </Statement>
+        <Statement>
+          <IfStatement>
+            LPare       (
+            Identity    num1
+            <Condition>
+              <Expression>
+                <Term>
+                  <Factor>
+                    Leq         <=
+                  </Factor>
+                </Term>
+              </Expression>
+              IntConst    0
+              <Expression>
+                <Term>
+                  <Factor>
+                    <Integer>
+                      RPare       )
+                    </Integer>
+                  </Factor>
+                </Term>
+              </Expression>
+            </Condition>
+            LBrac       {
+            <Statement>
+              PrintfSym   printf
+              <Statements>
+                <Statement>
+                  <PrintfStatement>
+                    LPare       (
+                    StringConst input error.
+                    RPare       )
+                    Semic       ;
+                  </PrintfStatement>
+                  ReturnSym   return
+                </Statement>
+                <Statement>
+                  <ReturnStatement>
+                    Semic       ;
+                  </ReturnStatement>
+                  RBrac       }
+                </Statement>
+              </Statements>
+              IfSym       if
+            </Statement>
+          </IfStatement>
+        </Statement>
+        <Statement>
+          <IfStatement>
+            LPare       (
+            Identity    num2
+            <Condition>
+              <Expression>
+                <Term>
+                  <Factor>
+                    Leq         <=
+                  </Factor>
+                </Term>
+              </Expression>
+              IntConst    0
+              <Expression>
+                <Term>
+                  <Factor>
+                    <Integer>
+                      RPare       )
+                    </Integer>
+                  </Factor>
+                </Term>
+              </Expression>
+            </Condition>
+            LBrac       {
+            <Statement>
+              PrintfSym   printf
+              <Statements>
+                <Statement>
+                  <PrintfStatement>
+                    LPare       (
+                    StringConst input error.
+                    RPare       )
+                    Semic       ;
+                  </PrintfStatement>
+                  ReturnSym   return
+                </Statement>
+                <Statement>
+                  <ReturnStatement>
+                    Semic       ;
+                  </ReturnStatement>
+                  RBrac       }
+                </Statement>
+              </Statements>
+              PrintfSym   printf
+            </Statement>
+          </IfStatement>
+        </Statement>
+        <Statement>
+          <PrintfStatement>
+            LPare       (
+            Identity    gcd
+            <Expression>
+              <Term>
+                <Factor>
+                  LPare       (
+                  Identity    num1
+                  <FunctionCallStatement>
+                    <ValueParameterTable>
+                      <Expression>
+                        <Term>
+                          <Factor>
+                            Comma       ,
+                          </Factor>
+                        </Term>
+                      </Expression>
+                      Identity    num2
+                      <Expression>
+                        <Term>
+                          <Factor>
+                            RPare       )
+                          </Factor>
+                        </Term>
+                      </Expression>
+                    </ValueParameterTable>
+                    RPare       )
+                  </FunctionCallStatement>
+                </Factor>
+              </Term>
+            </Expression>
+            Semic       ;
+          </PrintfStatement>
+          RBrac       }
+        </Statement>
+      </Statements>
+    </CompoundStatement>
+  </MainDefine>
+</Program>

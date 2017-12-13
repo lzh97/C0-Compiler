@@ -1,0 +1,44 @@
+  var,        int,           ,       num1
+ func,        int,           ,        mod
+ para,        int,           ,          x
+ para,        int,           ,          y
+    /,          x,          y,      $tmp1
+    *,      $tmp1,          y,      $tmp2
+    -,          x,      $tmp2,      $tmp3
+  ret,      $tmp3,           ,           
+  ret,           ,           ,           
+ func,        int,           ,        gcd
+ para,        int,           ,          x
+ para,        int,           ,          y
+   ==,          y,          0,      $tmp4
+   jz,      $tmp4,      $lab0,           
+  ret,          x,           ,           
+label,      $lab0,           ,           
+  val,          y,           ,           
+  val,          x,           ,           
+  val,          y,           ,           
+ call,        mod,           ,      $tmp5
+  val,      $tmp5,           ,           
+ call,        gcd,           ,      $tmp6
+  ret,      $tmp6,           ,           
+  ret,           ,           ,           
+ proc,           ,           ,       main
+  var,        int,           ,       num2
+prints,      $str0,           ,           
+ scan,           ,           ,       num1
+ scan,           ,           ,       num2
+   <=,       num1,          0,      $tmp7
+   jz,      $tmp7,      $lab1,           
+prints,      $str1,           ,           
+  ret,           ,           ,           
+label,      $lab1,           ,           
+   <=,       num2,          0,      $tmp8
+   jz,      $tmp8,      $lab2,           
+prints,      $str2,           ,           
+  ret,           ,           ,           
+label,      $lab2,           ,           
+  val,       num1,           ,           
+  val,       num2,           ,           
+ call,        gcd,           ,      $tmp9
+printi,      $tmp9,           ,           
+  ret,           ,           ,           
