@@ -1,4 +1,11 @@
-  var,        int,           ,       num1
+const,        int,       1000,        max
+const,        int,          2,        min
+const,       char,         97,          a
+const,       char,        122,          z
+  arr,        int,        200,       base
+  arr,        int,        200,        exp
+  var,        int,           ,        cnt
+  var,        int,           ,          x
  func,        int,           ,        mod
  para,        int,           ,          x
  para,        int,           ,          y
@@ -7,38 +14,149 @@
     -,          x,      $tmp2,      $tmp3
   ret,      $tmp3,           ,           
   ret,           ,           ,           
- func,        int,           ,        gcd
- para,        int,           ,          x
- para,        int,           ,          y
-   ==,          y,          0,      $tmp4
-   jz,      $tmp4,      $lab0,           
-  ret,          x,           ,           
+ proc,           ,           ,       init
+  arr,        int,       1005,        tag
+  var,        int,           ,          i
+  var,        int,           ,          j
+    =,        min,           ,          i
+    =,      $tmp4,           ,        cnt
 label,      $lab0,           ,           
-  val,          y,           ,           
-  val,          x,           ,           
-  val,          y,           ,           
- call,        mod,           ,      $tmp5
-  val,      $tmp5,           ,           
- call,        gcd,           ,      $tmp6
-  ret,      $tmp6,           ,           
+ sarr,      $tmp5,          i,        tag
+    +,          i,      $tmp6,      $tmp7
+    =,      $tmp7,           ,          i
+   <=,          i,        max,      $tmp8
+  jnz,      $tmp8,      $lab0,           
+    =,        min,           ,          i
+label,      $lab1,           ,           
+ larr,        tag,          i,      $tmp9
+   jz,      $tmp9,      $lab2,           
+ sarr,          i,        cnt,       base
+ sarr,     $tmp10,        cnt,        exp
+    +,        cnt,     $tmp11,     $tmp12
+    =,     $tmp12,           ,        cnt
+    =,     $tmp13,           ,          j
+    *,          i,          j,     $tmp14
+   <=,     $tmp14,        max,     $tmp15
+   jz,     $tmp15,      $lab3,           
+label,      $lab4,           ,           
+    *,          i,          j,     $tmp16
+ sarr,     $tmp17,     $tmp16,        tag
+    +,          j,     $tmp18,     $tmp19
+    =,     $tmp19,           ,          j
+    *,          i,          j,     $tmp20
+   <=,     $tmp20,        max,     $tmp21
+  jnz,     $tmp21,      $lab4,           
+label,      $lab3,           ,           
+label,      $lab2,           ,           
+    +,          i,     $tmp22,     $tmp23
+    =,     $tmp23,           ,          i
+   <=,          i,        max,     $tmp24
+  jnz,     $tmp24,      $lab1,           
+  ret,           ,           ,           
+ proc,           ,           ,    resolve
+ para,        int,           ,        num
+ para,        int,           ,        pos
+   ==,        num,     $tmp25,     $tmp26
+   jz,     $tmp26,      $lab5,           
+  ret,           ,           ,           
+label,      $lab5,           ,           
+  val,        num,           ,           
+ larr,       base,        pos,     $tmp27
+  val,     $tmp27,           ,           
+ call,        mod,           ,     $tmp28
+   ==,     $tmp28,     $tmp29,     $tmp30
+   jz,     $tmp30,      $lab6,           
+ larr,        exp,        pos,     $tmp31
+    +,     $tmp31,     $tmp32,     $tmp33
+ sarr,     $tmp33,        pos,        exp
+ larr,       base,        pos,     $tmp34
+    /,        num,     $tmp34,     $tmp35
+  val,     $tmp35,           ,           
+  val,        pos,           ,           
+ call,    resolve,           ,           
+  ret,           ,           ,           
+label,      $lab6,           ,           
+  val,        num,           ,           
+    +,        pos,     $tmp36,     $tmp37
+  val,     $tmp37,           ,           
+ call,    resolve,           ,           
   ret,           ,           ,           
  proc,           ,           ,       main
-  var,        int,           ,       num2
-prints,      $str0,           ,           
- scan,           ,           ,       num1
- scan,           ,           ,       num2
-   <=,       num1,          0,      $tmp7
-   jz,      $tmp7,      $lab1,           
-prints,      $str1,           ,           
+  var,       char,           ,       func
+  var,        int,           ,        num
+  var,        int,           ,          i
+  var,        int,           ,          j
+ call,       init,           ,           
+ scan,           ,           ,       func
+ scan,           ,           ,        num
+   ==,       func,        114,     $tmp38
+   jz,     $tmp38,      $lab7,           
+    <,        num,        min,     $tmp39
+   jz,     $tmp39,      $lab8,           
+prints, "Number is out of range.",           ,           
   ret,           ,           ,           
-label,      $lab1,           ,           
-   <=,       num2,          0,      $tmp8
-   jz,      $tmp8,      $lab2,           
-prints,      $str2,           ,           
+label,      $lab8,           ,           
+    >,        num,        max,     $tmp40
+   jz,     $tmp40,      $lab9,           
+prints, "Number is out of range.",           ,           
   ret,           ,           ,           
-label,      $lab2,           ,           
-  val,       num1,           ,           
-  val,       num2,           ,           
- call,        gcd,           ,      $tmp9
-printi,      $tmp9,           ,           
+label,      $lab9,           ,           
+  val,        num,           ,           
+  val,     $tmp41,           ,           
+ call,    resolve,           ,           
+printi,        num,           ,           
+prints,        "=",           ,           
+    =,     $tmp42,           ,          j
+    =,     $tmp43,           ,          i
+label,     $lab10,           ,           
+ larr,        exp,          i,     $tmp44
+    >,     $tmp44,     $tmp45,     $tmp46
+   jz,     $tmp46,     $lab11,           
+   jz,          j,     $lab12,           
+prints,        "*",           ,           
+label,     $lab12,           ,           
+ larr,       base,          i,     $tmp47
+printi,     $tmp47,           ,           
+ larr,        exp,          i,     $tmp48
+    >,     $tmp48,     $tmp49,     $tmp50
+   jz,     $tmp50,     $lab13,           
+prints,        "^",           ,           
+ larr,        exp,          i,     $tmp51
+printi,     $tmp51,           ,           
+label,     $lab13,           ,           
+    =,     $tmp52,           ,          j
+label,     $lab11,           ,           
+    +,          i,     $tmp53,     $tmp54
+    =,     $tmp54,           ,          i
+    <,          i,        cnt,     $tmp55
+  jnz,     $tmp55,     $lab10,           
+label,      $lab7,           ,           
+   ==,       func,        116,     $tmp56
+   jz,     $tmp56,     $lab14,           
+    <,        num,        min,     $tmp57
+   jz,     $tmp57,     $lab15,           
+prints, "Number is out of range.",           ,           
+  ret,           ,           ,           
+label,     $lab15,           ,           
+    >,        num,        max,     $tmp58
+   jz,     $tmp58,     $lab16,           
+prints, "Number is out of range.",           ,           
+  ret,           ,           ,           
+label,     $lab16,           ,           
+prints, "Prime numbers:",           ,           
+    =,     $tmp59,           ,          i
+label,     $lab17,           ,           
+prints,        " ",           ,           
+ larr,       base,          i,     $tmp60
+printi,     $tmp60,           ,           
+    +,          i,     $tmp61,     $tmp62
+    =,     $tmp62,           ,          i
+   >=,          i,        cnt,     $tmp63
+   jz,     $tmp63,     $lab18,           
+  ret,           ,           ,           
+label,     $lab18,           ,           
+ larr,       base,          i,     $tmp64
+   <=,     $tmp64,        num,     $tmp65
+  jnz,     $tmp65,     $lab17,           
+label,     $lab14,           ,           
   ret,           ,           ,           

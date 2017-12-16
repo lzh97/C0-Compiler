@@ -23,11 +23,11 @@ Identity* Search(char name[], int code) {
 	return NULL;
 }
 
-void AddConst(char name[], int type, int value, bool isglobal) {
+Identity* AddConst(char name[], int type, int value, bool isglobal) {
 	if (isglobal) {
 		if (Search(name, 2) != NULL) {
 			Error(DUPLICATE_DEFINATION_ERROR);
-			return;
+			return NULL;
 		}
 		strcpy_s(global[gsize].name, name);
 		global[gsize].kind = CONSTANT;
@@ -35,11 +35,12 @@ void AddConst(char name[], int type, int value, bool isglobal) {
 		global[gsize].value = value;
 		global[gsize].isglobal = true;
 		global[gsize++].hash = Hash(name);
+		return &global[gsize - 1];
 	}
 	else {
 		if (Search(name, 1) != NULL) {
 			Error(DUPLICATE_DEFINATION_ERROR);
-			return;
+			return NULL;
 		}
 		strcpy_s(local[lsize].name, name);
 		local[lsize].kind = CONSTANT;
@@ -48,6 +49,7 @@ void AddConst(char name[], int type, int value, bool isglobal) {
 		local[lsize].isglobal = false;
 		local[lsize++].hash = Hash(name);
 		if (current != NULL)current->r++;
+		return &local[lsize - 1];
 	}
 }
 
@@ -113,6 +115,7 @@ Identity* AddFunc(char name[], int type) {
 	}
 	strcpy_s(global[gsize].name, name);
 	global[gsize].kind = FUNCTION;
+	global[gsize].type = type;
 	global[gsize].isglobal = true;
 	global[gsize++].hash = Hash(name);
 	return &global[gsize - 1];

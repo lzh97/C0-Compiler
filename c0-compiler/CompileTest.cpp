@@ -15,6 +15,7 @@ extern int lsize;
 extern Quadruple midcode[1024];
 extern int cnt;
 extern Identity* current;
+extern char ch;
 
 int level = 0;
 
@@ -141,6 +142,10 @@ void LexicalTest() {
 		break;
 	case semic:
 		fputs("Semic       ;", compilerecord);
+		break;
+	case none:
+		fputs("Invalid Sym ", compilerecord);
+		fputc(ch, compilerecord);
 		break;
 	}
 	fputs("\n", compilerecord);

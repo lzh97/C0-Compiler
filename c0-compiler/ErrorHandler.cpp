@@ -1,14 +1,28 @@
 #include "stdafx.h"
 
+extern int ln;
 extern int lc;
 extern char ch;
 extern char id[IdentityMaxLen];
 extern char name[IdentityMaxLen];
 extern bool success;
+extern Symbol symbol;
+extern int num;
+extern Identity* current;
+
+Symbol skipto[SymbolNum];
+int count = 0;
+
+char str[IdentityMaxLen];
+
+void Skip();
+void AddSkipTo(Symbol sym);
+bool inSkipToSet();
+char* Symbol2String(Symbol sym);
 
 void Error(int code) {
 	success = false;
-	printf("Error :   ");
+	printf("Error : ");
 	switch (code) {
 	case FILE_NOT_EXIST_ERROR:
 		printf("Source file does not exist");
@@ -47,7 +61,7 @@ void Error(int code) {
 		printf("In line %d, missing array index", lc);
 		break;
 	case SYNTAX_ERROR:
-		printf("In line %d, unrecognized syntax", lc);
+		printf("In line %d, invalid syntax \"%s\"", lc, Symbol2String(symbol));
 		break;
 	case MISSING_RIGHT_BRACE_ERROR:
 		printf("In line %d, missing \'}\'", lc);
@@ -115,6 +129,15 @@ void Error(int code) {
 	case UNMATCHED_PARA_TYPE_ERROR:
 		printf("In line %d, unmatched parameter type in function call", lc);
 		break;
+	case MISSING_RETURN_VALUE_ERROR:
+		printf("In function \"%s\", missing return value", current->name);
+		break;
+	case FUNC_RETURN_VALUE_ERROR:
+		printf("In line %d, there is no return value", lc);
+		break;
+	case UNMATCHED_RETURN_TYPE_ERROR:
+		printf("In line %d, unmatched return type for function \"%s\"", lc, current->name);
+		break;
 	}
 	printf("\n");
 }
@@ -128,6 +151,141 @@ void Warning(int code) {
 	case ASSIGN_INTTOCHAR_WARNING:
 		printf("In line %d, assigning integer to character", lc);
 		break;
+	case MAY_MISSING_RETURN_VALUE_WARNING:
+		printf("In function \"%s\", probably missing return value", current->name);
+		break;
+	case PROC_RETURN_VALUE_WARNING:
+		printf("In line %d, there is return value", lc);
+		break;
 	}
 	printf("\n");
+}
+
+void Skip() {
+	while (!inSkipToSet())
+		NextSymbol();
+	count = 0;
+}
+
+void AddSkipTo(Symbol sym) {
+	skipto[count++] = sym;
+}
+
+bool inSkipToSet() {
+	for (int i = 0; i < count; i++)
+		if (symbol == skipto[i])
+			return true;
+	return false;
+}
+
+char* Symbol2String(Symbol sym) {
+	switch (sym) {
+	case voidsym:return"void";
+	case intsym:return"int";
+	case charsym:return"char";
+	case mainsym:return"main";
+	case dosym:return"do";
+	case whilesym:return"while";
+	case ifsym:return"if";
+	case switchsym:return"switch";
+	case casesym:return"case";
+	case constsym:return"const";
+	case scanfsym:return"scanf";
+	case printfsym:return"printf";
+	case returnsym:return"return";
+	case identity:strcpy_s(str, id); return str;
+	case intconst:_itoa_s(num, str, 10); return str;
+	case charconst:str[0] = ch; str[1] = '\0'; return str;
+	case stringconst:strcpy_s(str, "\""); strcat_s(str, id); strcat_s(str, "\"");  return str;
+	case plus:return"+";
+	case minus:return"-";
+	case times:return"*";
+	case divide:return"/";
+	case lpare:return"(";
+	case rpare:return")";
+	case lbrak:return"[";
+	case rbrak:return"]";
+	case lbrac:return"{";
+	case rbrac:return"}";
+	case assign:return"=";
+	case equ:return"==";
+	case les:return"<";
+	case gtr:return">";
+	case leq:return"<=";
+	case geq:return">=";
+	case neq:return"!=";
+	case comma:return",";
+	case colon:return":";
+	case semic:return";";
+	case none:str[0] = ch; str[1] = '\0'; return str;
+	}
+	return "";
+}
+
+void SkipConstDefine() {
+	AddSkipTo(comma);
+	AddSkipTo(semic);
+	AddSkipTo(constsym);
+	AddSkipTo(intsym);
+	AddSkipTo(charsym);
+	AddSkipTo(voidsym);
+	Skip();
+}
+void SkipVarDefine() {
+	AddSkipTo(rbrak);
+	AddSkipTo(comma);
+	AddSkipTo(semic);
+	AddSkipTo(intsym);
+	AddSkipTo(charsym);
+	AddSkipTo(voidsym);
+	Skip();
+}
+void SkipFuncDeclare() {
+	AddSkipTo(intsym);
+	AddSkipTo(charsym);
+	AddSkipTo(voidsym);
+	Skip();
+}
+void SkipParaTable() {
+	AddSkipTo(comma);
+	AddSkipTo(rpare);
+	AddSkipTo(lbrac);
+	AddSkipTo(rbrac);
+	AddSkipTo(constsym);
+	AddSkipTo(intsym);
+	AddSkipTo(charsym);
+	AddSkipTo(voidsym);
+	Skip();
+}
+void SkipStatement() {
+	AddSkipTo(comma);
+	AddSkipTo(semic);
+	AddSkipTo(lbrac);
+	AddSkipTo(rbrac);
+	AddSkipTo(ifsym);
+	AddSkipTo(dosym);
+	AddSkipTo(switchsym);
+	AddSkipTo(identity);
+	AddSkipTo(scanfsym);
+	AddSkipTo(printfsym);
+	AddSkipTo(returnsym);
+	AddSkipTo(intsym);
+	AddSkipTo(charsym);
+	AddSkipTo(voidsym);
+	Skip();
+}
+void SkipFactor() {
+	AddSkipTo(semic);
+	AddSkipTo(ifsym);
+	AddSkipTo(dosym);
+	AddSkipTo(switchsym);
+	AddSkipTo(identity);
+	AddSkipTo(scanfsym);
+	AddSkipTo(printfsym);
+	AddSkipTo(returnsym);
+	AddSkipTo(plus);
+	AddSkipTo(minus);
+	AddSkipTo(times);
+	AddSkipTo(divide);
+	Skip();
 }

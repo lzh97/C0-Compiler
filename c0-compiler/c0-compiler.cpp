@@ -36,7 +36,7 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	filepath[len - 4] = '\0';
 	strcat_s(filepath, ".asm");
 	fopen_s(&targetcode, filepath, "w");
-	if (source == NULL)	{
+	if (source == NULL) {
 		Error(FILE_NOT_EXIST_ERROR);
 		exit(0);
 	}

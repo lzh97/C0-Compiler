@@ -27,7 +27,7 @@ struct Identity {
 	int l, r;					//¾Ö²¿·ûºÅË÷Òý
 };
 
-void AddConst(char name[], int type, int value, bool isglobal);
+Identity* AddConst(char name[], int type, int value, bool isglobal);
 void AddArray(char name[], int type, int size, bool isglobal);
 Identity* AddVar(char name[], int type, bool isglobal);
 Identity* AddFunc(char name[], int type);

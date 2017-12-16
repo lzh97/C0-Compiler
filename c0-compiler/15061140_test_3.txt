@@ -1,4 +1,4 @@
-const int MAX = 100, MIN = 002;
+const int MAX = 1000, MIN = 002;
 const char a = 'a', z = 'z';
 
 int base[200], exp[200];

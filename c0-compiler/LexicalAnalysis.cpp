@@ -176,8 +176,8 @@ void NextSymbol() {
 		symbol = semic;
 	else {
 		Error(INVALID_SYMBOL_ERROR);
+		symbol = none;
 		NextSymbol();
-		return;
 	}
 	LexicalTest();
 }

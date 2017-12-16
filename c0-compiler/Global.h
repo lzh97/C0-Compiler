@@ -37,8 +37,10 @@ enum Symbol {
 	neq,		//!=
 	comma,		//,
 	colon,		//:
-	semic		//;
+	semic,		//;
+	none
 };
+const int SymbolNum = 38;
 
 const int KeyWordNum = 13;
 const char KeyWord[KeyWordNum][10] = {

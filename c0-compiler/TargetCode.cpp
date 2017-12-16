@@ -55,15 +55,12 @@ void GenerateMIPS32() {
 		ident = Search(midcode[i].res, 2);
 		AllocGlobal(ident, "", "");				
 	}
-	fprintf(targetcode, "$stack: .space %d\n", ParaMaxNum * DATASIZE * 5);		//参数栈分配
 	for(int j = 0; j < cnt; j++)	//字符串常量分配
 		if (midcode[j].op == PRINTS) {
 			AllocGlobal(NULL, StringLabel(str), midcode[j].op1);
 			strcpy_s(midcode[j].op1, StringLabel(str++));
 		}
 	fprintf(targetcode, ".text\n");
-	MIPS_LA(t8, "$stack");
-	MIPS_LI(t9, 4);
 	MIPS_JAL("main");
 	MIPS_LI(v0, 10);
 	MIPS_SYSCALL();
@@ -78,7 +75,7 @@ void GenerateMIPS32() {
 			top = offset = 0;
 			current = Search(midcode[i].res, 2);
 			MIPS_LABEL(midcode[i].res);
-			MIPS_SUBI(t8, t8, current->size * DATASIZE);
+			MIPS_SUBI(gp, gp, current->size * DATASIZE);
 			MIPS_SW(fp, sp, -offset++ * DATASIZE);		//保存退栈信息
 			MIPS_SW(ra, sp, -offset++ * DATASIZE);
 			for (int j = current->l; j < current->r; j++) {
@@ -132,7 +129,8 @@ void GenerateMIPS32() {
 				MIPS_LA(t3, ident->name);
 			else
 				MIPS_ADDI(t3, sp, ident->addr);
-			MIPS_MUL(t1, t1, t9);
+			MIPS_LI(at, 4);
+			MIPS_MUL(t1, t1, at);
 			if (ident1->isglobal)
 				MIPS_ADD(t0, t0, t1);
 			else
@@ -172,7 +170,8 @@ void GenerateMIPS32() {
 				MIPS_LA(t2, ident->name);
 			else
 				MIPS_ADDI(t2, sp, ident->addr);
-			MIPS_MUL(t1, t1, t9);
+			MIPS_LI(at, 4);
+			MIPS_MUL(t1, t1, at);
 			if (ident->isglobal)
 				MIPS_ADD(t2, t2, t1);
 			else
@@ -379,7 +378,7 @@ void AllocLocal(Identity *&ident) {
 		offset++;
 }
 void PopPara(Identity ident) {
-	MIPS_LW(t0, t8, top++ * DATASIZE);
+	MIPS_LW(t0, gp, top++ * DATASIZE);
 	MIPS_SW(t0, sp, ident.addr);
 }
 void PushPara(Identity* ident, int value) {
@@ -393,8 +392,8 @@ void PushPara(Identity* ident, int value) {
 		else
 			MIPS_LW(t1, sp, ident->addr);
 	}
-	MIPS_SW(t1, t8, 0);
-	MIPS_ADD(t8, t8, t9);
+	MIPS_SW(t1, gp, 0);
+	MIPS_ADDI(gp, gp, 4);
 }
 char* StringLabel(int str) {
 	char tmp[10];
