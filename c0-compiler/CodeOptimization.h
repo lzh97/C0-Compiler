@@ -1,3 +1,9 @@
 #pragma once
 
-void ConstantReplace();
+struct BaseBlock {
+	int s;
+	int t;
+};
+
+void CommonSubexpressionElimination();
+//void ConstantReplace();

@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CodeOptimization.h" />
+    <ClInclude Include="DAG.h" />
     <ClInclude Include="ErrorHandler.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="IdentityManager.h" />
@@ -90,6 +91,7 @@
   <ItemGroup>
     <ClCompile Include="c0-compiler.cpp" />
     <ClCompile Include="CodeOptimization.cpp" />
+    <ClCompile Include="DAG.cpp" />
     <ClCompile Include="ErrorHandler.cpp" />
     <ClCompile Include="IdentityManager.cpp" />
     <ClCompile Include="LexicalAnalysis.cpp" />

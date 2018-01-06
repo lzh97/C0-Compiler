@@ -1,0 +1,3843 @@
+<Program>
+  ConstSym    const
+  <ConstantDeclare>
+    IntSym      int
+    <ConstantDefine>
+      Identity    cona
+      Assign      =
+      IntConst    10
+      <Integer>
+        Semic       ;
+      </Integer>
+    </ConstantDefine>
+    ConstSym    const
+    CharSym     char
+    <ConstantDefine>
+      Identity    conb
+      Assign      =
+      CharConst   a
+      <Character>
+        Comma       ,
+      </Character>
+      Identity    conc
+      Assign      =
+      CharConst   6
+      <Character>
+        Semic       ;
+      </Character>
+    </ConstantDefine>
+    IntSym      int
+  </ConstantDeclare>
+  <VariableDeclare>
+    <VariableDefine>(Maybe)
+      Identity    _cha
+      Comma       ,
+      Identity    chb
+      LBrak       [
+      IntConst    6
+      RBrak       ]
+      Semic       ;
+    </VariableDefine>(Right)
+    CharSym     char
+    <VariableDefine>(Maybe)
+      Identity    chc
+      Comma       ,
+      Identity    chd
+      Semic       ;
+    </VariableDefine>(Right)
+    IntSym      int
+    <VariableDefine>(Maybe)
+      Identity    f
+      LPare       (
+    </VariableDefine>(Wrong)
+  </VariableDeclare>
+  <FunctionDeclare or ProcedureDeclare>
+    <FunctionDefine>
+      IntSym      int
+      <ParameterTable>
+        Identity    x
+        Comma       ,
+        IntSym      int
+        Identity    y
+        RPare       )
+      </ParameterTable>
+      LBrac       {
+      ConstSym    const
+      <CompoundStatement>
+        <ConstantDeclare>
+          IntSym      int
+          <ConstantDefine>
+            Identity    z
+            Assign      =
+            IntConst    1
+            <Integer>
+              Semic       ;
+            </Integer>
+          </ConstantDefine>
+          IfSym       if
+        </ConstantDeclare>
+        <VariableDeclare>
+          <VariableDefine>
+          </VariableDefine>
+        </VariableDeclare>
+        <Statements>
+          <Statement>
+            <IfStatement>
+              LPare       (
+              Identity    x
+              <Condition>
+                <Expression>
+                  <Term>
+                    <Factor>
+                      Gtr         >
+                    </Factor>
+                  </Term>
+                </Expression>
+                IntConst    1
+                <Expression>
+                  <Term>
+                    <Factor>
+                      <Integer>
+                        RPare       )
+                      </Integer>
+                    </Factor>
+                  </Term>
+                </Expression>
+              </Condition>
+              ReturnSym   return
+              <Statement>
+                <ReturnStatement>
+                  LPare       (
+                  Identity    x
+                  <Expression>
+                    <Term>
+                      <Factor>
+                        Plus        +
+                      </Factor>
+                    </Term>
+                    Identity    z
+                    <Term>
+                      <Factor>
+                        RPare       )
+                      </Factor>
+                    </Term>
+                  </Expression>
+                  Semic       ;
+                </ReturnStatement>
+                Identity    x
+              </Statement>
+            </IfStatement>
+          </Statement>
+          <Statement>
+            Assign      =
+            <AssignStatement>
+              Identity    x
+              <Expression>
+                <Term>
+                  <Factor>
+                    Plus        +
+                  </Factor>
+                </Term>
+                IntConst    1
+                <Term>
+                  <Factor>
+                    <Integer>
+                      Semic       ;
+                    </Integer>
+                  </Factor>
+                </Term>
+              </Expression>
+            </AssignStatement>
+            Identity    f
+          </Statement>
+          <Statement>
+            LPare       (
+            Identity    x
+            <FunctionCallStatement>
+              <ValueParameterTable>
+                <Expression>
+                  <Term>
+                    <Factor>
+                      Comma       ,
+                    </Factor>
+                  </Term>
+                </Expression>
+                Identity    y
+                <Expression>
+                  <Term>
+                    <Factor>
+                      RPare       )
+                    </Factor>
+                  </Term>
+                </Expression>
+              </ValueParameterTable>
+              Semic       ;
+            </FunctionCallStatement>
+            ReturnSym   return
+          </Statement>
+          <Statement>
+            <ReturnStatement>
+              LPare       (
+              Identity    x
+              <Expression>
+                <Term>
+                  <Factor>
+                    Plus        +
+                  </Factor>
+                </Term>
+                Identity    y
+                <Term>
+                  <Factor>
+                    RPare       )
+                  </Factor>
+                </Term>
+              </Expression>
+              Semic       ;
+            </ReturnStatement>
+            RBrac       }
+          </Statement>
+        </Statements>
+      </CompoundStatement>
+      IntSym      int
+    </FunctionDefine>
+    <FunctionDefine>
+      Identity    compare
+      LPare       (
+      IntSym      int
+      <ParameterTable>
+        Identity    a
+        Comma       ,
+        IntSym      int
+        Identity    b
+        RPare       )
+      </ParameterTable>
+      LBrac       {
+      IfSym       if
+      <CompoundStatement>
+        <ConstantDeclare>
+        </ConstantDeclare>
+        <VariableDeclare>
+          <VariableDefine>
+          </VariableDefine>
+        </VariableDeclare>
+        <Statements>
+          <Statement>
+            <IfStatement>
+              LPare       (
+              Identity    a
+              <Condition>
+                <Expression>
+                  <Term>
+                    <Factor>
+                      Gtr         >
+                    </Factor>
+                  </Term>
+                </Expression>
+                Identity    b
+                <Expression>
+                  <Term>
+                    <Factor>
+                      RPare       )
+                    </Factor>
+                  </Term>
+                </Expression>
+              </Condition>
+              ReturnSym   return
+              <Statement>
+                <ReturnStatement>
+                  LPare       (
+                  IntConst    1
+                  <Expression>
+                    <Term>
+                      <Factor>
+                        <Integer>
+                          RPare       )
+                        </Integer>
+                      </Factor>
+                    </Term>
+                  </Expression>
+                  Semic       ;
+                </ReturnStatement>
+                IfSym       if
+              </Statement>
+            </IfStatement>
+          </Statement>
+          <Statement>
+            <IfStatement>
+              LPare       (
+              Identity    a
+              <Condition>
+                <Expression>
+                  <Term>
+                    <Factor>
+                      Leq         <=
+                    </Factor>
+                  </Term>
+                </Expression>
+                Identity    b
+                <Expression>
+                  <Term>
+                    <Factor>
+                      RPare       )
+                    </Factor>
+                  </Term>
+                </Expression>
+              </Condition>
+              ReturnSym   return
+              <Statement>
+                <ReturnStatement>
+                  LPare       (
+                  Minus       -
+                  <Expression>
+                    IntConst    1
+                    <Term>
+                      <Factor>
+                        <Integer>
+                          RPare       )
+                        </Integer>
+                      </Factor>
+                    </Term>
+                  </Expression>
+                  Semic       ;
+                </ReturnStatement>
+                RBrac       }
+              </Statement>
+            </IfStatement>
+          </Statement>
+        </Statements>
+      </CompoundStatement>
+      VoidSym     void
+    </FunctionDefine>
+    <ProcedureDefine>
+      Identity    line
+      LPare       (
+      IntSym      int
+      <ParameterTable>
+        Identity    n
+        Comma       ,
+        IntSym      int
+        Identity    m
+        RPare       )
+      </ParameterTable>
+      LBrac       {
+      IntSym      int
+      <CompoundStatement>
+        <ConstantDeclare>
+        </ConstantDeclare>
+        <VariableDeclare>
+          <VariableDefine>
+            Identity    i
+            Comma       ,
+            Identity    j
+            Comma       ,
+            Identity    stpos
+            LBrak       [
+            IntConst    100
+            RBrak       ]
+            Comma       ,
+            Identity    posst
+            LBrak       [
+            IntConst    100
+            RBrak       ]
+            Semic       ;
+          </VariableDefine>
+          IntSym      int
+          <VariableDefine>
+            Identity    p
+            Comma       ,
+            Identity    q
+            Comma       ,
+            Identity    move
+            Comma       ,
+            Identity    end
+            Comma       ,
+            Identity    po1
+            Comma       ,
+            Identity    po2
+            Comma       ,
+            Identity    st2
+            Semic       ;
+          </VariableDefine>
+          Identity    i
+          <VariableDefine>
+          </VariableDefine>
+        </VariableDeclare>
+        <Statements>
+          <Statement>
+            Assign      =
+            <AssignStatement>
+              IntConst    1
+              <Expression>
+                <Term>
+                  <Factor>
+                    <Integer>
+                      Semic       ;
+                    </Integer>
+                  </Factor>
+                </Term>
+              </Expression>
+            </AssignStatement>
+            Identity    j
+          </Statement>
+          <Statement>
+            Assign      =
+            <AssignStatement>
+              IntConst    1
+              <Expression>
+                <Term>
+                  <Factor>
+                    <Integer>
+                      Semic       ;
+                    </Integer>
+                  </Factor>
+                </Term>
+              </Expression>
+            </AssignStatement>
+            DoSym       do
+          </Statement>
+          <Statement>
+            <DoWhileStatement>
+              LBrac       {
+              <Statement>
+                Identity    stpos
+                <Statements>
+                  <Statement>
+                    LBrak       [
+                    <AssignStatement>
+                      Identity    i
+                      <Expression>
+                        <Term>
+                          <Factor>
+                            RBrak       ]
+                          </Factor>
+                        </Term>
+                      </Expression>
+                      Assign      =
+                      Identity    i
+                      <Expression>
+                        <Term>
+                          <Factor>
+                            Semic       ;
+                          </Factor>
+                        </Term>
+                      </Expression>
+                    </AssignStatement>
+                    Identity    posst
+                  </Statement>
+                  <Statement>
+                    LBrak       [
+                    <AssignStatement>
+                      Identity    i
+                      <Expression>
+                        <Term>
+                          <Factor>
+                            RBrak       ]
+                          </Factor>
+                        </Term>
+                      </Expression>
+                      Assign      =
+                      Identity    i
+                      <Expression>
+                        <Term>
+                          <Factor>
+                            Semic       ;
+                          </Factor>
+                        </Term>
+                      </Expression>
+                    </AssignStatement>
+                    Identity    i
+                  </Statement>
+                  <Statement>
+                    Assign      =
+                    <AssignStatement>
+                      Identity    i
+                      <Expression>
+                        <Term>
+                          <Factor>
+                            Plus        +
+                          </Factor>
+                        </Term>
+                        IntConst    1
+                        <Term>
+                          <Factor>
+                            <Integer>
+                              Semic       ;
+                            </Integer>
+                          </Factor>
+                        </Term>
+                      </Expression>
+                    </AssignStatement>
+                    RBrac       }
+                  </Statement>
+                </Statements>
+                WhileSym    while
+              </Statement>
+              LPare       (
+              Identity    i
+              <Condition>
+                <Expression>
+                  <Term>
+                    <Factor>
+                      Leq         <=
+                    </Factor>
+                  </Term>
+                </Expression>
+                Identity    n
+                <Expression>
+                  <Term>
+                    <Factor>
+                      RPare       )
+                    </Factor>
+                  </Term>
+                </Expression>
+              </Condition>
+              Identity    i
+            </DoWhileStatement>
+          </Statement>
+          <Statement>
+            Assign      =
+            <AssignStatement>
+              IntConst    1
+              <Expression>
+                <Term>
+                  <Factor>
+                    <Integer>
+                      Semic       ;
+                    </Integer>
+                  </Factor>
+                </Term>
+              </Expression>
+            </AssignStatement>
+            DoSym       do
+          </Statement>
+          <Statement>
+            <DoWhileStatement>
+              LBrac       {
+              <Statement>
+                IfSym       if
+                <Statements>
+                  <Statement>
+                    <IfStatement>
+                      LPare       (
+                      Identity    i
+                      <Condition>
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              Equ         ==
+                            </Factor>
+                          </Term>
+                        </Expression>
+                        IntConst    1
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              <Integer>
+                                RPare       )
+                              </Integer>
+                            </Factor>
+                          </Term>
+                        </Expression>
+                      </Condition>
+                      LBrac       {
+                      <Statement>
+                        Identity    p
+                        <Statements>
+                          <Statement>
+                            Assign      =
+                            <AssignStatement>
+                              IntConst    3
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      Semic       ;
+                                    </Integer>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            Identity    q
+                          </Statement>
+                          <Statement>
+                            Assign      =
+                            <AssignStatement>
+                              IntConst    2
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      Semic       ;
+                                    </Integer>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            RBrac       }
+                          </Statement>
+                        </Statements>
+                        IfSym       if
+                      </Statement>
+                    </IfStatement>
+                  </Statement>
+                  <Statement>
+                    <IfStatement>
+                      LPare       (
+                      Identity    i
+                      <Condition>
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              Equ         ==
+                            </Factor>
+                          </Term>
+                        </Expression>
+                        IntConst    2
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              <Integer>
+                                RPare       )
+                              </Integer>
+                            </Factor>
+                          </Term>
+                        </Expression>
+                      </Condition>
+                      LBrac       {
+                      <Statement>
+                        Identity    p
+                        <Statements>
+                          <Statement>
+                            Assign      =
+                            <AssignStatement>
+                              IntConst    8
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      Semic       ;
+                                    </Integer>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            Identity    q
+                          </Statement>
+                          <Statement>
+                            Assign      =
+                            <AssignStatement>
+                              Minus       -
+                              <Expression>
+                                IntConst    3
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      Semic       ;
+                                    </Integer>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            RBrac       }
+                          </Statement>
+                        </Statements>
+                        IfSym       if
+                      </Statement>
+                    </IfStatement>
+                  </Statement>
+                  <Statement>
+                    <IfStatement>
+                      LPare       (
+                      Identity    i
+                      <Condition>
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              Equ         ==
+                            </Factor>
+                          </Term>
+                        </Expression>
+                        IntConst    3
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              <Integer>
+                                RPare       )
+                              </Integer>
+                            </Factor>
+                          </Term>
+                        </Expression>
+                      </Condition>
+                      LBrac       {
+                      <Statement>
+                        Identity    p
+                        <Statements>
+                          <Statement>
+                            Assign      =
+                            <AssignStatement>
+                              IntConst    3
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      Semic       ;
+                                    </Integer>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            Identity    q
+                          </Statement>
+                          <Statement>
+                            Assign      =
+                            <AssignStatement>
+                              Minus       -
+                              <Expression>
+                                IntConst    2
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      Semic       ;
+                                    </Integer>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            RBrac       }
+                          </Statement>
+                        </Statements>
+                        IfSym       if
+                      </Statement>
+                    </IfStatement>
+                  </Statement>
+                  <Statement>
+                    <IfStatement>
+                      LPare       (
+                      Identity    q
+                      <Condition>
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              Neq         !=
+                            </Factor>
+                          </Term>
+                        </Expression>
+                        IntConst    0
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              <Integer>
+                                RPare       )
+                              </Integer>
+                            </Factor>
+                          </Term>
+                        </Expression>
+                      </Condition>
+                      LBrac       {
+                      <Statement>
+                        Identity    move
+                        <Statements>
+                          <Statement>
+                            Assign      =
+                            <AssignStatement>
+                              Identity    compare
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    LPare       (
+                                    Identity    q
+                                    <FunctionCallStatement>
+                                      <ValueParameterTable>
+                                        <Expression>
+                                          <Term>
+                                            <Factor>
+                                              Comma       ,
+                                            </Factor>
+                                          </Term>
+                                        </Expression>
+                                        IntConst    0
+                                        <Expression>
+                                          <Term>
+                                            <Factor>
+                                              <Integer>
+                                                RPare       )
+                                              </Integer>
+                                            </Factor>
+                                          </Term>
+                                        </Expression>
+                                      </ValueParameterTable>
+                                      Semic       ;
+                                    </FunctionCallStatement>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            Identity    end
+                          </Statement>
+                          <Statement>
+                            Assign      =
+                            <AssignStatement>
+                              Identity    move
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    Times       *
+                                  </Factor>
+                                  Identity    q
+                                  <Factor>
+                                    Semic       ;
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            Identity    po1
+                          </Statement>
+                          <Statement>
+                            Assign      =
+                            <AssignStatement>
+                              Identity    stpos
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    LBrak       [
+                                    Identity    p
+                                    <Expression>
+                                      <Term>
+                                        <Factor>
+                                          RBrak       ]
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                    Semic       ;
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            DoSym       do
+                          </Statement>
+                          <Statement>
+                            <DoWhileStatement>
+                              LBrac       {
+                              <Statement>
+                                Identity    st2
+                                <Statements>
+                                  <Statement>
+                                    Assign      =
+                                    <AssignStatement>
+                                      Identity    posst
+                                      <Expression>
+                                        <Term>
+                                          <Factor>
+                                            LBrak       [
+                                            Identity    po1
+                                            <Expression>
+                                              <Term>
+                                                <Factor>
+                                                  Plus        +
+                                                </Factor>
+                                              </Term>
+                                              Identity    move
+                                              <Term>
+                                                <Factor>
+                                                  RBrak       ]
+                                                </Factor>
+                                              </Term>
+                                            </Expression>
+                                            Semic       ;
+                                          </Factor>
+                                        </Term>
+                                      </Expression>
+                                    </AssignStatement>
+                                    Identity    po2
+                                  </Statement>
+                                  <Statement>
+                                    Assign      =
+                                    <AssignStatement>
+                                      Identity    stpos
+                                      <Expression>
+                                        <Term>
+                                          <Factor>
+                                            LBrak       [
+                                            Identity    st2
+                                            <Expression>
+                                              <Term>
+                                                <Factor>
+                                                  RBrak       ]
+                                                </Factor>
+                                              </Term>
+                                            </Expression>
+                                            Semic       ;
+                                          </Factor>
+                                        </Term>
+                                      </Expression>
+                                    </AssignStatement>
+                                    Identity    posst
+                                  </Statement>
+                                  <Statement>
+                                    LBrak       [
+                                    <AssignStatement>
+                                      Identity    po1
+                                      <Expression>
+                                        <Term>
+                                          <Factor>
+                                            RBrak       ]
+                                          </Factor>
+                                        </Term>
+                                      </Expression>
+                                      Assign      =
+                                      Identity    st2
+                                      <Expression>
+                                        <Term>
+                                          <Factor>
+                                            Semic       ;
+                                          </Factor>
+                                        </Term>
+                                      </Expression>
+                                    </AssignStatement>
+                                    Identity    stpos
+                                  </Statement>
+                                  <Statement>
+                                    LBrak       [
+                                    <AssignStatement>
+                                      Identity    st2
+                                      <Expression>
+                                        <Term>
+                                          <Factor>
+                                            RBrak       ]
+                                          </Factor>
+                                        </Term>
+                                      </Expression>
+                                      Assign      =
+                                      Identity    po1
+                                      <Expression>
+                                        <Term>
+                                          <Factor>
+                                            Semic       ;
+                                          </Factor>
+                                        </Term>
+                                      </Expression>
+                                    </AssignStatement>
+                                    Identity    po1
+                                  </Statement>
+                                  <Statement>
+                                    Assign      =
+                                    <AssignStatement>
+                                      Identity    po2
+                                      <Expression>
+                                        <Term>
+                                          <Factor>
+                                            Semic       ;
+                                          </Factor>
+                                        </Term>
+                                      </Expression>
+                                    </AssignStatement>
+                                    Identity    j
+                                  </Statement>
+                                  <Statement>
+                                    Assign      =
+                                    <AssignStatement>
+                                      Identity    j
+                                      <Expression>
+                                        <Term>
+                                          <Factor>
+                                            Plus        +
+                                          </Factor>
+                                        </Term>
+                                        IntConst    1
+                                        <Term>
+                                          <Factor>
+                                            <Integer>
+                                              Semic       ;
+                                            </Integer>
+                                          </Factor>
+                                        </Term>
+                                      </Expression>
+                                    </AssignStatement>
+                                    RBrac       }
+                                  </Statement>
+                                </Statements>
+                                WhileSym    while
+                              </Statement>
+                              LPare       (
+                              Identity    j
+                              <Condition>
+                                <Expression>
+                                  <Term>
+                                    <Factor>
+                                      Leq         <=
+                                    </Factor>
+                                  </Term>
+                                </Expression>
+                                Identity    end
+                                <Expression>
+                                  <Term>
+                                    <Factor>
+                                      RPare       )
+                                    </Factor>
+                                  </Term>
+                                </Expression>
+                              </Condition>
+                              Identity    posst
+                            </DoWhileStatement>
+                          </Statement>
+                          <Statement>
+                            LBrak       [
+                            <AssignStatement>
+                              Identity    po2
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    RBrak       ]
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Assign      =
+                              Identity    p
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    Semic       ;
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            Identity    stpos
+                          </Statement>
+                          <Statement>
+                            LBrak       [
+                            <AssignStatement>
+                              Identity    p
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    RBrak       ]
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Assign      =
+                              Identity    stpos
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    LBrak       [
+                                    Identity    p
+                                    <Expression>
+                                      <Term>
+                                        <Factor>
+                                          RBrak       ]
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                    Plus        +
+                                  </Factor>
+                                </Term>
+                                Identity    q
+                                <Term>
+                                  <Factor>
+                                    Semic       ;
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            RBrac       }
+                          </Statement>
+                        </Statements>
+                        Identity    i
+                      </Statement>
+                    </IfStatement>
+                  </Statement>
+                  <Statement>
+                    Assign      =
+                    <AssignStatement>
+                      Identity    i
+                      <Expression>
+                        <Term>
+                          <Factor>
+                            Plus        +
+                          </Factor>
+                        </Term>
+                        IntConst    1
+                        <Term>
+                          <Factor>
+                            <Integer>
+                              Semic       ;
+                            </Integer>
+                          </Factor>
+                        </Term>
+                      </Expression>
+                    </AssignStatement>
+                    RBrac       }
+                  </Statement>
+                </Statements>
+                WhileSym    while
+              </Statement>
+              LPare       (
+              Identity    i
+              <Condition>
+                <Expression>
+                  <Term>
+                    <Factor>
+                      Leq         <=
+                    </Factor>
+                  </Term>
+                </Expression>
+                Identity    m
+                <Expression>
+                  <Term>
+                    <Factor>
+                      RPare       )
+                    </Factor>
+                  </Term>
+                </Expression>
+              </Condition>
+              PrintfSym   printf
+            </DoWhileStatement>
+          </Statement>
+          <Statement>
+            <PrintfStatement>
+              LPare       (
+              Identity    posst
+              <Expression>
+                <Term>
+                  <Factor>
+                    LBrak       [
+                    IntConst    1
+                    <Expression>
+                      <Term>
+                        <Factor>
+                          <Integer>
+                            RBrak       ]
+                          </Integer>
+                        </Factor>
+                      </Term>
+                    </Expression>
+                    RPare       )
+                  </Factor>
+                </Term>
+              </Expression>
+              Semic       ;
+            </PrintfStatement>
+            Identity    i
+          </Statement>
+          <Statement>
+            Assign      =
+            <AssignStatement>
+              IntConst    2
+              <Expression>
+                <Term>
+                  <Factor>
+                    <Integer>
+                      Semic       ;
+                    </Integer>
+                  </Factor>
+                </Term>
+              </Expression>
+            </AssignStatement>
+            DoSym       do
+          </Statement>
+          <Statement>
+            <DoWhileStatement>
+              LBrac       {
+              <Statement>
+                PrintfSym   printf
+                <Statements>
+                  <Statement>
+                    <PrintfStatement>
+                      LPare       (
+                      Identity    posst
+                      <Expression>
+                        <Term>
+                          <Factor>
+                            LBrak       [
+                            Identity    i
+                            <Expression>
+                              <Term>
+                                <Factor>
+                                  RBrak       ]
+                                </Factor>
+                              </Term>
+                            </Expression>
+                            RPare       )
+                          </Factor>
+                        </Term>
+                      </Expression>
+                      Semic       ;
+                    </PrintfStatement>
+                    Identity    i
+                  </Statement>
+                  <Statement>
+                    Assign      =
+                    <AssignStatement>
+                      Identity    i
+                      <Expression>
+                        <Term>
+                          <Factor>
+                            Plus        +
+                          </Factor>
+                        </Term>
+                        IntConst    1
+                        <Term>
+                          <Factor>
+                            <Integer>
+                              Semic       ;
+                            </Integer>
+                          </Factor>
+                        </Term>
+                      </Expression>
+                    </AssignStatement>
+                    RBrac       }
+                  </Statement>
+                </Statements>
+                WhileSym    while
+              </Statement>
+              LPare       (
+              Identity    i
+              <Condition>
+                <Expression>
+                  <Term>
+                    <Factor>
+                      Leq         <=
+                    </Factor>
+                  </Term>
+                </Expression>
+                Identity    n
+                <Expression>
+                  <Term>
+                    <Factor>
+                      RPare       )
+                    </Factor>
+                  </Term>
+                </Expression>
+              </Condition>
+              ReturnSym   return
+            </DoWhileStatement>
+          </Statement>
+          <Statement>
+            <ReturnStatement>
+              Semic       ;
+            </ReturnStatement>
+            RBrac       }
+          </Statement>
+        </Statements>
+      </CompoundStatement>
+      CharSym     char
+    </ProcedureDefine>
+    <FunctionDefine>
+      Identity    f2
+      LPare       (
+      CharSym     char
+      <ParameterTable>
+        Identity    x
+        RPare       )
+      </ParameterTable>
+      LBrac       {
+      IntSym      int
+      <CompoundStatement>
+        <ConstantDeclare>
+        </ConstantDeclare>
+        <VariableDeclare>
+          <VariableDefine>
+            Identity    z2
+            Semic       ;
+          </VariableDefine>
+          Identity    z2
+          <VariableDefine>
+          </VariableDefine>
+        </VariableDeclare>
+        <Statements>
+          <Statement>
+            Assign      =
+            <AssignStatement>
+              IntConst    1
+              <Expression>
+                <Term>
+                  <Factor>
+                    <Integer>
+                      Semic       ;
+                    </Integer>
+                  </Factor>
+                </Term>
+              </Expression>
+            </AssignStatement>
+            Identity    x
+          </Statement>
+          <Statement>
+            Assign      =
+            <AssignStatement>
+              Identity    x
+              <Expression>
+                <Term>
+                  <Factor>
+                    Plus        +
+                  </Factor>
+                </Term>
+                Identity    z2
+                <Term>
+                  <Factor>
+                    Semic       ;
+                  </Factor>
+                </Term>
+              </Expression>
+            </AssignStatement>
+            ReturnSym   return
+          </Statement>
+          <Statement>
+            <ReturnStatement>
+              LPare       (
+              Identity    x
+              <Expression>
+                <Term>
+                  <Factor>
+                    RPare       )
+                  </Factor>
+                </Term>
+              </Expression>
+              Semic       ;
+            </ReturnStatement>
+            RBrac       }
+          </Statement>
+        </Statements>
+      </CompoundStatement>
+      IntSym      int
+    </FunctionDefine>
+    <FunctionDefine>
+      Identity    fib
+      LPare       (
+      IntSym      int
+      <ParameterTable>
+        Identity    n
+        RPare       )
+      </ParameterTable>
+      LBrac       {
+      IntSym      int
+      <CompoundStatement>
+        <ConstantDeclare>
+        </ConstantDeclare>
+        <VariableDeclare>
+          <VariableDefine>
+            Identity    result
+            Semic       ;
+          </VariableDefine>
+          IfSym       if
+          <VariableDefine>
+          </VariableDefine>
+        </VariableDeclare>
+        <Statements>
+          <Statement>
+            <IfStatement>
+              LPare       (
+              Identity    n
+              <Condition>
+                <Expression>
+                  <Term>
+                    <Factor>
+                      Equ         ==
+                    </Factor>
+                  </Term>
+                </Expression>
+                IntConst    0
+                <Expression>
+                  <Term>
+                    <Factor>
+                      <Integer>
+                        RPare       )
+                      </Integer>
+                    </Factor>
+                  </Term>
+                </Expression>
+              </Condition>
+              ReturnSym   return
+              <Statement>
+                <ReturnStatement>
+                  LPare       (
+                  IntConst    0
+                  <Expression>
+                    <Term>
+                      <Factor>
+                        <Integer>
+                          RPare       )
+                        </Integer>
+                      </Factor>
+                    </Term>
+                  </Expression>
+                  Semic       ;
+                </ReturnStatement>
+                IfSym       if
+              </Statement>
+            </IfStatement>
+          </Statement>
+          <Statement>
+            <IfStatement>
+              LPare       (
+              Identity    n
+              <Condition>
+                <Expression>
+                  <Term>
+                    <Factor>
+                      Equ         ==
+                    </Factor>
+                  </Term>
+                </Expression>
+                IntConst    1
+                <Expression>
+                  <Term>
+                    <Factor>
+                      <Integer>
+                        RPare       )
+                      </Integer>
+                    </Factor>
+                  </Term>
+                </Expression>
+              </Condition>
+              ReturnSym   return
+              <Statement>
+                <ReturnStatement>
+                  LPare       (
+                  IntConst    1
+                  <Expression>
+                    <Term>
+                      <Factor>
+                        <Integer>
+                          RPare       )
+                        </Integer>
+                      </Factor>
+                    </Term>
+                  </Expression>
+                  Semic       ;
+                </ReturnStatement>
+                Identity    result
+              </Statement>
+            </IfStatement>
+          </Statement>
+          <Statement>
+            Assign      =
+            <AssignStatement>
+              Identity    fib
+              <Expression>
+                <Term>
+                  <Factor>
+                    LPare       (
+                    Identity    n
+                    <FunctionCallStatement>
+                      <ValueParameterTable>
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              Minus       -
+                            </Factor>
+                          </Term>
+                          IntConst    1
+                          <Term>
+                            <Factor>
+                              <Integer>
+                                RPare       )
+                              </Integer>
+                            </Factor>
+                          </Term>
+                        </Expression>
+                      </ValueParameterTable>
+                      Plus        +
+                    </FunctionCallStatement>
+                  </Factor>
+                </Term>
+                Identity    fib
+                <Term>
+                  <Factor>
+                    LPare       (
+                    Identity    n
+                    <FunctionCallStatement>
+                      <ValueParameterTable>
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              Minus       -
+                            </Factor>
+                          </Term>
+                          IntConst    2
+                          <Term>
+                            <Factor>
+                              <Integer>
+                                RPare       )
+                              </Integer>
+                            </Factor>
+                          </Term>
+                        </Expression>
+                      </ValueParameterTable>
+                      Semic       ;
+                    </FunctionCallStatement>
+                  </Factor>
+                </Term>
+              </Expression>
+            </AssignStatement>
+            ReturnSym   return
+          </Statement>
+          <Statement>
+            <ReturnStatement>
+              LPare       (
+              Identity    result
+              <Expression>
+                <Term>
+                  <Factor>
+                    RPare       )
+                  </Factor>
+                </Term>
+              </Expression>
+              Semic       ;
+            </ReturnStatement>
+            RBrac       }
+          </Statement>
+        </Statements>
+      </CompoundStatement>
+      VoidSym     void
+    </FunctionDefine>
+    <ProcedureDefine>
+      Identity    nest
+      LPare       (
+      RPare       )
+      <ParameterTable>
+      </ParameterTable>
+      LBrac       {
+      IntSym      int
+      <CompoundStatement>
+        <ConstantDeclare>
+        </ConstantDeclare>
+        <VariableDeclare>
+          <VariableDefine>
+            Identity    a
+            LBrak       [
+            IntConst    15
+            RBrak       ]
+            Semic       ;
+          </VariableDefine>
+          IntSym      int
+          <VariableDefine>
+            Identity    b
+            LBrak       [
+            IntConst    15
+            RBrak       ]
+            Semic       ;
+          </VariableDefine>
+          Identity    a
+          <VariableDefine>
+          </VariableDefine>
+        </VariableDeclare>
+        <Statements>
+          <Statement>
+            LBrak       [
+            <AssignStatement>
+              IntConst    0
+              <Expression>
+                <Term>
+                  <Factor>
+                    <Integer>
+                      RBrak       ]
+                    </Integer>
+                  </Factor>
+                </Term>
+              </Expression>
+              Assign      =
+              IntConst    1
+              <Expression>
+                <Term>
+                  <Factor>
+                    <Integer>
+                      Semic       ;
+                    </Integer>
+                  </Factor>
+                </Term>
+              </Expression>
+            </AssignStatement>
+            Identity    b
+          </Statement>
+          <Statement>
+            LBrak       [
+            <AssignStatement>
+              IntConst    1
+              <Expression>
+                <Term>
+                  <Factor>
+                    <Integer>
+                      RBrak       ]
+                    </Integer>
+                  </Factor>
+                </Term>
+              </Expression>
+              Assign      =
+              IntConst    3
+              <Expression>
+                <Term>
+                  <Factor>
+                    <Integer>
+                      Semic       ;
+                    </Integer>
+                  </Factor>
+                </Term>
+              </Expression>
+            </AssignStatement>
+            Identity    a
+          </Statement>
+          <Statement>
+            LBrak       [
+            <AssignStatement>
+              IntConst    3
+              <Expression>
+                <Term>
+                  <Factor>
+                    <Integer>
+                      RBrak       ]
+                    </Integer>
+                  </Factor>
+                </Term>
+              </Expression>
+              Assign      =
+              IntConst    4
+              <Expression>
+                <Term>
+                  <Factor>
+                    <Integer>
+                      Semic       ;
+                    </Integer>
+                  </Factor>
+                </Term>
+              </Expression>
+            </AssignStatement>
+            Identity    b
+          </Statement>
+          <Statement>
+            LBrak       [
+            <AssignStatement>
+              IntConst    4
+              <Expression>
+                <Term>
+                  <Factor>
+                    <Integer>
+                      RBrak       ]
+                    </Integer>
+                  </Factor>
+                </Term>
+              </Expression>
+              Assign      =
+              IntConst    6
+              <Expression>
+                <Term>
+                  <Factor>
+                    <Integer>
+                      Semic       ;
+                    </Integer>
+                  </Factor>
+                </Term>
+              </Expression>
+            </AssignStatement>
+            Identity    a
+          </Statement>
+          <Statement>
+            LBrak       [
+            <AssignStatement>
+              IntConst    6
+              <Expression>
+                <Term>
+                  <Factor>
+                    <Integer>
+                      RBrak       ]
+                    </Integer>
+                  </Factor>
+                </Term>
+              </Expression>
+              Assign      =
+              IntConst    8
+              <Expression>
+                <Term>
+                  <Factor>
+                    <Integer>
+                      Semic       ;
+                    </Integer>
+                  </Factor>
+                </Term>
+              </Expression>
+            </AssignStatement>
+            Identity    b
+          </Statement>
+          <Statement>
+            LBrak       [
+            <AssignStatement>
+              Identity    a
+              <Expression>
+                <Term>
+                  <Factor>
+                    LBrak       [
+                    Identity    b
+                    <Expression>
+                      <Term>
+                        <Factor>
+                          LBrak       [
+                          Identity    a
+                          <Expression>
+                            <Term>
+                              <Factor>
+                                LBrak       [
+                                Identity    b
+                                <Expression>
+                                  <Term>
+                                    <Factor>
+                                      LBrak       [
+                                      Identity    a
+                                      <Expression>
+                                        <Term>
+                                          <Factor>
+                                            LBrak       [
+                                            IntConst    0
+                                            <Expression>
+                                              <Term>
+                                                <Factor>
+                                                  <Integer>
+                                                    RBrak       ]
+                                                  </Integer>
+                                                </Factor>
+                                              </Term>
+                                            </Expression>
+                                            RBrak       ]
+                                          </Factor>
+                                        </Term>
+                                      </Expression>
+                                      RBrak       ]
+                                    </Factor>
+                                  </Term>
+                                </Expression>
+                                RBrak       ]
+                              </Factor>
+                            </Term>
+                          </Expression>
+                          RBrak       ]
+                        </Factor>
+                      </Term>
+                    </Expression>
+                    RBrak       ]
+                  </Factor>
+                </Term>
+              </Expression>
+              Assign      =
+              IntConst    2333
+              <Expression>
+                <Term>
+                  <Factor>
+                    <Integer>
+                      Semic       ;
+                    </Integer>
+                  </Factor>
+                </Term>
+              </Expression>
+            </AssignStatement>
+            PrintfSym   printf
+          </Statement>
+          <Statement>
+            <PrintfStatement>
+              LPare       (
+              Identity    a
+              <Expression>
+                <Term>
+                  <Factor>
+                    LBrak       [
+                    IntConst    0
+                    <Expression>
+                      <Term>
+                        <Factor>
+                          <Integer>
+                            RBrak       ]
+                          </Integer>
+                        </Factor>
+                      </Term>
+                    </Expression>
+                    Plus        +
+                  </Factor>
+                </Term>
+                Identity    b
+                <Term>
+                  <Factor>
+                    LBrak       [
+                    IntConst    8
+                    <Expression>
+                      <Term>
+                        <Factor>
+                          <Integer>
+                            RBrak       ]
+                          </Integer>
+                        </Factor>
+                      </Term>
+                    </Expression>
+                    RPare       )
+                  </Factor>
+                </Term>
+              </Expression>
+              Semic       ;
+            </PrintfStatement>
+            ReturnSym   return
+          </Statement>
+          <Statement>
+            <ReturnStatement>
+              Semic       ;
+            </ReturnStatement>
+            RBrac       }
+          </Statement>
+        </Statements>
+      </CompoundStatement>
+      VoidSym     void
+    </ProcedureDefine>
+    <ProcedureDefine>
+      Identity    t
+      LPare       (
+      CharSym     char
+      <ParameterTable>
+        Identity    x
+        RPare       )
+      </ParameterTable>
+      LBrac       {
+      IfSym       if
+      <CompoundStatement>
+        <ConstantDeclare>
+        </ConstantDeclare>
+        <VariableDeclare>
+          <VariableDefine>
+          </VariableDefine>
+        </VariableDeclare>
+        <Statements>
+          <Statement>
+            <IfStatement>
+              LPare       (
+              Identity    x
+              <Condition>
+                <Expression>
+                  <Term>
+                    <Factor>
+                      Gtr         >
+                    </Factor>
+                  </Term>
+                </Expression>
+                CharConst   c
+                <Expression>
+                  <Term>
+                    <Factor>
+                      <Character>
+                        RPare       )
+                      </Character>
+                    </Factor>
+                  </Term>
+                </Expression>
+              </Condition>
+              ReturnSym   return
+              <Statement>
+                <ReturnStatement>
+                  Semic       ;
+                </ReturnStatement>
+                Identity    x
+              </Statement>
+            </IfStatement>
+          </Statement>
+          <Statement>
+            Assign      =
+            <AssignStatement>
+              Identity    x
+              <Expression>
+                <Term>
+                  <Factor>
+                    Plus        +
+                  </Factor>
+                </Term>
+                IntConst    1
+                <Term>
+                  <Factor>
+                    <Integer>
+                      Semic       ;
+                    </Integer>
+                  </Factor>
+                </Term>
+              </Expression>
+            </AssignStatement>
+            PrintfSym   printf
+          </Statement>
+          <Statement>
+            <PrintfStatement>
+              LPare       (
+              Identity    x
+              <Expression>
+                <Term>
+                  <Factor>
+                    RPare       )
+                  </Factor>
+                </Term>
+              </Expression>
+              Semic       ;
+            </PrintfStatement>
+            Identity    t
+          </Statement>
+          <Statement>
+            LPare       (
+            Identity    x
+            <ProcedureCallStatement>
+              <ValueParameterTable>
+                <Expression>
+                  <Term>
+                    <Factor>
+                      RPare       )
+                    </Factor>
+                  </Term>
+                </Expression>
+              </ValueParameterTable>
+              Semic       ;
+            </ProcedureCallStatement>
+            ReturnSym   return
+          </Statement>
+          <Statement>
+            <ReturnStatement>
+              Semic       ;
+            </ReturnStatement>
+            RBrac       }
+          </Statement>
+        </Statements>
+      </CompoundStatement>
+      VoidSym     void
+    </ProcedureDefine>
+    <ProcedureDefine>
+      MainSym     main
+    </ProcedureDefine>
+  </FunctionDeclare or ProcedureDeclare>
+  <MainDefine>
+    LPare       (
+    RPare       )
+    LBrac       {
+    ConstSym    const
+    <CompoundStatement>
+      <ConstantDeclare>
+        IntSym      int
+        <ConstantDefine>
+          Identity    coz
+          Assign      =
+          IntConst    3
+          <Integer>
+            Semic       ;
+          </Integer>
+        </ConstantDefine>
+        IntSym      int
+      </ConstantDeclare>
+      <VariableDeclare>
+        <VariableDefine>
+          Identity    a
+          Comma       ,
+          Identity    b
+          Comma       ,
+          Identity    c
+          Comma       ,
+          Identity    d
+          Comma       ,
+          Identity    key
+          Comma       ,
+          Identity    i
+          Comma       ,
+          Identity    sz2
+          LBrak       [
+          IntConst    5
+          RBrak       ]
+          Semic       ;
+        </VariableDefine>
+        IntSym      int
+        <VariableDefine>
+          Identity    cho
+          Semic       ;
+        </VariableDefine>
+        CharSym     char
+        <VariableDefine>
+          Identity    sz
+          LBrak       [
+          IntConst    5
+          RBrak       ]
+          Comma       ,
+          Identity    e
+          Semic       ;
+        </VariableDefine>
+        Identity    chc
+        <VariableDefine>
+        </VariableDefine>
+      </VariableDeclare>
+      <Statements>
+        <Statement>
+          Assign      =
+          <AssignStatement>
+            CharConst   +
+            <Expression>
+              <Term>
+                <Factor>
+                  <Character>
+                    Semic       ;
+                  </Character>
+                </Factor>
+              </Term>
+            </Expression>
+          </AssignStatement>
+          Identity    chd
+        </Statement>
+        <Statement>
+          Assign      =
+          <AssignStatement>
+            CharConst   -
+            <Expression>
+              <Term>
+                <Factor>
+                  <Character>
+                    Semic       ;
+                  </Character>
+                </Factor>
+              </Term>
+            </Expression>
+          </AssignStatement>
+          Identity    b
+        </Statement>
+        <Statement>
+          Assign      =
+          <AssignStatement>
+            Plus        +
+            <Expression>
+              IntConst    3
+              <Term>
+                <Factor>
+                  <Integer>
+                    Semic       ;
+                  </Integer>
+                </Factor>
+              </Term>
+            </Expression>
+          </AssignStatement>
+          Identity    i
+        </Statement>
+        <Statement>
+          Assign      =
+          <AssignStatement>
+            IntConst    0
+            <Expression>
+              <Term>
+                <Factor>
+                  <Integer>
+                    Semic       ;
+                  </Integer>
+                </Factor>
+              </Term>
+            </Expression>
+          </AssignStatement>
+          Identity    c
+        </Statement>
+        <Statement>
+          Assign      =
+          <AssignStatement>
+            Minus       -
+            <Expression>
+              IntConst    2
+              <Term>
+                <Factor>
+                  <Integer>
+                    Semic       ;
+                  </Integer>
+                </Factor>
+              </Term>
+            </Expression>
+          </AssignStatement>
+          Identity    key
+        </Statement>
+        <Statement>
+          Assign      =
+          <AssignStatement>
+            IntConst    1
+            <Expression>
+              <Term>
+                <Factor>
+                  <Integer>
+                    Semic       ;
+                  </Integer>
+                </Factor>
+              </Term>
+            </Expression>
+          </AssignStatement>
+          ScanfSym    scanf
+        </Statement>
+        <Statement>
+          <ScanfStatement>
+            LPare       (
+            Identity    cho
+            RPare       )
+            Semic       ;
+          </ScanfStatement>
+          SwitchSym   switch
+        </Statement>
+        <Statement>
+          <SwitchStatemtn>
+            LPare       (
+            Identity    cho
+            <Expression>
+              <Term>
+                <Factor>
+                  RPare       )
+                </Factor>
+              </Term>
+            </Expression>
+            LBrac       {
+            CaseSym     case
+            <SwitchTable>
+              IntConst    0
+              <Constant>
+                <Integer>
+                  Colon       :
+                </Integer>
+              </Constant>
+              LBrac       {
+              <Statement>
+                PrintfSym   printf
+                <Statements>
+                  <Statement>
+                    <PrintfStatement>
+                      LPare       (
+                      StringConst test line:
+                      RPare       )
+                      Semic       ;
+                    </PrintfStatement>
+                    Identity    line
+                  </Statement>
+                  <Statement>
+                    LPare       (
+                    IntConst    8
+                    <ProcedureCallStatement>
+                      <ValueParameterTable>
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              <Integer>
+                                Comma       ,
+                              </Integer>
+                            </Factor>
+                          </Term>
+                        </Expression>
+                        IntConst    3
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              <Integer>
+                                RPare       )
+                              </Integer>
+                            </Factor>
+                          </Term>
+                        </Expression>
+                      </ValueParameterTable>
+                      Semic       ;
+                    </ProcedureCallStatement>
+                    RBrac       }
+                  </Statement>
+                </Statements>
+                CaseSym     case
+              </Statement>
+              IntConst    1
+              <Constant>
+                <Integer>
+                  Colon       :
+                </Integer>
+              </Constant>
+              LBrac       {
+              <Statement>
+                PrintfSym   printf
+                <Statements>
+                  <Statement>
+                    <PrintfStatement>
+                      LPare       (
+                      StringConst test fib:
+                      RPare       )
+                      Semic       ;
+                    </PrintfStatement>
+                    Identity    d
+                  </Statement>
+                  <Statement>
+                    Assign      =
+                    <AssignStatement>
+                      Identity    fib
+                      <Expression>
+                        <Term>
+                          <Factor>
+                            LPare       (
+                            Identity    coz
+                            <FunctionCallStatement>
+                              <ValueParameterTable>
+                                <Expression>
+                                  <Term>
+                                    <Factor>
+                                      RPare       )
+                                    </Factor>
+                                  </Term>
+                                </Expression>
+                              </ValueParameterTable>
+                              Semic       ;
+                            </FunctionCallStatement>
+                          </Factor>
+                        </Term>
+                      </Expression>
+                    </AssignStatement>
+                    PrintfSym   printf
+                  </Statement>
+                  <Statement>
+                    <PrintfStatement>
+                      LPare       (
+                      StringConst fib=
+                      Comma       ,
+                      Identity    d
+                      <Expression>
+                        <Term>
+                          <Factor>
+                            RPare       )
+                          </Factor>
+                        </Term>
+                      </Expression>
+                      Semic       ;
+                    </PrintfStatement>
+                    RBrac       }
+                  </Statement>
+                </Statements>
+                CaseSym     case
+              </Statement>
+              IntConst    2
+              <Constant>
+                <Integer>
+                  Colon       :
+                </Integer>
+              </Constant>
+              LBrac       {
+              <Statement>
+                DoSym       do
+                <Statements>
+                  <Statement>
+                    <DoWhileStatement>
+                      LBrac       {
+                      <Statement>
+                        Identity    sz
+                        <Statements>
+                          <Statement>
+                            LBrak       [
+                            <AssignStatement>
+                              Identity    i
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    RBrak       ]
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Assign      =
+                              CharConst   a
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    <Character>
+                                      Semic       ;
+                                    </Character>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            Identity    sz2
+                          </Statement>
+                          <Statement>
+                            LBrak       [
+                            <AssignStatement>
+                              Identity    i
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    RBrak       ]
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Assign      =
+                              Identity    i
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    Semic       ;
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            Identity    i
+                          </Statement>
+                          <Statement>
+                            Assign      =
+                            <AssignStatement>
+                              Identity    i
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    Plus        +
+                                  </Factor>
+                                </Term>
+                                IntConst    1
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      Semic       ;
+                                    </Integer>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            RBrac       }
+                          </Statement>
+                        </Statements>
+                        WhileSym    while
+                      </Statement>
+                      LPare       (
+                      Identity    i
+                      <Condition>
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              Les         <
+                            </Factor>
+                          </Term>
+                        </Expression>
+                        IntConst    5
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              <Integer>
+                                RPare       )
+                              </Integer>
+                            </Factor>
+                          </Term>
+                        </Expression>
+                      </Condition>
+                      ScanfSym    scanf
+                    </DoWhileStatement>
+                  </Statement>
+                  <Statement>
+                    <ScanfStatement>
+                      LPare       (
+                      Identity    key
+                      Comma       ,
+                      Identity    a
+                      RPare       )
+                      Semic       ;
+                    </ScanfStatement>
+                    IfSym       if
+                  </Statement>
+                  <Statement>
+                    <IfStatement>
+                      LPare       (
+                      Identity    key
+                      <Condition>
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              Les         <
+                            </Factor>
+                          </Term>
+                        </Expression>
+                        IntConst    3
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              <Integer>
+                                RPare       )
+                              </Integer>
+                            </Factor>
+                          </Term>
+                        </Expression>
+                      </Condition>
+                      LBrac       {
+                      <Statement>
+                        Identity    a
+                        <Statements>
+                          <Statement>
+                            Assign      =
+                            <AssignStatement>
+                              Identity    a
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    Plus        +
+                                  </Factor>
+                                </Term>
+                                Identity    b
+                                <Term>
+                                  <Factor>
+                                    Semic       ;
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            PrintfSym   printf
+                          </Statement>
+                          <Statement>
+                            <PrintfStatement>
+                              LPare       (
+                              Identity    a
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    RPare       )
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Semic       ;
+                            </PrintfStatement>
+                            RBrac       }
+                          </Statement>
+                        </Statements>
+                        IfSym       if
+                      </Statement>
+                    </IfStatement>
+                  </Statement>
+                  <Statement>
+                    <IfStatement>
+                      LPare       (
+                      Identity    key
+                      <Condition>
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              Leq         <=
+                            </Factor>
+                          </Term>
+                        </Expression>
+                        IntConst    3
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              <Integer>
+                                RPare       )
+                              </Integer>
+                            </Factor>
+                          </Term>
+                        </Expression>
+                      </Condition>
+                      LBrac       {
+                      <Statement>
+                        Identity    b
+                        <Statements>
+                          <Statement>
+                            Assign      =
+                            <AssignStatement>
+                              Identity    b
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    Minus       -
+                                  </Factor>
+                                </Term>
+                                Identity    a
+                                <Term>
+                                  <Factor>
+                                    Semic       ;
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            Identity    sz2
+                          </Statement>
+                          <Statement>
+                            LBrak       [
+                            <AssignStatement>
+                              IntConst    0
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      RBrak       ]
+                                    </Integer>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Assign      =
+                              Identity    sz2
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    LBrak       [
+                                    IntConst    0
+                                    <Expression>
+                                      <Term>
+                                        <Factor>
+                                          <Integer>
+                                            RBrak       ]
+                                          </Integer>
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                    Plus        +
+                                  </Factor>
+                                </Term>
+                                Identity    b
+                                <Term>
+                                  <Factor>
+                                    Semic       ;
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            Identity    sz
+                          </Statement>
+                          <Statement>
+                            LBrak       [
+                            <AssignStatement>
+                              IntConst    0
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      RBrak       ]
+                                    </Integer>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Assign      =
+                              Identity    sz
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    LBrak       [
+                                    IntConst    0
+                                    <Expression>
+                                      <Term>
+                                        <Factor>
+                                          <Integer>
+                                            RBrak       ]
+                                          </Integer>
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                    Plus        +
+                                  </Factor>
+                                </Term>
+                                IntConst    1
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      Semic       ;
+                                    </Integer>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            PrintfSym   printf
+                          </Statement>
+                          <Statement>
+                            <PrintfStatement>
+                              LPare       (
+                              Identity    b
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    RPare       )
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Semic       ;
+                            </PrintfStatement>
+                            PrintfSym   printf
+                          </Statement>
+                          <Statement>
+                            <PrintfStatement>
+                              LPare       (
+                              Identity    sz
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    LBrak       [
+                                    IntConst    0
+                                    <Expression>
+                                      <Term>
+                                        <Factor>
+                                          <Integer>
+                                            RBrak       ]
+                                          </Integer>
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                    RPare       )
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Semic       ;
+                            </PrintfStatement>
+                            PrintfSym   printf
+                          </Statement>
+                          <Statement>
+                            <PrintfStatement>
+                              LPare       (
+                              Identity    sz2
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    LBrak       [
+                                    IntConst    0
+                                    <Expression>
+                                      <Term>
+                                        <Factor>
+                                          <Integer>
+                                            RBrak       ]
+                                          </Integer>
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                    RPare       )
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Semic       ;
+                            </PrintfStatement>
+                            RBrac       }
+                          </Statement>
+                        </Statements>
+                        IfSym       if
+                      </Statement>
+                    </IfStatement>
+                  </Statement>
+                  <Statement>
+                    <IfStatement>
+                      LPare       (
+                      Identity    key
+                      <Condition>
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              Gtr         >
+                            </Factor>
+                          </Term>
+                        </Expression>
+                        IntConst    6
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              <Integer>
+                                RPare       )
+                              </Integer>
+                            </Factor>
+                          </Term>
+                        </Expression>
+                      </Condition>
+                      LBrac       {
+                      <Statement>
+                        Identity    c
+                        <Statements>
+                          <Statement>
+                            Assign      =
+                            <AssignStatement>
+                              Identity    a
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    Times       *
+                                  </Factor>
+                                  Identity    b
+                                  <Factor>
+                                    Semic       ;
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            Identity    sz2
+                          </Statement>
+                          <Statement>
+                            LBrak       [
+                            <AssignStatement>
+                              IntConst    1
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      RBrak       ]
+                                    </Integer>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Assign      =
+                              Identity    sz2
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    LBrak       [
+                                    IntConst    1
+                                    <Expression>
+                                      <Term>
+                                        <Factor>
+                                          <Integer>
+                                            RBrak       ]
+                                          </Integer>
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                    Plus        +
+                                  </Factor>
+                                </Term>
+                                Identity    c
+                                <Term>
+                                  <Factor>
+                                    Semic       ;
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            Identity    sz
+                          </Statement>
+                          <Statement>
+                            LBrak       [
+                            <AssignStatement>
+                              IntConst    1
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      RBrak       ]
+                                    </Integer>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Assign      =
+                              Identity    sz
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    LBrak       [
+                                    IntConst    1
+                                    <Expression>
+                                      <Term>
+                                        <Factor>
+                                          <Integer>
+                                            RBrak       ]
+                                          </Integer>
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                    Plus        +
+                                  </Factor>
+                                </Term>
+                                IntConst    1
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      Semic       ;
+                                    </Integer>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            PrintfSym   printf
+                          </Statement>
+                          <Statement>
+                            <PrintfStatement>
+                              LPare       (
+                              Identity    c
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    RPare       )
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Semic       ;
+                            </PrintfStatement>
+                            PrintfSym   printf
+                          </Statement>
+                          <Statement>
+                            <PrintfStatement>
+                              LPare       (
+                              Identity    sz
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    LBrak       [
+                                    IntConst    1
+                                    <Expression>
+                                      <Term>
+                                        <Factor>
+                                          <Integer>
+                                            RBrak       ]
+                                          </Integer>
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                    RPare       )
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Semic       ;
+                            </PrintfStatement>
+                            PrintfSym   printf
+                          </Statement>
+                          <Statement>
+                            <PrintfStatement>
+                              LPare       (
+                              Identity    sz2
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    LBrak       [
+                                    IntConst    1
+                                    <Expression>
+                                      <Term>
+                                        <Factor>
+                                          <Integer>
+                                            RBrak       ]
+                                          </Integer>
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                    RPare       )
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Semic       ;
+                            </PrintfStatement>
+                            RBrac       }
+                          </Statement>
+                        </Statements>
+                        IfSym       if
+                      </Statement>
+                    </IfStatement>
+                  </Statement>
+                  <Statement>
+                    <IfStatement>
+                      LPare       (
+                      Identity    key
+                      <Condition>
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              Geq         >=
+                            </Factor>
+                          </Term>
+                        </Expression>
+                        IntConst    6
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              <Integer>
+                                RPare       )
+                              </Integer>
+                            </Factor>
+                          </Term>
+                        </Expression>
+                      </Condition>
+                      LBrac       {
+                      <Statement>
+                        Identity    d
+                        <Statements>
+                          <Statement>
+                            Assign      =
+                            <AssignStatement>
+                              Plus        +
+                              <Expression>
+                                Identity    a
+                                <Term>
+                                  <Factor>
+                                    Divide      /
+                                  </Factor>
+                                  Identity    b
+                                  <Factor>
+                                    Semic       ;
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            Identity    sz2
+                          </Statement>
+                          <Statement>
+                            LBrak       [
+                            <AssignStatement>
+                              IntConst    2
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      RBrak       ]
+                                    </Integer>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Assign      =
+                              Identity    sz2
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    LBrak       [
+                                    IntConst    2
+                                    <Expression>
+                                      <Term>
+                                        <Factor>
+                                          <Integer>
+                                            RBrak       ]
+                                          </Integer>
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                    Plus        +
+                                  </Factor>
+                                </Term>
+                                Identity    d
+                                <Term>
+                                  <Factor>
+                                    Semic       ;
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            Identity    sz
+                          </Statement>
+                          <Statement>
+                            LBrak       [
+                            <AssignStatement>
+                              IntConst    2
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      RBrak       ]
+                                    </Integer>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Assign      =
+                              Identity    sz
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    LBrak       [
+                                    IntConst    2
+                                    <Expression>
+                                      <Term>
+                                        <Factor>
+                                          <Integer>
+                                            RBrak       ]
+                                          </Integer>
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                    Plus        +
+                                  </Factor>
+                                </Term>
+                                IntConst    1
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      Semic       ;
+                                    </Integer>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            PrintfSym   printf
+                          </Statement>
+                          <Statement>
+                            <PrintfStatement>
+                              LPare       (
+                              Identity    d
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    RPare       )
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Semic       ;
+                            </PrintfStatement>
+                            PrintfSym   printf
+                          </Statement>
+                          <Statement>
+                            <PrintfStatement>
+                              LPare       (
+                              Identity    sz
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    LBrak       [
+                                    IntConst    2
+                                    <Expression>
+                                      <Term>
+                                        <Factor>
+                                          <Integer>
+                                            RBrak       ]
+                                          </Integer>
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                    RPare       )
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Semic       ;
+                            </PrintfStatement>
+                            PrintfSym   printf
+                          </Statement>
+                          <Statement>
+                            <PrintfStatement>
+                              LPare       (
+                              Identity    sz2
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    LBrak       [
+                                    IntConst    2
+                                    <Expression>
+                                      <Term>
+                                        <Factor>
+                                          <Integer>
+                                            RBrak       ]
+                                          </Integer>
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                    RPare       )
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Semic       ;
+                            </PrintfStatement>
+                            RBrac       }
+                          </Statement>
+                        </Statements>
+                        IfSym       if
+                      </Statement>
+                    </IfStatement>
+                  </Statement>
+                  <Statement>
+                    <IfStatement>
+                      LPare       (
+                      Identity    key
+                      <Condition>
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              Neq         !=
+                            </Factor>
+                          </Term>
+                        </Expression>
+                        IntConst    4
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              <Integer>
+                                RPare       )
+                              </Integer>
+                            </Factor>
+                          </Term>
+                        </Expression>
+                      </Condition>
+                      LBrac       {
+                      <Statement>
+                        Identity    a
+                        <Statements>
+                          <Statement>
+                            Assign      =
+                            <AssignStatement>
+                              Identity    a
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    Minus       -
+                                  </Factor>
+                                </Term>
+                                IntConst    1
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      Divide      /
+                                    </Integer>
+                                  </Factor>
+                                  Identity    coz
+                                  <Factor>
+                                    Semic       ;
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            Identity    sz2
+                          </Statement>
+                          <Statement>
+                            LBrak       [
+                            <AssignStatement>
+                              IntConst    3
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      RBrak       ]
+                                    </Integer>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Assign      =
+                              Identity    sz2
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    LBrak       [
+                                    IntConst    3
+                                    <Expression>
+                                      <Term>
+                                        <Factor>
+                                          <Integer>
+                                            RBrak       ]
+                                          </Integer>
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                    Plus        +
+                                  </Factor>
+                                </Term>
+                                Identity    a
+                                <Term>
+                                  <Factor>
+                                    Plus        +
+                                  </Factor>
+                                </Term>
+                                CharConst   c
+                                <Term>
+                                  <Factor>
+                                    <Character>
+                                      Semic       ;
+                                    </Character>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            Identity    sz
+                          </Statement>
+                          <Statement>
+                            LBrak       [
+                            <AssignStatement>
+                              IntConst    3
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      RBrak       ]
+                                    </Integer>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Assign      =
+                              Identity    sz
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    LBrak       [
+                                    IntConst    3
+                                    <Expression>
+                                      <Term>
+                                        <Factor>
+                                          <Integer>
+                                            RBrak       ]
+                                          </Integer>
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                    Plus        +
+                                  </Factor>
+                                </Term>
+                                IntConst    1
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      Semic       ;
+                                    </Integer>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            PrintfSym   printf
+                          </Statement>
+                          <Statement>
+                            <PrintfStatement>
+                              LPare       (
+                              Identity    a
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    RPare       )
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Semic       ;
+                            </PrintfStatement>
+                            PrintfSym   printf
+                          </Statement>
+                          <Statement>
+                            <PrintfStatement>
+                              LPare       (
+                              Identity    sz
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    LBrak       [
+                                    IntConst    3
+                                    <Expression>
+                                      <Term>
+                                        <Factor>
+                                          <Integer>
+                                            RBrak       ]
+                                          </Integer>
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                    RPare       )
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Semic       ;
+                            </PrintfStatement>
+                            PrintfSym   printf
+                          </Statement>
+                          <Statement>
+                            <PrintfStatement>
+                              LPare       (
+                              Identity    sz2
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    LBrak       [
+                                    IntConst    3
+                                    <Expression>
+                                      <Term>
+                                        <Factor>
+                                          <Integer>
+                                            RBrak       ]
+                                          </Integer>
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                    RPare       )
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Semic       ;
+                            </PrintfStatement>
+                            RBrac       }
+                          </Statement>
+                        </Statements>
+                        IfSym       if
+                      </Statement>
+                    </IfStatement>
+                  </Statement>
+                  <Statement>
+                    <IfStatement>
+                      LPare       (
+                      Identity    key
+                      <Condition>
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              Equ         ==
+                            </Factor>
+                          </Term>
+                        </Expression>
+                        IntConst    4
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              <Integer>
+                                RPare       )
+                              </Integer>
+                            </Factor>
+                          </Term>
+                        </Expression>
+                      </Condition>
+                      LBrac       {
+                      <Statement>
+                        Identity    a
+                        <Statements>
+                          <Statement>
+                            Assign      =
+                            <AssignStatement>
+                              Minus       -
+                              <Expression>
+                                Identity    a
+                                <Term>
+                                  <Factor>
+                                    Plus        +
+                                  </Factor>
+                                </Term>
+                                IntConst    2
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      Times       *
+                                    </Integer>
+                                  </Factor>
+                                  Identity    coz
+                                  <Factor>
+                                    Semic       ;
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            Identity    sz
+                          </Statement>
+                          <Statement>
+                            LBrak       [
+                            <AssignStatement>
+                              IntConst    4
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      RBrak       ]
+                                    </Integer>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Assign      =
+                              Identity    sz
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    LBrak       [
+                                    IntConst    4
+                                    <Expression>
+                                      <Term>
+                                        <Factor>
+                                          <Integer>
+                                            RBrak       ]
+                                          </Integer>
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                    Plus        +
+                                  </Factor>
+                                </Term>
+                                IntConst    1
+                                <Term>
+                                  <Factor>
+                                    <Integer>
+                                      Semic       ;
+                                    </Integer>
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                            </AssignStatement>
+                            PrintfSym   printf
+                          </Statement>
+                          <Statement>
+                            <PrintfStatement>
+                              LPare       (
+                              Identity    a
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    RPare       )
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Semic       ;
+                            </PrintfStatement>
+                            PrintfSym   printf
+                          </Statement>
+                          <Statement>
+                            <PrintfStatement>
+                              LPare       (
+                              Identity    sz
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    LBrak       [
+                                    IntConst    4
+                                    <Expression>
+                                      <Term>
+                                        <Factor>
+                                          <Integer>
+                                            RBrak       ]
+                                          </Integer>
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                    RPare       )
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Semic       ;
+                            </PrintfStatement>
+                            PrintfSym   printf
+                          </Statement>
+                          <Statement>
+                            <PrintfStatement>
+                              LPare       (
+                              Identity    sz2
+                              <Expression>
+                                <Term>
+                                  <Factor>
+                                    LBrak       [
+                                    IntConst    4
+                                    <Expression>
+                                      <Term>
+                                        <Factor>
+                                          <Integer>
+                                            RBrak       ]
+                                          </Integer>
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                    RPare       )
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Semic       ;
+                            </PrintfStatement>
+                            RBrac       }
+                          </Statement>
+                        </Statements>
+                        IfSym       if
+                      </Statement>
+                    </IfStatement>
+                  </Statement>
+                  <Statement>
+                    <IfStatement>
+                      LPare       (
+                      Identity    key
+                      <Condition>
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              RPare       )
+                            </Factor>
+                          </Term>
+                        </Expression>
+                      </Condition>
+                      LBrac       {
+                      <Statement>
+                        PrintfSym   printf
+                        <Statements>
+                          <Statement>
+                            <PrintfStatement>
+                              LPare       (
+                              Plus        +
+                              <Expression>
+                                Identity    a
+                                <Term>
+                                  <Factor>
+                                    RPare       )
+                                  </Factor>
+                                </Term>
+                              </Expression>
+                              Semic       ;
+                            </PrintfStatement>
+                            RBrac       }
+                          </Statement>
+                        </Statements>
+                        RBrac       }
+                      </Statement>
+                    </IfStatement>
+                  </Statement>
+                </Statements>
+                CaseSym     case
+              </Statement>
+              IntConst    3
+              <Constant>
+                <Integer>
+                  Colon       :
+                </Integer>
+              </Constant>
+              LBrac       {
+              <Statement>
+                PrintfSym   printf
+                <Statements>
+                  <Statement>
+                    <PrintfStatement>
+                      LPare       (
+                      StringConst test function:
+                      RPare       )
+                      Semic       ;
+                    </PrintfStatement>
+                    IfSym       if
+                  </Statement>
+                  <Statement>
+                    <IfStatement>
+                      LPare       (
+                      Identity    key
+                      <Condition>
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              RPare       )
+                            </Factor>
+                          </Term>
+                        </Expression>
+                      </Condition>
+                      Identity    sz2
+                      <Statement>
+                        LBrak       [
+                        <AssignStatement>
+                          IntConst    4
+                          <Expression>
+                            <Term>
+                              <Factor>
+                                <Integer>
+                                  RBrak       ]
+                                </Integer>
+                              </Factor>
+                            </Term>
+                          </Expression>
+                          Assign      =
+                          Identity    f
+                          <Expression>
+                            <Term>
+                              <Factor>
+                                LPare       (
+                                Minus       -
+                                <FunctionCallStatement>
+                                  <ValueParameterTable>
+                                    <Expression>
+                                      IntConst    2
+                                      <Term>
+                                        <Factor>
+                                          <Integer>
+                                            Comma       ,
+                                          </Integer>
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                    IntConst    3
+                                    <Expression>
+                                      <Term>
+                                        <Factor>
+                                          <Integer>
+                                            RPare       )
+                                          </Integer>
+                                        </Factor>
+                                      </Term>
+                                    </Expression>
+                                  </ValueParameterTable>
+                                  Plus        +
+                                </FunctionCallStatement>
+                              </Factor>
+                            </Term>
+                            LPare       (
+                            <Term>
+                              <Factor>
+                                IntConst    5
+                                <Expression>
+                                  <Term>
+                                    <Factor>
+                                      <Integer>
+                                        Plus        +
+                                      </Integer>
+                                    </Factor>
+                                  </Term>
+                                  IntConst    1
+                                  <Term>
+                                    <Factor>
+                                      <Integer>
+                                        RPare       )
+                                      </Integer>
+                                    </Factor>
+                                  </Term>
+                                </Expression>
+                                Times       *
+                              </Factor>
+                              Identity    coz
+                              <Factor>
+                                Semic       ;
+                              </Factor>
+                            </Term>
+                          </Expression>
+                        </AssignStatement>
+                        Identity    t
+                      </Statement>
+                    </IfStatement>
+                  </Statement>
+                  <Statement>
+                    LPare       (
+                    Identity    conb
+                    <ProcedureCallStatement>
+                      <ValueParameterTable>
+                        <Expression>
+                          <Term>
+                            <Factor>
+                              RPare       )
+                            </Factor>
+                          </Term>
+                        </Expression>
+                      </ValueParameterTable>
+                      Semic       ;
+                    </ProcedureCallStatement>
+                    PrintfSym   printf
+                  </Statement>
+                  <Statement>
+                    <PrintfStatement>
+                      LPare       (
+                      Identity    f2
+                      <Expression>
+                        <Term>
+                          <Factor>
+                            LPare       (
+                            CharConst   a
+                            <FunctionCallStatement>
+                              <ValueParameterTable>
+                                <Expression>
+                                  <Term>
+                                    <Factor>
+                                      <Character>
+                                        RPare       )
+                                      </Character>
+                                    </Factor>
+                                  </Term>
+                                </Expression>
+                              </ValueParameterTable>
+                              RPare       )
+                            </FunctionCallStatement>
+                          </Factor>
+                        </Term>
+                      </Expression>
+                      Semic       ;
+                    </PrintfStatement>
+                    PrintfSym   printf
+                  </Statement>
+                  <Statement>
+                    <PrintfStatement>
+                      LPare       (
+                      Identity    sz2
+                      <Expression>
+                        <Term>
+                          <Factor>
+                            LBrak       [
+                            IntConst    4
+                            <Expression>
+                              <Term>
+                                <Factor>
+                                  <Integer>
+                                    RBrak       ]
+                                  </Integer>
+                                </Factor>
+                              </Term>
+                            </Expression>
+                            RPare       )
+                          </Factor>
+                        </Term>
+                      </Expression>
+                      Semic       ;
+                    </PrintfStatement>
+                    RBrac       }
+                  </Statement>
+                </Statements>
+                CaseSym     case
+              </Statement>
+              IntConst    4
+              <Constant>
+                <Integer>
+                  Colon       :
+                </Integer>
+              </Constant>
+              LBrac       {
+              <Statement>
+                PrintfSym   printf
+                <Statements>
+                  <Statement>
+                    <PrintfStatement>
+                      LPare       (
+                      StringConst test switch:
+                      RPare       )
+                      Semic       ;
+                    </PrintfStatement>
+                    ScanfSym    scanf
+                  </Statement>
+                  <Statement>
+                    <ScanfStatement>
+                      LPare       (
+                      Identity    key
+                      RPare       )
+                      Semic       ;
+                    </ScanfStatement>
+                    SwitchSym   switch
+                  </Statement>
+                  <Statement>
+                    <SwitchStatemtn>
+                      LPare       (
+                      Identity    key
+                      <Expression>
+                        <Term>
+                          <Factor>
+                            Times       *
+                          </Factor>
+                          IntConst    1
+                          <Factor>
+                            <Integer>
+                              RPare       )
+                            </Integer>
+                          </Factor>
+                        </Term>
+                      </Expression>
+                      LBrac       {
+                      CaseSym     case
+                      <SwitchTable>
+                        IntConst    0
+                        <Constant>
+                          <Integer>
+                            Colon       :
+                          </Integer>
+                        </Constant>
+                        PrintfSym   printf
+                        <Statement>
+                          <PrintfStatement>
+                            LPare       (
+                            StringConst key is 0
+                            RPare       )
+                            Semic       ;
+                          </PrintfStatement>
+                          CaseSym     case
+                        </Statement>
+                        IntConst    1
+                        <Constant>
+                          <Integer>
+                            Colon       :
+                          </Integer>
+                        </Constant>
+                        PrintfSym   printf
+                        <Statement>
+                          <PrintfStatement>
+                            LPare       (
+                            StringConst key is 
+                            Comma       ,
+                            Identity    key
+                            <Expression>
+                              <Term>
+                                <Factor>
+                                  RPare       )
+                                </Factor>
+                              </Term>
+                            </Expression>
+                            Semic       ;
+                          </PrintfStatement>
+                          CaseSym     case
+                        </Statement>
+                        IntConst    2
+                        <Constant>
+                          <Integer>
+                            Colon       :
+                          </Integer>
+                        </Constant>
+                        PrintfSym   printf
+                        <Statement>
+                          <PrintfStatement>
+                            LPare       (
+                            StringConst key is 2
+                            RPare       )
+                            Semic       ;
+                          </PrintfStatement>
+                          RBrac       }
+                        </Statement>
+                      </SwitchTable>
+                      ScanfSym    scanf
+                    </SwitchStatement>
+                  </Statement>
+                  <Statement>
+                    <ScanfStatement>
+                      LPare       (
+                      Identity    e
+                      RPare       )
+                      Semic       ;
+                    </ScanfStatement>
+                    SwitchSym   switch
+                  </Statement>
+                  <Statement>
+                    <SwitchStatemtn>
+                      LPare       (
+                      Identity    e
+                      <Expression>
+                        <Term>
+                          <Factor>
+                            RPare       )
+                          </Factor>
+                        </Term>
+                      </Expression>
+                      LBrac       {
+                      CaseSym     case
+                      <SwitchTable>
+                        CharConst   a
+                        <Constant>
+                          <Character>
+                            Colon       :
+                          </Character>
+                        </Constant>
+                        PrintfSym   printf
+                        <Statement>
+                          <PrintfStatement>
+                            LPare       (
+                            Plus        +
+                            <Expression>
+                              Plus        +
+                              <Term>
+                                <Factor>
+                                  <Integer>
+                                    IntConst    2
+                                    RPare       )
+                                  </Integer>
+                                </Factor>
+                              </Term>
+                            </Expression>
+                            Semic       ;
+                          </PrintfStatement>
+                          CaseSym     case
+                        </Statement>
+                        CharConst   b
+                        <Constant>
+                          <Character>
+                            Colon       :
+                          </Character>
+                        </Constant>
+                        PrintfSym   printf
+                        <Statement>
+                          <PrintfStatement>
+                            LPare       (
+                            Plus        +
+                            <Expression>
+                              IntConst    2
+                              <Term>
+                                <Factor>
+                                  <Integer>
+                                    Plus        +
+                                  </Integer>
+                                </Factor>
+                              </Term>
+                              Minus       -
+                              <Term>
+                                <Factor>
+                                  <Integer>
+                                    IntConst    2
+                                    RPare       )
+                                  </Integer>
+                                </Factor>
+                              </Term>
+                            </Expression>
+                            Semic       ;
+                          </PrintfStatement>
+                          RBrac       }
+                        </Statement>
+                      </SwitchTable>
+                      RBrac       }
+                    </SwitchStatement>
+                  </Statement>
+                </Statements>
+                RBrac       }
+              </Statement>
+            </SwitchTable>
+            Identity    nest
+          </SwitchStatement>
+        </Statement>
+        <Statement>
+          LPare       (
+          RPare       )
+          <ProcedureCallStatement>
+            <ValueParameterTable>
+            </ValueParameterTable>
+            Semic       ;
+          </ProcedureCallStatement>
+          ReturnSym   return
+        </Statement>
+        <Statement>
+          <ReturnStatement>
+            Semic       ;
+          </ReturnStatement>
+          RBrac       }
+        </Statement>
+      </Statements>
+    </CompoundStatement>
+  </MainDefine>
+</Program>

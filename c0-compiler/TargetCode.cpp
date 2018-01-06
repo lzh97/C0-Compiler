@@ -4,8 +4,10 @@ extern FILE* targetcode;
 
 extern Quadruple midcode[CodeMaxNum];
 extern int cnt;
+extern Identity global[GlobalSize];
 extern Identity local[LocalSize];
 extern Identity* current;
+extern int gsize;
 
 int offset;
 int top = 0;
@@ -48,28 +50,21 @@ void GenerateMIPS32() {
 	Identity *ident, *ident1, *ident2;
 	int value = 95;
 	fprintf(targetcode, ".data\n");
-	int i = 0;
-	for (; i < cnt; i++) {		//全局变量、常量分配
-		if (midcode[i].op == FUNC || midcode[i].op == PROC)
-			break;
-		ident = Search(midcode[i].res, 2);
-		AllocGlobal(ident, "", "");				
+	for (int i = 0; i < gsize; i++) {	//全局常量、变量分配
+		ident = &global[i];
+		AllocGlobal(ident, NULL, NULL);
 	}
-	for(int j = 0; j < cnt; j++)	//字符串常量分配
-		if (midcode[j].op == PRINTS) {
-			AllocGlobal(NULL, StringLabel(str), midcode[j].op1);
-			strcpy_s(midcode[j].op1, StringLabel(str++));
+	for(int i = 0; i < cnt; i++)	//字符串常量分配
+		if (midcode[i].op == PRINTS) {
+			AllocGlobal(NULL, StringLabel(str), midcode[i].op1);
+			strcpy_s(midcode[i].op1, StringLabel(str++));
 		}
 	fprintf(targetcode, ".text\n");
 	MIPS_JAL("main");
 	MIPS_LI(v0, 10);
 	MIPS_SYSCALL();
-	for (; i < cnt; i++)
+	for (int i = 0; i < cnt; i++)
 		switch (midcode[i].op) {
-		case CONST:
-		case VAR:
-		case ARR:
-			break;
 		case PROC:
 		case FUNC:
 			top = offset = 0;
@@ -78,7 +73,7 @@ void GenerateMIPS32() {
 			MIPS_SUBI(gp, gp, current->size * DATASIZE);
 			MIPS_SW(fp, sp, -offset++ * DATASIZE);		//保存退栈信息
 			MIPS_SW(ra, sp, -offset++ * DATASIZE);
-			for (int j = current->l; j < current->r; j++) {
+			for (int j = current->l; j < current->r; j++){
 				ident = &local[j];
 				AllocLocal(ident);
 			}
@@ -231,7 +226,7 @@ void GenerateMIPS32() {
 				else
 					MIPS_LW(a0, sp, ident1->addr);
 			}
-			if (ident1->type == INT)
+			if (midcode[i].op == PRINTI)
 				MIPS_LI(v0, 1);
 			else
 				MIPS_LI(v0, 11);
@@ -360,15 +355,19 @@ void AllocGlobal(Identity* ident, char* name, char* value) {
 	if (ident == NULL)
 		fprintf(targetcode, "%s: .asciiz %s\n", name, value);
 	else {
+		if (ident->kind == DELETED)
+			return;
 		if (ident->kind == ARRAY) 
 			fprintf(targetcode, "%s: .space %d\n", ident->name, ident->size * DATASIZE);
-		else
+		else if(ident->kind == CONSTANT || ident->kind == VARIABLE)
 			fprintf(targetcode, "%s: .word %d\n", ident->name, ident->value);
 	}
 }
 void AllocLocal(Identity *&ident) {
+	if (ident->kind == DELETED)
+		return;
 	ident->addr = -offset * DATASIZE;
-	if (ident->kind == CONST) {
+	if (ident->kind == CONSTANT) {
 		MIPS_LI(t0, ident->value);
 		MIPS_SW(t0, sp, -offset * DATASIZE);
 	}

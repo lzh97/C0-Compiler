@@ -322,6 +322,10 @@ void FuncDefine() {
 				Error(MISSING_RETURN_VALUE_ERROR);
 			else if (returned == 1)
 				Warning(MAY_MISSING_RETURN_VALUE_WARNING);
+			if (returned != 2) {
+				Identity* ident = AddConst(TempVar(NewTempVar()), current->type, 95, false);
+				GenerateMidCode(RET, ident->name, "", "");
+			}
 			LocalTableTest();
 			if (symbol == rbrac)
 				NextSymbol();
@@ -362,7 +366,10 @@ void ProcDefine() {
 				NextSymbol();
 			else
 				Error(MISSING_LEFT_BRACE_ERROR);
+			returned = 0;
 			CompoundStatement();
+			if (returned != 2)
+				GenerateMidCode(RET, "", "", "");
 			LocalTableTest();
 			if (symbol == rbrac)
 				NextSymbol();
@@ -394,7 +401,7 @@ void ParaTable() {
 			paratype |= type << size;
 			size++;
 			AddPara(name, type);
-			GenerateMidCode(PARA, Type2String(type), "", name);
+			GenerateMidCode(PARA, "", "", name);
 			NextSymbol();
 		}
 		else {
@@ -416,7 +423,7 @@ l1:
 					paratype |= type << size;
 					size++;
 					AddPara(name, type);
-					GenerateMidCode(PARA, Type2String(type), "", name);
+					GenerateMidCode(PARA, "", "", name);
 				}
 				else
 					Error(PARAMETER_NUM_OUTOFRANGE_ERROR);
@@ -456,7 +463,10 @@ void MainDefine() {
 		NextSymbol();
 	else
 		Error(MISSING_LEFT_BRACE_ERROR);
+	returned = 0;
 	CompoundStatement();
+	if (returned != 2)
+		GenerateMidCode(RET, "", "", "");
 	LocalTableTest();
 	if (symbol == rbrac){
 	}
@@ -472,7 +482,6 @@ void CompoundStatement() {
 	ConstDeclare(false);
 	VarDeclare(false);
 	Statements();
-	GenerateMidCode(RET, "", "", "");
 	SyntaxTest(23);
 }
 
@@ -677,7 +686,7 @@ void AssignStatement(Identity ident) {
 				if (ident.type == CHAR && ident2->type == INT)
 					Warning(ASSIGN_INTTOCHAR_WARNING);
 				ch = ident2->value;
-				if (ident.type == CHAR && ident2->kind == CONSTANT && !isLetter()) {
+				if (ident.type == CHAR && ident2->kind == CONSTANT && !isValidChar()) {
 					Error(INVALID_CHARACTER_ERROR);
 					SkipStatement();
 				}
@@ -692,7 +701,7 @@ void AssignStatement(Identity ident) {
 		if (ident.type == CHAR && ident1->type == INT)
 			Warning(ASSIGN_INTTOCHAR_WARNING);
 		ch = ident1->value;
-		if (ident.type == CHAR && ident1->kind == CONSTANT && !isLetter()) {
+		if (ident.type == CHAR && ident1->kind == CONSTANT && !isValidChar()) {
 			Error(INVALID_CHARACTER_ERROR);
 			SkipStatement();
 		}

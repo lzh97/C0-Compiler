@@ -1,4 +1,4 @@
 #pragma once
 
 void NextSymbol();
-bool isLetter();
+bool isValidChar();

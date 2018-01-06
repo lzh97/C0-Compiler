@@ -29,7 +29,6 @@
 #define GEQ 26
 #define NEQ 27
 #define ASN 28
-#define DEL 29
 
 struct Quadruple {
 	int op;
@@ -39,6 +38,7 @@ struct Quadruple {
 };
 
 void GenerateMidCode(int op, char op1[], char op2[], char res[]);
+void GenerateTempCode(int op, char op1[], char op2[], char res[]);
 
 char* Type2String(int type);
 char* Int2String(int value);

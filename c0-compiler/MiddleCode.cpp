@@ -5,6 +5,9 @@ int cnt = 0;
 int tmp_num = 0;
 int lab_num = -1;
 
+extern Quadruple tempcode[CodeMaxNum];
+extern int temp_cnt;
+
 int rec = 0;
 char res1[15];
 char res2[15];
@@ -16,6 +19,14 @@ void GenerateMidCode(int op, char op1[], char op2[], char res[]) {
 	strcpy_s(midcode[cnt].op2, op2);
 	strcpy_s(midcode[cnt].res, res);
 	cnt++;
+}
+
+void GenerateTempCode(int op, char op1[], char op2[], char res[]) {
+	tempcode[temp_cnt].op = op;
+	strcpy_s(tempcode[temp_cnt].op1, op1);
+	strcpy_s(tempcode[temp_cnt].op2, op2);
+	strcpy_s(tempcode[temp_cnt].res, res);
+	temp_cnt++;
 }
 
 char* Type2String(int type) {

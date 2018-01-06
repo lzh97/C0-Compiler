@@ -6,6 +6,7 @@
 #define PROCEDURE 3			//过程
 #define FUNCTION 4			//函数
 #define ARRAY 5				//数组
+#define DELETED 6			//删除
 
 #define INT 0				//整型
 #define CHAR 1				//字符型
@@ -34,3 +35,5 @@ Identity* AddFunc(char name[], int type);
 Identity* AddProc(char name[]);
 void AddPara(char name[], int type);
 Identity* Search(char name[], int code);
+
+unsigned int Hash(char *str);

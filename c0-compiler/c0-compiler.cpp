@@ -22,35 +22,44 @@ bool success = true;
 FILE *source;
 FILE *compilerecord;
 FILE *tablerecord;
+FILE *middlecode_o;
 FILE *middlecode;
 FILE *targetcode;
 
 int _tmain(int argc, _TCHAR* argv[]) {
-	char filepath[IdentityMaxLen] = "15061140_test.txt";
-	//scanf("%s", filepath);
+	char filepath[IdentityMaxLen];
+	scanf("%s", filepath);
 	fopen_s(&source, filepath, "r");
-	fopen_s(&compilerecord, "15061140_record.txt", "w");
-	fopen_s(&tablerecord, "15061140_table.txt", "w");
-	fopen_s(&middlecode, "15061140_midcode.txt", "w");
-	int len = strnlen_s(filepath, IdentityMaxLen);
-	filepath[len - 4] = '\0';
-	strcat_s(filepath, ".asm");
-	fopen_s(&targetcode, filepath, "w");
 	if (source == NULL) {
 		Error(FILE_NOT_EXIST_ERROR);
 		exit(0);
 	}
+	fopen_s(&compilerecord, "record.txt", "w");
+	fopen_s(&tablerecord, "table.txt", "w");
+	fopen_s(&middlecode_o, "midcode_origin.txt", "w");
+	fopen_s(&middlecode, "midcode.txt", "w");
+	int len = strnlen_s(filepath, IdentityMaxLen);
+	while (len > 0)
+		if (filepath[--len] == '.')
+			break;
+	filepath[len] = '\0';
+	strcat_s(filepath, ".asm");
+	fopen_s(&targetcode, filepath, "w");
 	Program();
 	if (success) {
+		QuadrupleTest(false);
+		CommonSubexpressionElimination();
+		//ConstantReplace();
+		QuadrupleTest(true);
 		GenerateMIPS32();
 		printf("Compile successfully.\n");
 	}
 	else
 		printf("Compile failed.\n");
-	QuadrupleTest();
 	fclose(source);
 	fclose(compilerecord);
 	fclose(tablerecord);
 	fclose(middlecode);
+	fclose(middlecode_o);
 	return 0;
 }

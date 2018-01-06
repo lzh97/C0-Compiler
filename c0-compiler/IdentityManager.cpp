@@ -24,6 +24,15 @@ Identity* Search(char name[], int code) {
 }
 
 Identity* AddConst(char name[], int type, int value, bool isglobal) {
+	if (name[0] == '$') {
+		if (current != NULL)
+			for (int i = current->l; i < current->r; i++)
+				if (local[i].kind == CONSTANT && local[i].type == type && local[i].value == value)
+					return &local[i];
+		for (int i = 0; i < gsize; i++)
+			if (global[i].kind == CONSTANT && global[i].type == type && global[i].value == value)
+				return &global[i];
+	}
 	if (isglobal) {
 		if (Search(name, 2) != NULL) {
 			Error(DUPLICATE_DEFINATION_ERROR);

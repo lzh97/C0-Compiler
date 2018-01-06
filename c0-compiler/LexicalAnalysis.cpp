@@ -17,6 +17,7 @@ extern FILE *source;
 void NextChar();
 void Retract();
 bool isUseless();
+bool isLetter();
 bool isNumber(int l, int r);
 bool isPlus();
 bool isMinus();
@@ -104,7 +105,7 @@ void NextSymbol() {
 			NextChar();
 			if (isSquot())
 				break;
-			else if (isLetter() || isNumber(0, 9) || isPlus() || isMinus() || isTimes() || isDivide())
+			else if (isValidChar())
 				id[len++] = ch;
 			else
 				Error(INVALID_CHARACTER_ERROR);
@@ -270,6 +271,9 @@ bool isColon() {
 }
 bool isSemic() {
 	return ch == ';' ? true : false;
+}
+bool isValidChar() {
+	return isLetter() || isNumber(0, 9) || isPlus() || isMinus() || isTimes() || isDivide();
 }
 void ToLower() {
 	for (int i = 0; i < len; i++)
