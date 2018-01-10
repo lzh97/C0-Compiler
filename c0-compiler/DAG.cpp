@@ -20,6 +20,10 @@ void AddNode_3(int op, char* res);
 void AddNode_4(int op, char* op1, char* op2, char* res);
 void AddNode_5(int op, char* op1, char* op2, char* res);
 void AddNode_6(int op, char* op1, char* op2, char* res);
+void AddNode_7(int op);
+bool isSimpleArithmetic(int op);
+
+
 
 void Link(int root, int lchild, int rchild) {
 	nodes[root].lchild = lchild;
@@ -64,12 +68,6 @@ int SearchIndex(char* name) {
 
 void AddNode_1(int op, char* op1, char* res) {
 	int lchild = SearchIndex(op1);
-	for(int i = nodenum - 1; i >= 0; i--)
-		if (nodes[i].op == op)
-			if (nodes[i].lchild == lchild) {
-				UpdateTab(res, i);
-				return;
-			}
 	int root = NewNode(res, op);
 	Link(root, lchild, -1);
 }
@@ -123,6 +121,10 @@ void AddNode_6(int op, char* op1, char* op2, char* res) {
 	Link(root, lchild, rchild);
 }
 
+void AddNode_7(int op) {
+	int root = NewNode("", op);
+}
+
 void InitDAG() {
 	tabnum = nodenum = 0;
 }
@@ -148,6 +150,8 @@ void InsertDAG(Quadruple code) {
 	case GEQ:
 	case MINUS:
 	case DIVIDE:
+	case JZ:
+	case JNZ:
 		AddNode_4(code.op, code.op1, code.op2, code.res);
 		break;
 	case PLUS:
@@ -159,46 +163,41 @@ void InsertDAG(Quadruple code) {
 	case SARR:
 		AddNode_6(code.op, code.op1, code.op2, code.res);
 		break;
+	case CALL:
+		char temp[IdentityMaxLen];
+		strcpy_s(temp, code.op1);
+		strcat_s(temp, "@");
+		if (strcmp(code.res, "") == 0)
+			AddNode_2(code.op, temp);
+		else
+			AddNode_1(code.op, temp, code.res);
+		break;
+	case RET:
+		if (strcmp(code.op1, "") == 0)
+			AddNode_7(code.op);
+		else
+			AddNode_2(code.op, code.op1);
+		break;
 	}
 }
 
 void ExportDAG() {
 	int stack[LocalSize];
 	int top = -1;
+	for (int i = 0; i < nodenum; i++)
+		if (nodes[i].op == ASN) {
+			int lchild = nodes[i].lchild;
+			if (nodes[lchild].op >= 0 && nodes[lchild].parent_num == 1 && nodes[lchild].name[0] == '$') {
+				nodes[i].op = nodes[lchild].op;
+				nodes[i].lchild = nodes[lchild].lchild;
+				nodes[i].rchild = nodes[lchild].rchild;
+				nodes[lchild].op = -1;
+			}
+		}
 	for (int i = nodenum - 1; i >= 0; i--)
 		if (nodes[i].parent_num == 0) {
 			int p = i;
-			while (p >= 0 && nodes[p].parent_num == 0) {
-				if (nodes[p].op == LARR) {
-					bool cancel = false;
-					for (int j = p + 1; j < nodenum; j++)
-						if (nodes[j].parent_num == 0 && nodes[j].op == SARR && strcmp(nodes[nodes[p].lchild].name, nodes[j].name) == 0) {
-							cancel = true;
-							break;
-						}
-					if (cancel)
-						break;
-				}
-				if (nodes[p].op == SARR) {
-					bool cancel = false;
-					for (int j = p + 1; j < nodenum; j++)
-						if (nodes[j].parent_num == 0 && nodes[j].op == LARR && strcmp(nodes[p].name, nodes[nodes[j].lchild].name) == 0) {
-							cancel = true;
-							break;
-						}
-					if (cancel)
-						break;
-				}
-				if (nodes[p].op == SCAN) {
-					bool cancel = false;
-					for(int j = p + 1; j < nodenum; j++)
-						if (nodes[j].parent_num == 0 && nodes[j].op == SCAN) {
-							cancel = true;
-							break;
-						}
-					if (cancel)
-						break;
-				}
+			do{
 				stack[++top] = p;
 				if (nodes[p].lchild >= 0)
 					nodes[nodes[p].lchild].parent_num--;
@@ -206,12 +205,17 @@ void ExportDAG() {
 					nodes[nodes[p].rchild].parent_num--;
 				nodes[p].parent_num = -1;
 				p = nodes[p].lchild;
-			}
+			} while (p >= 0 && nodes[p].parent_num == 0 && isSimpleArithmetic(nodes[p].op));
 		}
 	for (int i = top; i >= 0; i--) {
 		int p = stack[i];
 		if (nodes[p].op >= 0) {
 			switch (nodes[p].op) {
+			case CALL:
+				char temp[IdentityMaxLen];
+				strncpy_s(temp, nodes[nodes[p].lchild].name, strlen(nodes[nodes[p].lchild].name) - 1);
+				GenerateTempCode(nodes[p].op, temp, "", nodes[p].name);
+				break;
 			case ASN:
 				GenerateTempCode(nodes[p].op, nodes[nodes[p].lchild].name, "", nodes[p].name);
 				break;
@@ -236,13 +240,35 @@ void ExportDAG() {
 			case TIMES:
 			case EQU:
 			case NEQ:
+			case JZ:
+			case JNZ:
 				GenerateTempCode(nodes[p].op, nodes[nodes[p].lchild].name, nodes[nodes[p].rchild].name, nodes[p].name);
 				break;
+			case RET:
+				if(nodes[p].lchild >= 0)
+					GenerateTempCode(nodes[p].op, nodes[nodes[p].lchild].name, "", "");
+				else
+					GenerateTempCode(nodes[p].op, "", "", "");
+				break;
 			}
-			int index = SearchIndex(nodes[p].name);
-			for (int i = 0; i < tabnum; i++)
-				if (nodetab[i].index == index && strcmp(nodetab[i].name, nodes[p].name) != 0)
-					GenerateTempCode(ASN, nodes[p].name, "", nodetab[i].name);
 		}
 	}
+}
+
+bool isSimpleArithmetic(int op) {
+	switch (op) {
+	case ASN:
+	case PLUS:
+	case TIMES:
+	case MINUS:
+	case DIVIDE:
+	case EQU:
+	case NEQ:
+	case LES:
+	case LEQ:
+	case GTR:
+	case GEQ:
+		return true;
+	}
+	return false;
 }

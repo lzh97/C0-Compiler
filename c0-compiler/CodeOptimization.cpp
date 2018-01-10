@@ -22,20 +22,12 @@ void GetBaseBlock() {
 	while (i < cnt) {
 		int j = i + 1;
 		while (j < cnt) {
-			if (midcode[j].op == PROC)
+			if (midcode[j].op == PROC || midcode[j].op == FUNC || midcode[j].op == LABEL)
 				break;
-			if (midcode[j].op == FUNC)
+			if (midcode[j].op == JZ || midcode[j].op == JNZ || midcode[j].op == RET) {
+				j++;
 				break;
-			if (midcode[j].op == LABEL)
-				break;
-			if (midcode[j].op == CALL)
-				break;
-			if (midcode[j].op == JZ)
-				break;
-			if (midcode[j].op == JNZ)
-				break;
-			if (midcode[j].op == RET)
-				break;
+			}
 			j++;
 		}
 		block[block_num].s = i;
@@ -72,18 +64,14 @@ void CommonSubexpressionElimination() {
 			case PROC:
 			case FUNC:
 			case PARA:
-			case LABEL:
-			case CALL:
-			case JZ:
-			case JNZ:
-			case RET:
-				ExportDAG();
-				InitDAG();
+			case LABEL:	
 				CopyToTemp(midcode[j]);
 				break;
 			default:
 				InsertDAG(midcode[j]);
 			}
+		ExportDAG();
+		InitDAG();
 	}
 	cnt = 0;
 	for (int i = 0; i < temp_cnt; i++)

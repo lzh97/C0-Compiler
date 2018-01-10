@@ -47,12 +47,9 @@ f:
 $lab0:
 	 lw   $t0, -8($sp)
 	 lw   $t1, -16($sp)
-	 addi $t2, $sp, 0xffffffe4
+	 addi $t2, $sp, 0xfffffff8
 	 add  $t3, $t0, $t1
 	 sw   $t3, 0($t2)
-	 lw   $t0, -28($sp)
-	 addi $t1, $sp, 0xfffffff8
-	 sw   $t0, 0($t1)
 	 lw   $t1, -8($sp)
 	 sw   $t1, 0($gp)
 	 addi $gp, $gp, 0x4
@@ -137,7 +134,7 @@ line:
 	 lw   $t0, -852($sp)
 	 addi $t1, $sp, 0xfffffff0
 	 sw   $t0, 0($t1)
-	 lw   $t0, -16($sp)
+	 lw   $t0, -852($sp)
 	 addi $t1, $sp, 0xffffffec
 	 sw   $t0, 0($t1)
 $lab3:
@@ -157,12 +154,9 @@ $lab3:
 	 sw   $t0, 0($t2)
 	 lw   $t0, -16($sp)
 	 lw   $t1, -852($sp)
-	 addi $t2, $sp, 0xfffffca8
+	 addi $t2, $sp, 0xfffffff0
 	 add  $t3, $t0, $t1
 	 sw   $t3, 0($t2)
-	 lw   $t0, -856($sp)
-	 addi $t1, $sp, 0xfffffff0
-	 sw   $t0, 0($t1)
 	 lw   $t0, -16($sp)
 	 lw   $t1, -8($sp)
 	 addi $t2, $sp, 0xfffffca4
@@ -200,12 +194,9 @@ $lab5:
 	 sw   $t0, 0($t1)
 	 li   $t0, 0
 	 lw   $t1, -868($sp)
-	 addi $t2, $sp, 0xfffffc8c
+	 addi $t2, $sp, 0xfffffcc4
 	 sub  $t3, $t0, $t1
 	 sw   $t3, 0($t2)
-	 lw   $t0, -884($sp)
-	 addi $t1, $sp, 0xfffffcc4
-	 sw   $t0, 0($t1)
 $lab6:
 	 lw   $t0, -16($sp)
 	 lw   $t1, -868($sp)
@@ -219,12 +210,9 @@ $lab6:
 	 sw   $t0, 0($t1)
 	 li   $t0, 0
 	 lw   $t1, -872($sp)
-	 addi $t2, $sp, 0xfffffc84
+	 addi $t2, $sp, 0xfffffcc4
 	 sub  $t3, $t0, $t1
 	 sw   $t3, 0($t2)
-	 lw   $t0, -892($sp)
-	 addi $t1, $sp, 0xfffffcc4
-	 sw   $t0, 0($t1)
 $lab7:
 	 lw   $t0, -828($sp)
 	 lw   $t1, -896($sp)
@@ -242,29 +230,20 @@ $lab7:
 	 move $fp, $sp
 	 subi $sp, $sp, 0x3c8
 	 jal  compare
-	 sw   $v0, -904($sp)
-	 lw   $t0, -904($sp)
-	 addi $t1, $sp, 0xfffffcc0
-	 sw   $t0, 0($t1)
+	 sw   $v0, -832($sp)
 	 lw   $t0, -832($sp)
 	 lw   $t1, -828($sp)
-	 addi $t2, $sp, 0xfffffc74
+	 addi $t2, $sp, 0xfffffcbc
 	 mul  $t3, $t0, $t1
 	 sw   $t3, 0($t2)
-	 lw   $t0, -908($sp)
-	 addi $t1, $sp, 0xfffffcbc
-	 sw   $t0, 0($t1)
 	 addi $t0, $sp, 0xffffffe8
 	 lw   $t1, -824($sp)
-	 addi $t3, $sp, 0xfffffc70
+	 addi $t3, $sp, 0xfffffcb8
 	 li   $at, 4
 	 mul  $t1, $t1, $at
 	 sub  $t0, $t0, $t1
 	 lw   $t2, 0($t0)
 	 sw   $t2, 0($t3)
-	 lw   $t0, -912($sp)
-	 addi $t1, $sp, 0xfffffcb8
-	 sw   $t0, 0($t1)
 $lab9:
 	 lw   $t0, -840($sp)
 	 lw   $t1, -832($sp)
@@ -273,18 +252,15 @@ $lab9:
 	 sw   $t3, 0($t2)
 	 addi $t0, $sp, 0xfffffe58
 	 lw   $t1, -916($sp)
-	 addi $t3, $sp, 0xfffffc68
+	 addi $t3, $sp, 0xfffffcb0
 	 li   $at, 4
 	 mul  $t1, $t1, $at
 	 sub  $t0, $t0, $t1
 	 lw   $t2, 0($t0)
 	 sw   $t2, 0($t3)
-	 lw   $t0, -920($sp)
-	 addi $t1, $sp, 0xfffffcb0
-	 sw   $t0, 0($t1)
 	 addi $t0, $sp, 0xffffffe8
 	 lw   $t1, -848($sp)
-	 addi $t3, $sp, 0xfffffc64
+	 addi $t3, $sp, 0xfffffcb4
 	 li   $at, 4
 	 mul  $t1, $t1, $at
 	 sub  $t0, $t0, $t1
@@ -304,20 +280,14 @@ $lab9:
 	 mul  $t1, $t1, $at
 	 sub  $t2, $t2, $t1
 	 sw   $t0, 0($t2)
-	 lw   $t0, -924($sp)
-	 addi $t1, $sp, 0xfffffcb4
-	 sw   $t0, 0($t1)
 	 lw   $t0, -844($sp)
 	 addi $t1, $sp, 0xfffffcb8
 	 sw   $t0, 0($t1)
 	 lw   $t0, -20($sp)
 	 lw   $t1, -852($sp)
-	 addi $t2, $sp, 0xfffffc60
+	 addi $t2, $sp, 0xffffffec
 	 add  $t3, $t0, $t1
 	 sw   $t3, 0($t2)
-	 lw   $t0, -928($sp)
-	 addi $t1, $sp, 0xffffffec
-	 sw   $t0, 0($t1)
 	 lw   $t0, -20($sp)
 	 lw   $t1, -836($sp)
 	 addi $t2, $sp, 0xfffffc5c
@@ -355,12 +325,9 @@ $lab9:
 $lab8:
 	 lw   $t0, -16($sp)
 	 lw   $t1, -852($sp)
-	 addi $t2, $sp, 0xfffffc50
+	 addi $t2, $sp, 0xfffffff0
 	 add  $t3, $t0, $t1
 	 sw   $t3, 0($t2)
-	 lw   $t0, -944($sp)
-	 addi $t1, $sp, 0xfffffff0
-	 sw   $t0, 0($t1)
 	 lw   $t0, -16($sp)
 	 lw   $t1, -12($sp)
 	 addi $t2, $sp, 0xfffffc4c
@@ -396,12 +363,9 @@ $lab10:
 	 syscall
 	 lw   $t0, -16($sp)
 	 lw   $t1, -852($sp)
-	 addi $t2, $sp, 0xfffffc40
+	 addi $t2, $sp, 0xfffffff0
 	 add  $t3, $t0, $t1
 	 sw   $t3, 0($t2)
-	 lw   $t0, -960($sp)
-	 addi $t1, $sp, 0xfffffff0
-	 sw   $t0, 0($t1)
 	 lw   $t0, -16($sp)
 	 lw   $t1, -8($sp)
 	 addi $t2, $sp, 0xfffffc3c
@@ -428,12 +392,9 @@ f2:
 	 sw   $t0, 0($t1)
 	 lw   $t0, -8($sp)
 	 lw   $t1, -12($sp)
-	 addi $t2, $sp, 0xffffffec
+	 addi $t2, $sp, 0xfffffff8
 	 add  $t3, $t0, $t1
 	 sw   $t3, 0($t2)
-	 lw   $t0, -20($sp)
-	 addi $t1, $sp, 0xfffffff8
-	 sw   $t0, 0($t1)
 	 lw   $v0, -8($sp)
 	 lw   $ra, -4($sp)
 	 lw   $sp, 0($sp)
@@ -500,12 +461,9 @@ $lab12:
 	 sw   $v0, -48($sp)
 	 lw   $t0, -36($sp)
 	 lw   $t1, -48($sp)
-	 addi $t2, $sp, 0xffffffcc
+	 addi $t2, $sp, 0xfffffff4
 	 add  $t3, $t0, $t1
 	 sw   $t3, 0($t2)
-	 lw   $t0, -52($sp)
-	 addi $t1, $sp, 0xfffffff4
-	 sw   $t0, 0($t1)
 	 lw   $v0, -12($sp)
 	 lw   $ra, -4($sp)
 	 lw   $sp, 0($sp)
@@ -549,6 +507,13 @@ nest:
 	 mul  $t1, $t1, $at
 	 sub  $t2, $t2, $t1
 	 sw   $t0, 0($t2)
+	 lw   $t0, -144($sp)
+	 lw   $t1, -140($sp)
+	 addi $t2, $sp, 0xffffffbc
+	 li   $at, 4
+	 mul  $t1, $t1, $at
+	 sub  $t2, $t2, $t1
+	 sw   $t0, 0($t2)
 	 lw   $t0, -148($sp)
 	 lw   $t1, -144($sp)
 	 addi $t2, $sp, 0xfffffff8
@@ -564,16 +529,6 @@ nest:
 	 sub  $t0, $t0, $t1
 	 lw   $t2, 0($t0)
 	 sw   $t2, 0($t3)
-	 lw   $t0, -152($sp)
-	 addi $t1, $sp, 0xffffff50
-	 sw   $t0, 0($t1)
-	 lw   $t0, -144($sp)
-	 lw   $t1, -140($sp)
-	 addi $t2, $sp, 0xffffffbc
-	 li   $at, 4
-	 mul  $t1, $t1, $at
-	 sub  $t2, $t2, $t1
-	 sw   $t0, 0($t2)
 	 addi $t0, $sp, 0xffffffbc
 	 lw   $t1, -152($sp)
 	 addi $t3, $sp, 0xffffff64
@@ -658,12 +613,9 @@ t:
 $lab13:
 	 lw   $t0, -8($sp)
 	 lw   $t1, -20($sp)
-	 addi $t2, $sp, 0xffffffe8
+	 addi $t2, $sp, 0xfffffff8
 	 add  $t3, $t0, $t1
 	 sw   $t3, 0($t2)
-	 lw   $t0, -24($sp)
-	 addi $t1, $sp, 0xfffffff8
-	 sw   $t0, 0($t1)
 	 lw   $a0, -8($sp)
 	 li   $v0, 11
 	 syscall
@@ -721,12 +673,9 @@ main:
 	 sw   $t0, 0($t1)
 	 li   $t0, 0
 	 lw   $t1, -96($sp)
-	 addi $t2, $sp, 0xffffff9c
+	 addi $t2, $sp, 0xffffffec
 	 sub  $t3, $t0, $t1
 	 sw   $t3, 0($t2)
-	 lw   $t0, -100($sp)
-	 addi $t1, $sp, 0xffffffec
-	 sw   $t0, 0($t1)
 	 lw   $t0, -104($sp)
 	 addi $t1, $sp, 0xffffffe4
 	 sw   $t0, 0($t1)
@@ -770,13 +719,10 @@ $lab14:
 	 move $fp, $sp
 	 subi $sp, $sp, 0x18c
 	 jal  fib
-	 sw   $v0, -120($sp)
+	 sw   $v0, -24($sp)
 	 la   $a0, $str2
 	 li   $v0, 4
 	 syscall
-	 lw   $t0, -120($sp)
-	 addi $t1, $sp, 0xffffffe8
-	 sw   $t0, 0($t1)
 	 lw   $a0, -24($sp)
 	 li   $v0, 1
 	 syscall
@@ -806,12 +752,9 @@ $lab17:
 	 sw   $t0, 0($t2)
 	 lw   $t0, -32($sp)
 	 lw   $t1, -104($sp)
-	 addi $t2, $sp, 0xffffff80
+	 addi $t2, $sp, 0xffffffe0
 	 add  $t3, $t0, $t1
 	 sw   $t3, 0($t2)
-	 lw   $t0, -128($sp)
-	 addi $t1, $sp, 0xffffffe0
-	 sw   $t0, 0($t1)
 	 lw   $t0, -32($sp)
 	 lw   $t1, -132($sp)
 	 addi $t2, $sp, 0xffffff78
@@ -836,12 +779,9 @@ $lab17:
 	 beq  $t0, $0, $lab18
 	 lw   $t0, -12($sp)
 	 lw   $t1, -16($sp)
-	 addi $t2, $sp, 0xffffff70
+	 addi $t2, $sp, 0xfffffff4
 	 add  $t3, $t0, $t1
 	 sw   $t3, 0($t2)
-	 lw   $t0, -144($sp)
-	 addi $t1, $sp, 0xfffffff4
-	 sw   $t0, 0($t1)
 	 lw   $a0, -12($sp)
 	 li   $v0, 1
 	 syscall
@@ -855,46 +795,9 @@ $lab18:
 	 beq  $t0, $0, $lab19
 	 lw   $t0, -16($sp)
 	 lw   $t1, -12($sp)
-	 addi $t2, $sp, 0xffffff68
+	 addi $t2, $sp, 0xfffffff0
 	 sub  $t3, $t0, $t1
 	 sw   $t3, 0($t2)
-	 lw   $t0, -152($sp)
-	 addi $t1, $sp, 0xfffffff0
-	 sw   $t0, 0($t1)
-	 lw   $a0, -16($sp)
-	 li   $v0, 1
-	 syscall
-	 addi $t0, $sp, 0xffffffc4
-	 lw   $t1, -92($sp)
-	 addi $t3, $sp, 0xffffff5c
-	 li   $at, 4
-	 mul  $t1, $t1, $at
-	 sub  $t0, $t0, $t1
-	 lw   $t2, 0($t0)
-	 sw   $t2, 0($t3)
-	 lw   $t0, -164($sp)
-	 lw   $t1, -104($sp)
-	 addi $t2, $sp, 0xffffff58
-	 add  $t3, $t0, $t1
-	 sw   $t3, 0($t2)
-	 lw   $t0, -168($sp)
-	 lw   $t1, -92($sp)
-	 addi $t2, $sp, 0xffffffc4
-	 li   $at, 4
-	 mul  $t1, $t1, $at
-	 sub  $t2, $t2, $t1
-	 sw   $t0, 0($t2)
-	 addi $t0, $sp, 0xffffffc4
-	 lw   $t1, -92($sp)
-	 addi $t3, $sp, 0xffffff54
-	 li   $at, 4
-	 mul  $t1, $t1, $at
-	 sub  $t0, $t0, $t1
-	 lw   $t2, 0($t0)
-	 sw   $t2, 0($t3)
-	 lw   $a0, -172($sp)
-	 li   $v0, 11
-	 syscall
 	 addi $t0, $sp, 0xffffffdc
 	 lw   $t1, -92($sp)
 	 addi $t3, $sp, 0xffffff64
@@ -915,6 +818,40 @@ $lab18:
 	 mul  $t1, $t1, $at
 	 sub  $t2, $t2, $t1
 	 sw   $t0, 0($t2)
+	 addi $t0, $sp, 0xffffffc4
+	 lw   $t1, -92($sp)
+	 addi $t3, $sp, 0xffffff5c
+	 li   $at, 4
+	 mul  $t1, $t1, $at
+	 sub  $t0, $t0, $t1
+	 lw   $t2, 0($t0)
+	 sw   $t2, 0($t3)
+	 lw   $t0, -164($sp)
+	 lw   $t1, -104($sp)
+	 addi $t2, $sp, 0xffffff58
+	 add  $t3, $t0, $t1
+	 sw   $t3, 0($t2)
+	 lw   $t0, -168($sp)
+	 lw   $t1, -92($sp)
+	 addi $t2, $sp, 0xffffffc4
+	 li   $at, 4
+	 mul  $t1, $t1, $at
+	 sub  $t2, $t2, $t1
+	 sw   $t0, 0($t2)
+	 lw   $a0, -16($sp)
+	 li   $v0, 1
+	 syscall
+	 addi $t0, $sp, 0xffffffc4
+	 lw   $t1, -92($sp)
+	 addi $t3, $sp, 0xffffff54
+	 li   $at, 4
+	 mul  $t1, $t1, $at
+	 sub  $t0, $t0, $t1
+	 lw   $t2, 0($t0)
+	 sw   $t2, 0($t3)
+	 lw   $a0, -172($sp)
+	 li   $v0, 11
+	 syscall
 	 addi $t0, $sp, 0xffffffdc
 	 lw   $t1, -92($sp)
 	 addi $t3, $sp, 0xffffff50
@@ -936,46 +873,9 @@ $lab19:
 	 beq  $t0, $0, $lab20
 	 lw   $t0, -12($sp)
 	 lw   $t1, -16($sp)
-	 addi $t2, $sp, 0xffffff44
+	 addi $t2, $sp, 0xffffffec
 	 mul  $t3, $t0, $t1
 	 sw   $t3, 0($t2)
-	 lw   $t0, -188($sp)
-	 addi $t1, $sp, 0xffffffec
-	 sw   $t0, 0($t1)
-	 lw   $a0, -20($sp)
-	 li   $v0, 1
-	 syscall
-	 addi $t0, $sp, 0xffffffc4
-	 lw   $t1, -104($sp)
-	 addi $t3, $sp, 0xffffff38
-	 li   $at, 4
-	 mul  $t1, $t1, $at
-	 sub  $t0, $t0, $t1
-	 lw   $t2, 0($t0)
-	 sw   $t2, 0($t3)
-	 lw   $t0, -200($sp)
-	 lw   $t1, -104($sp)
-	 addi $t2, $sp, 0xffffff34
-	 add  $t3, $t0, $t1
-	 sw   $t3, 0($t2)
-	 lw   $t0, -204($sp)
-	 lw   $t1, -104($sp)
-	 addi $t2, $sp, 0xffffffc4
-	 li   $at, 4
-	 mul  $t1, $t1, $at
-	 sub  $t2, $t2, $t1
-	 sw   $t0, 0($t2)
-	 addi $t0, $sp, 0xffffffc4
-	 lw   $t1, -104($sp)
-	 addi $t3, $sp, 0xffffff30
-	 li   $at, 4
-	 mul  $t1, $t1, $at
-	 sub  $t0, $t0, $t1
-	 lw   $t2, 0($t0)
-	 sw   $t2, 0($t3)
-	 lw   $a0, -208($sp)
-	 li   $v0, 11
-	 syscall
 	 addi $t0, $sp, 0xffffffdc
 	 lw   $t1, -104($sp)
 	 addi $t3, $sp, 0xffffff40
@@ -996,6 +896,40 @@ $lab19:
 	 mul  $t1, $t1, $at
 	 sub  $t2, $t2, $t1
 	 sw   $t0, 0($t2)
+	 addi $t0, $sp, 0xffffffc4
+	 lw   $t1, -104($sp)
+	 addi $t3, $sp, 0xffffff38
+	 li   $at, 4
+	 mul  $t1, $t1, $at
+	 sub  $t0, $t0, $t1
+	 lw   $t2, 0($t0)
+	 sw   $t2, 0($t3)
+	 lw   $t0, -200($sp)
+	 lw   $t1, -104($sp)
+	 addi $t2, $sp, 0xffffff34
+	 add  $t3, $t0, $t1
+	 sw   $t3, 0($t2)
+	 lw   $t0, -204($sp)
+	 lw   $t1, -104($sp)
+	 addi $t2, $sp, 0xffffffc4
+	 li   $at, 4
+	 mul  $t1, $t1, $at
+	 sub  $t2, $t2, $t1
+	 sw   $t0, 0($t2)
+	 lw   $a0, -20($sp)
+	 li   $v0, 1
+	 syscall
+	 addi $t0, $sp, 0xffffffc4
+	 lw   $t1, -104($sp)
+	 addi $t3, $sp, 0xffffff30
+	 li   $at, 4
+	 mul  $t1, $t1, $at
+	 sub  $t0, $t0, $t1
+	 lw   $t2, 0($t0)
+	 sw   $t2, 0($t3)
+	 lw   $a0, -208($sp)
+	 li   $v0, 11
+	 syscall
 	 addi $t0, $sp, 0xffffffdc
 	 lw   $t1, -104($sp)
 	 addi $t3, $sp, 0xffffff2c
@@ -1017,47 +951,10 @@ $lab20:
 	 beq  $t0, $0, $lab21
 	 lw   $t0, -12($sp)
 	 lw   $t1, -16($sp)
-	 addi $t2, $sp, 0xffffff24
+	 addi $t2, $sp, 0xffffffe8
 	 div  $t0, $t1
 	 mflo $t3
 	 sw   $t3, 0($t2)
-	 lw   $t0, -220($sp)
-	 addi $t1, $sp, 0xffffffe8
-	 sw   $t0, 0($t1)
-	 lw   $a0, -24($sp)
-	 li   $v0, 1
-	 syscall
-	 addi $t0, $sp, 0xffffffc4
-	 lw   $t1, -96($sp)
-	 addi $t3, $sp, 0xffffff18
-	 li   $at, 4
-	 mul  $t1, $t1, $at
-	 sub  $t0, $t0, $t1
-	 lw   $t2, 0($t0)
-	 sw   $t2, 0($t3)
-	 lw   $t0, -232($sp)
-	 lw   $t1, -104($sp)
-	 addi $t2, $sp, 0xffffff14
-	 add  $t3, $t0, $t1
-	 sw   $t3, 0($t2)
-	 lw   $t0, -236($sp)
-	 lw   $t1, -96($sp)
-	 addi $t2, $sp, 0xffffffc4
-	 li   $at, 4
-	 mul  $t1, $t1, $at
-	 sub  $t2, $t2, $t1
-	 sw   $t0, 0($t2)
-	 addi $t0, $sp, 0xffffffc4
-	 lw   $t1, -96($sp)
-	 addi $t3, $sp, 0xffffff10
-	 li   $at, 4
-	 mul  $t1, $t1, $at
-	 sub  $t0, $t0, $t1
-	 lw   $t2, 0($t0)
-	 sw   $t2, 0($t3)
-	 lw   $a0, -240($sp)
-	 li   $v0, 11
-	 syscall
 	 addi $t0, $sp, 0xffffffdc
 	 lw   $t1, -96($sp)
 	 addi $t3, $sp, 0xffffff20
@@ -1078,6 +975,40 @@ $lab20:
 	 mul  $t1, $t1, $at
 	 sub  $t2, $t2, $t1
 	 sw   $t0, 0($t2)
+	 addi $t0, $sp, 0xffffffc4
+	 lw   $t1, -96($sp)
+	 addi $t3, $sp, 0xffffff18
+	 li   $at, 4
+	 mul  $t1, $t1, $at
+	 sub  $t0, $t0, $t1
+	 lw   $t2, 0($t0)
+	 sw   $t2, 0($t3)
+	 lw   $t0, -232($sp)
+	 lw   $t1, -104($sp)
+	 addi $t2, $sp, 0xffffff14
+	 add  $t3, $t0, $t1
+	 sw   $t3, 0($t2)
+	 lw   $t0, -236($sp)
+	 lw   $t1, -96($sp)
+	 addi $t2, $sp, 0xffffffc4
+	 li   $at, 4
+	 mul  $t1, $t1, $at
+	 sub  $t2, $t2, $t1
+	 sw   $t0, 0($t2)
+	 lw   $a0, -24($sp)
+	 li   $v0, 1
+	 syscall
+	 addi $t0, $sp, 0xffffffc4
+	 lw   $t1, -96($sp)
+	 addi $t3, $sp, 0xffffff10
+	 li   $at, 4
+	 mul  $t1, $t1, $at
+	 sub  $t0, $t0, $t1
+	 lw   $t2, 0($t0)
+	 sw   $t2, 0($t3)
+	 lw   $a0, -240($sp)
+	 li   $v0, 11
+	 syscall
 	 addi $t0, $sp, 0xffffffdc
 	 lw   $t1, -96($sp)
 	 addi $t3, $sp, 0xffffff0c
@@ -1105,46 +1036,9 @@ $lab21:
 	 sw   $t3, 0($t2)
 	 lw   $t0, -12($sp)
 	 lw   $t1, -256($sp)
-	 addi $t2, $sp, 0xfffffefc
+	 addi $t2, $sp, 0xfffffff4
 	 sub  $t3, $t0, $t1
 	 sw   $t3, 0($t2)
-	 lw   $t0, -260($sp)
-	 addi $t1, $sp, 0xfffffff4
-	 sw   $t0, 0($t1)
-	 lw   $a0, -12($sp)
-	 li   $v0, 1
-	 syscall
-	 addi $t0, $sp, 0xffffffc4
-	 lw   $t1, -8($sp)
-	 addi $t3, $sp, 0xfffffee8
-	 li   $at, 4
-	 mul  $t1, $t1, $at
-	 sub  $t0, $t0, $t1
-	 lw   $t2, 0($t0)
-	 sw   $t2, 0($t3)
-	 lw   $t0, -280($sp)
-	 lw   $t1, -104($sp)
-	 addi $t2, $sp, 0xfffffee4
-	 add  $t3, $t0, $t1
-	 sw   $t3, 0($t2)
-	 lw   $t0, -284($sp)
-	 lw   $t1, -8($sp)
-	 addi $t2, $sp, 0xffffffc4
-	 li   $at, 4
-	 mul  $t1, $t1, $at
-	 sub  $t2, $t2, $t1
-	 sw   $t0, 0($t2)
-	 addi $t0, $sp, 0xffffffc4
-	 lw   $t1, -8($sp)
-	 addi $t3, $sp, 0xfffffee0
-	 li   $at, 4
-	 mul  $t1, $t1, $at
-	 sub  $t0, $t0, $t1
-	 lw   $t2, 0($t0)
-	 sw   $t2, 0($t3)
-	 lw   $a0, -288($sp)
-	 li   $v0, 11
-	 syscall
 	 addi $t0, $sp, 0xffffffdc
 	 lw   $t1, -8($sp)
 	 addi $t3, $sp, 0xfffffef8
@@ -1170,6 +1064,40 @@ $lab21:
 	 mul  $t1, $t1, $at
 	 sub  $t2, $t2, $t1
 	 sw   $t0, 0($t2)
+	 addi $t0, $sp, 0xffffffc4
+	 lw   $t1, -8($sp)
+	 addi $t3, $sp, 0xfffffee8
+	 li   $at, 4
+	 mul  $t1, $t1, $at
+	 sub  $t0, $t0, $t1
+	 lw   $t2, 0($t0)
+	 sw   $t2, 0($t3)
+	 lw   $t0, -280($sp)
+	 lw   $t1, -104($sp)
+	 addi $t2, $sp, 0xfffffee4
+	 add  $t3, $t0, $t1
+	 sw   $t3, 0($t2)
+	 lw   $t0, -284($sp)
+	 lw   $t1, -8($sp)
+	 addi $t2, $sp, 0xffffffc4
+	 li   $at, 4
+	 mul  $t1, $t1, $at
+	 sub  $t2, $t2, $t1
+	 sw   $t0, 0($t2)
+	 lw   $a0, -12($sp)
+	 li   $v0, 1
+	 syscall
+	 addi $t0, $sp, 0xffffffc4
+	 lw   $t1, -8($sp)
+	 addi $t3, $sp, 0xfffffee0
+	 li   $at, 4
+	 mul  $t1, $t1, $at
+	 sub  $t0, $t0, $t1
+	 lw   $t2, 0($t0)
+	 sw   $t2, 0($t3)
+	 lw   $a0, -288($sp)
+	 li   $v0, 11
+	 syscall
 	 addi $t0, $sp, 0xffffffdc
 	 lw   $t1, -8($sp)
 	 addi $t3, $sp, 0xfffffedc
@@ -1194,22 +1122,6 @@ $lab22:
 	 addi $t2, $sp, 0xfffffed0
 	 mul  $t3, $t0, $t1
 	 sw   $t3, 0($t2)
-	 li   $t0, 0
-	 lw   $t1, -12($sp)
-	 addi $t2, $sp, 0xfffffed4
-	 sub  $t3, $t0, $t1
-	 sw   $t3, 0($t2)
-	 lw   $t0, -300($sp)
-	 lw   $t1, -304($sp)
-	 addi $t2, $sp, 0xfffffecc
-	 add  $t3, $t0, $t1
-	 sw   $t3, 0($t2)
-	 lw   $t0, -308($sp)
-	 addi $t1, $sp, 0xfffffff4
-	 sw   $t0, 0($t1)
-	 lw   $a0, -12($sp)
-	 li   $v0, 1
-	 syscall
 	 addi $t0, $sp, 0xffffffc4
 	 lw   $t1, -248($sp)
 	 addi $t3, $sp, 0xfffffec8
@@ -1230,6 +1142,19 @@ $lab22:
 	 mul  $t1, $t1, $at
 	 sub  $t2, $t2, $t1
 	 sw   $t0, 0($t2)
+	 li   $t0, 0
+	 lw   $t1, -12($sp)
+	 addi $t2, $sp, 0xfffffed4
+	 sub  $t3, $t0, $t1
+	 sw   $t3, 0($t2)
+	 lw   $t0, -300($sp)
+	 lw   $t1, -304($sp)
+	 addi $t2, $sp, 0xfffffff4
+	 add  $t3, $t0, $t1
+	 sw   $t3, 0($t2)
+	 lw   $a0, -12($sp)
+	 li   $v0, 1
+	 syscall
 	 addi $t0, $sp, 0xffffffc4
 	 lw   $t1, -248($sp)
 	 addi $t3, $sp, 0xfffffec0
