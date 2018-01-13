@@ -29,6 +29,7 @@
 #define GEQ 26
 #define NEQ 27
 #define ASN 28
+#define DEL 29
 
 struct Quadruple {
 	int op;

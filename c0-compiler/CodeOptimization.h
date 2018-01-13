@@ -5,5 +5,7 @@ struct BaseBlock {
 	int t;
 };
 
+void DeleteInvalidCode();
 void CommonSubexpressionElimination();
-//void ConstantReplace();
+void AllocGlobalReg();
+void AllocTempReg();

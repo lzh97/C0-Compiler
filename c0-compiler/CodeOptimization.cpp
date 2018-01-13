@@ -14,8 +14,6 @@ int temp_cnt;
 BaseBlock block[CodeMaxNum];
 int block_num;
 
-int Calc(int op, int op1, int op2);
-
 void GetBaseBlock() {
 	block_num = 0;
 	int i = 0;
@@ -52,6 +50,33 @@ void CopyToMid(Quadruple code) {
 	cnt++;
 }
 
+void DeleteInvalidCode() {
+	for (int i = 0; i < cnt; i++)
+		if (midcode[i].op == LABEL) {
+			int j = i + 1;
+			while (j < cnt && midcode[j].op == LABEL) {
+				midcode[j].op = DEL;
+				for (int k = 0; k < cnt; k++)
+					if (midcode[k].op == JZ || midcode[k].op == JNZ)
+						if (strcmp(midcode[k].op2, midcode[j].op1) == 0)
+							strcpy_s(midcode[k].op2, midcode[i].op1);
+				j++;
+			}
+		}
+		else if (midcode[i].op == RET) {
+			int j = i + 1;
+			while (j < cnt) {
+				if (midcode[j].op == LABEL)
+					break;
+				if (midcode[j].op == PROC)
+					break;
+				if (midcode[j].op == FUNC)
+					break;
+				midcode[j++].op = DEL;
+			}
+		}
+}
+
 void CommonSubexpressionElimination() {
 	temp_cnt = 0;
 	GetBaseBlock();
@@ -78,91 +103,78 @@ void CommonSubexpressionElimination() {
 		CopyToMid(tempcode[i]);
 }
 
-/*void ConstantReplace() {
-	Identity *ident1, *ident2, *ident;
-	for (int i = 0; i < cnt; i++)
-		switch (midcode[i].op) {
-		case PROC:
-		case FUNC:
-			current = Search(midcode[i].res, 2);
-			break;
-		case VAL:
-		case JZ:
-		case JNZ:
-		case PRINTI:
-		case PRINTC:
-		case RET:
-		case ASN:
-			ident1 = Search(midcode[i].op1, 3);
-			if (ident1 != NULL)
-				if (ident1->kind == CONSTANT)
-					strcpy_s(midcode[i].op1, Int2String(ident1->value));
-			break;
-		case LARR:
-			ident2 = Search(midcode[i].op2, 3);
-			if (ident2 != NULL)
-				if (ident2->kind == CONSTANT)
-					strcpy_s(midcode[i].op2, Int2String(ident2->value));
-			break;
-		case SARR:
-			ident1 = Search(midcode[i].op1, 3);
-			ident2 = Search(midcode[i].op2, 3);
-			if (ident1 != NULL)
-				if (ident1->kind == CONSTANT)
-					strcpy_s(midcode[i].op1, Int2String(ident1->value));
-			if (ident2 != NULL)
-				if (ident2->kind == CONSTANT)
-					strcpy_s(midcode[i].op2, Int2String(ident2->value));
-			break;
-		case PLUS:
-		case MINUS:
-		case TIMES:
-		case DIVIDE:
-		case EQU:
-		case LES:
-		case LEQ:
-		case GTR:
-		case GEQ:
-		case NEQ:
-			ident1 = Search(midcode[i].op1, 3);
-			ident2 = Search(midcode[i].op2, 3);
-			ident = Search(midcode[i].res, 3);
-			if (ident1 != NULL && ident2 != NULL) {
-				if (ident1->kind == CONSTANT && ident2->kind == CONSTANT) {
-					midcode[i].op = DEL;
-					ident->kind = CONSTANT;
-					ident->value = Calc(midcode[i].op, ident1->value, ident2->value);
-					break;
-				}
-			}
-			if (ident1 != NULL)
-				if (ident1->kind == CONSTANT)
-					strcpy_s(midcode[i].op1, Int2String(ident1->value));
-			if (ident2 != NULL)
-				if (ident2->kind == CONSTANT)
-					strcpy_s(midcode[i].op2, Int2String(ident2->value));
-			break;
-		}
+void AllocGlobalReg() {
 	for (int i = 0; i < gsize; i++)
-		if (global[i].kind == CONSTANT)
-			global[i].kind = DELETED;
-	for (int i = 0; i < lsize; i++)
-		if (local[i].kind == CONSTANT)
-			local[i].kind = DELETED;
-}*/
+		if (global[i].kind == PROCEDURE || global[i].kind == FUNCTION) {
+			int pos[LocalSize];
+			int cnt = 0;
+			for (int j = global[i].l; j < global[i].r; j++)
+				if ((local[j].kind == VARIABLE || local[j].kind == PARAMETER) && local[j].name[0] != '$')
+					pos[cnt++] = j;
+			for (int j = 0; j < cnt && j < 8; j++) {
+				int max = j;
+				for (int k = j + 1; k < cnt; k++)
+					if (local[pos[k]].weight > local[pos[max]].weight)
+						max = k;
+				local[pos[max]].reg = s0 + j;
+				pos[max] = pos[j];
+			}
+		}
+}
 
-int Calc(int op, int op1, int op2) {
-	switch (op) {
-	case PLUS:return op1 + op2;
-	case MINUS:return op1 - op2;
-	case TIMES:return op1 * op2;
-	case DIVIDE:return op1 / op2;
-	case EQU:return op1 == op2 ? 1 : 0;
-	case LES:return op1 < op2 ? 1 : 0;
-	case LEQ:return op1 <= op2 ? 1 : 0;
-	case GTR:return op1 > op2 ? 1 : 0;
-	case GEQ:return op1 >= op2 ? 1 : 0;
-	case NEQ:return op1 != op2 ? 1 : 0;
+void AllocTempReg() {
+	GetBaseBlock();
+	for (int i = 0; i < block_num; i++) {
+		Identity* pos[LocalSize];
+		int cnt = 0;
+		for (int j = block[i].s; j < block[i].t; j++) {
+			if (midcode[j].op == PROC || midcode[j].op == FUNC)
+				current = Search(midcode[j].res, 2);
+			Identity *ident1, *ident2, *ident;
+			ident1 = Search(midcode[j].op1, 1);
+			ident2 = Search(midcode[j].op2, 1);
+			ident = Search(midcode[j].res, 1);
+			if (ident1 != NULL)
+				if (ident1->kind == VARIABLE && ident1->name[0] == '$') {
+					bool exist = false;
+					for (int k = 0; k < cnt; k++)
+						if (pos[k] == ident1) {
+							exist = true;
+							break;
+						}
+					if (!exist)
+						pos[cnt++] = ident1;
+				}
+			if (ident2 != NULL)
+				if (ident2->kind == VARIABLE && ident2->name[0] == '$') {
+					bool exist = false;
+					for (int k = 0; k < cnt; k++)
+						if (pos[k] == ident2) {
+							exist = true;
+							break;
+						}
+					if (!exist)
+						pos[cnt++] = ident2;
+				}
+			if (ident != NULL)
+				if (ident->kind == VARIABLE && ident->name[0] == '$') {
+					bool exist = false;
+					for (int k = 0; k < cnt; k++)
+						if (pos[k] == ident) {
+							exist = true;
+							break;
+						}
+					if (!exist)
+						pos[cnt++] = ident;
+				}
+		}
+		for (int j = 0; j < cnt && j < 11; j++) {
+			int max = j;
+			for (int k = j + 1; k < cnt; k++)
+				if (pos[k]->weight > pos[max]->weight)
+					max = k;
+			pos[max]->reg = a1 + j;
+			pos[max] = pos[j];
+		}
 	}
-	return 0;
 }

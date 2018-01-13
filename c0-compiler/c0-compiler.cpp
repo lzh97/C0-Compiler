@@ -48,8 +48,10 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	Program();
 	if (success) {
 		QuadrupleTest(false);
+		DeleteInvalidCode();
 		CommonSubexpressionElimination();
-		//ConstantReplace();
+		AllocGlobalReg();
+		AllocTempReg();
 		QuadrupleTest(true);
 		GenerateMIPS32();
 		printf("Compile successfully.\n");

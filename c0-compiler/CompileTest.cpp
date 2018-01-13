@@ -387,10 +387,11 @@ void LocalTableTest() {
 
 void QuadrupleTest(bool isOpti) {
 	for (int i = 0; i < cnt; i++)
-		if (isOpti)
-			fprintf(middlecode, "%6s, %10s, %10s, %10s\n", Op2String(midcode[i].op), midcode[i].op1, midcode[i].op2, midcode[i].res);
-		else
-			fprintf(middlecode_o, "%6s, %10s, %10s, %10s\n", Op2String(midcode[i].op), midcode[i].op1, midcode[i].op2, midcode[i].res);
+		if (midcode[i].op != DEL)
+			if (isOpti)
+				fprintf(middlecode, "%6s, %10s, %10s, %10s\n", Op2String(midcode[i].op), midcode[i].op1, midcode[i].op2, midcode[i].res);
+			else
+				fprintf(middlecode_o, "%6s, %10s, %10s, %10s\n", Op2String(midcode[i].op), midcode[i].op1, midcode[i].op2, midcode[i].res);
 }
 
 void Tab() {

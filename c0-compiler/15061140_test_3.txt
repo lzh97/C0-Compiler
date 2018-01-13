@@ -1,7 +1,7 @@
-const int MAX = 10000, MIN = 002;
+const int MAX = 1000, MIN = 002;
 const char a = 'a', z = 'z';
 
-int base[3000], exp[3000];
+int base[200], exp[200];
 int cnt;
 
 
@@ -10,7 +10,7 @@ int mod(int x, int y){
 }
 
 void init(){
-	int tag[10005];
+	int tag[1005];
 	int i, j;
 	i = min;
 	cnt = 0;

@@ -7,6 +7,7 @@ int lab_num = -1;
 
 extern Quadruple tempcode[CodeMaxNum];
 extern int temp_cnt;
+extern double weight;
 
 int rec = 0;
 char res1[15];
@@ -14,6 +15,47 @@ char res2[15];
 char res3[15];
 
 void GenerateMidCode(int op, char op1[], char op2[], char res[]) {
+	switch (op) {
+	case PARA:
+	case VAL:
+	case CALL:
+	case LARR:
+	case SARR:
+	case JZ:
+	case JNZ:
+	case SCAN:
+	case PRINTI:
+	case PRINTC:
+	case RET:
+	case PLUS:
+	case MINUS:
+	case TIMES:
+	case DIVIDE:
+	case EQU:
+	case LES:
+	case LEQ:
+	case GTR:
+	case GEQ:
+	case NEQ:
+	case ASN:
+		Identity* ident;
+		ident = Search(op1, 3);
+		if (ident != NULL) {
+			ident->weight += weight;
+			ident->isused = true;
+		}
+		ident = Search(op2, 3);
+		if (ident != NULL) {
+			ident->weight += weight;
+			ident->isused = true;
+		}
+		ident = Search(res, 3);
+		if (ident != NULL) {
+			ident->weight += weight;
+			ident->isused = true;
+		}
+		break;
+	}
 	midcode[cnt].op = op;
 	strcpy_s(midcode[cnt].op1, op1);
 	strcpy_s(midcode[cnt].op2, op2);

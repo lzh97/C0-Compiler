@@ -6,7 +6,6 @@
 #define PROCEDURE 3			//过程
 #define FUNCTION 4			//函数
 #define ARRAY 5				//数组
-#define DELETED 6			//删除
 
 #define INT 0				//整型
 #define CHAR 1				//字符型
@@ -20,6 +19,9 @@ struct Identity {
 	int type;					//类型
 	int value;					//值
 	int addr;					//地址
+	double weight;				//权重
+	int reg;
+	bool isused;
 	bool isglobal;
 	unsigned int hash;
 

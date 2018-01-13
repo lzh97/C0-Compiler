@@ -14,10 +14,12 @@ int top = 0;
 int str = 0;
 char res[10];
 
+int Calc(int op, int op1, int op2);
+
 void AllocGlobal(Identity* ident, char* name, char* value);
 void AllocLocal(Identity *&ident);
 void PopPara(Identity ident);
-void PushPara(Identity* ident, int value);
+void PushPara(Identity ident);
 char* StringLabel(int str);
 
 void MIPS_LABEL(char* label);
@@ -48,9 +50,8 @@ void MIPS_SYSCALL();
 
 void GenerateMIPS32() {
 	Identity *ident, *ident1, *ident2;
-	int value = 95;
 	fprintf(targetcode, ".data\n");
-	for (int i = 0; i < gsize; i++) {	//全局常量、变量分配
+	for (int i = 0; i < gsize; i++) {	//全局变量分配
 		ident = &global[i];
 		AllocGlobal(ident, NULL, NULL);
 	}
@@ -73,7 +74,8 @@ void GenerateMIPS32() {
 			MIPS_SUBI(gp, gp, current->size * DATASIZE);
 			MIPS_SW(fp, sp, -offset++ * DATASIZE);		//保存退栈信息
 			MIPS_SW(ra, sp, -offset++ * DATASIZE);
-			for (int j = current->l; j < current->r; j++){
+			offset += s7 - s0 + 1;		//全局寄存器分配
+			for (int j = current->l; j < current->r; j++) {	//局部变量分配
 				ident = &local[j];
 				AllocLocal(ident);
 			}
@@ -87,124 +89,132 @@ void GenerateMIPS32() {
 			break;
 		case VAL:
 			ident1 = Search(midcode[i].op1, 3);
-			if (ident1 == NULL)
-				value = atoi(midcode[i].op1);
-			PushPara(ident1, value);
+			PushPara(*ident1);
 			break;
 		case CALL:
 			ident1 = Search(midcode[i].op1, 2);
 			ident = Search(midcode[i].res, 3);
+			for (int offset = 2; offset < 10; offset++)		//保存全局寄存器
+				MIPS_SW(s0 + offset - 2, sp, -offset * DATASIZE);
 			MIPS_MOVE(fp, sp);
 			MIPS_SUBI(sp, sp, offset * DATASIZE);		//压栈
 			MIPS_JAL(midcode[i].op1);
-			if (ident != NULL)
-				MIPS_SW(v0, sp, ident->addr);
+			if (ident != NULL) {
+				if (ident->reg >= 0)
+					MIPS_MOVE(ident->reg, v0);
+				else
+					MIPS_SW(v0, sp, ident->addr);
+			}
 			break;
 		case LARR:
 			ident1 = Search(midcode[i].op1, 3);
 			ident2 = Search(midcode[i].op2, 3);
 			ident = Search(midcode[i].res, 3);
 			if (ident1->isglobal)		//基地址
-				MIPS_LA(t0, ident1->name);
+				MIPS_LA(t8, ident1->name);
+			else if (ident1->reg >= 0)
+				MIPS_MOVE(t8, ident1->reg);
 			else
-				MIPS_ADDI(t0, sp, ident1->addr);
-			if (ident2 == NULL) {		//偏移量
-				value = atoi(midcode[i].op2);
-				MIPS_LI(t1, value * DATASIZE);
+				MIPS_ADDI(t8, sp, ident1->addr);
+			if (ident2->kind == CONSTANT)		//偏移量
+				MIPS_LI(t9, ident2->value);
+			else if (ident2->isglobal) {
+				MIPS_LA(t9, ident2->name);
+				MIPS_LW(t9, t9, 0);
 			}
-			else {
-				if (ident2->isglobal) {
-					MIPS_LA(t1, ident2->name);
-					MIPS_LW(t1, t1, 0);
-				}
-				else
-					MIPS_LW(t1, sp, ident2->addr);
-			}
-			if (ident->isglobal)
-				MIPS_LA(t3, ident->name);
+			else if (ident2->reg >= 0)
+				MIPS_MOVE(t9, ident2->reg);
 			else
-				MIPS_ADDI(t3, sp, ident->addr);
-			MIPS_LI(at, 4);
-			MIPS_MUL(t1, t1, at);
+				MIPS_LW(t9, sp, ident2->addr);
+			MIPS_LI(at, 4);		//数组元素地址
+			MIPS_MUL(t9, t9, at);
 			if (ident1->isglobal)
-				MIPS_ADD(t0, t0, t1);
+				MIPS_ADD(t8, t8, t9);
 			else
-				MIPS_SUB(t0, t0, t1);
-			MIPS_LW(t2, t0, 0);
-			MIPS_SW(t2, t3, 0);
+				MIPS_SUB(t8, t8, t9);
+			MIPS_LW(t8, t8, 0);		//数组元素
+			if (ident->isglobal) {		//取数组元素
+				MIPS_LA(t9, ident->name);
+				MIPS_SW(t8, t9, 0);
+			}
+			else if (ident->reg >= 0)
+				MIPS_MOVE(ident->reg, t8);
+			else {
+				MIPS_ADDI(t9, sp, ident->addr);
+				MIPS_SW(t8, t9, 0);
+			}
 			break;
 		case SARR:
 			ident1 = Search(midcode[i].op1, 3);
 			ident2 = Search(midcode[i].op2, 3);
 			ident = Search(midcode[i].res, 3);
-			if (ident1 == NULL) {
-				value = atoi(midcode[i].op1);
-				MIPS_LI(t0, value);
-			}
-			else {
-				if (ident1->isglobal) {
-					MIPS_LA(t0, ident1->name);
-					MIPS_LW(t0, t0, 0);
-				}
-				else
-					MIPS_LW(t0, sp, ident1->addr);
-			}
-			if (ident2 == NULL) {		//偏移量
-				value = atoi(midcode[i].op2);
-				MIPS_LI(t1, value);
-			}
-			else {
-				if (ident2->isglobal) {
-					MIPS_LA(t1, ident2->name);
-					MIPS_LW(t1, t1, 0);
-				}
-				else
-					MIPS_LW(t1, sp, ident2->addr);
-			}
 			if (ident->isglobal)		//基地址
-				MIPS_LA(t2, ident->name);
+				MIPS_LA(t8, ident->name);
+			else if (ident->reg >= 0)
+				MIPS_MOVE(t8, ident->reg);
 			else
-				MIPS_ADDI(t2, sp, ident->addr);
-			MIPS_LI(at, 4);
-			MIPS_MUL(t1, t1, at);
+				MIPS_ADDI(t8, sp, ident->addr);
+			if (ident2->kind == CONSTANT)		//偏移量
+				MIPS_LI(t9, ident2->value);
+			else if (ident2->isglobal) {
+				MIPS_LA(t9, ident2->name);
+				MIPS_LW(t9, t9, 0);
+			}
+			else if (ident2->reg >= 0)
+				MIPS_MOVE(t9, ident2->reg);
+			else
+				MIPS_LW(t9, sp, ident2->addr);
+			MIPS_LI(at, 4);		//数组元素地址
+			MIPS_MUL(t9, t9, at);
 			if (ident->isglobal)
-				MIPS_ADD(t2, t2, t1);
+				MIPS_ADD(t8, t8, t9);
 			else
-				MIPS_SUB(t2, t2, t1);
-			MIPS_SW(t0, t2, 0);
+				MIPS_SUB(t8, t8, t9);
+			if (ident1->kind == CONSTANT)		//元素
+				MIPS_LI(t9, ident1->value);
+			else if (ident1->isglobal) {
+				MIPS_LA(t9, ident1->name);
+				MIPS_LW(t9, t9, 0);
+			}
+			else if (ident1->reg >= 0)
+				MIPS_MOVE(t9, ident1->reg);
+			else
+				MIPS_LW(t9, sp, ident1->addr);
+			MIPS_SW(t9, t8, 0);		//存元素
 			break;
 		case JZ:
 		case JNZ:
 			ident1 = Search(midcode[i].op1, 3);
-			if (ident1 == NULL) {
-				value = atoi(midcode[i].op1);
-				MIPS_LI(t0, value);
+			if (ident1->kind == CONSTANT)		//取元素
+				MIPS_LI(t8, ident1->value);
+			else if (ident1->isglobal) {
+				MIPS_LA(t8, ident1->name);
+				MIPS_LW(t8, t8, 0);
 			}
-			else {
-				if (ident1->isglobal) {
-					MIPS_LA(t0, ident1->name);
-					MIPS_LW(t0, t0, 0);
-				}
-				else
-					MIPS_LW(t0, sp, ident1->addr);
-			}
-			if (midcode[i].op == JZ)
-				MIPS_BEQ(t0, 0, midcode[i].op2);
+			else if (ident1->reg >= 0)
+				MIPS_MOVE(t8, ident1->reg);
 			else
-				MIPS_BNE(t0, 0, midcode[i].op2);
+				MIPS_LW(t8, sp, ident1->addr);
+			if (midcode[i].op == JZ)		//条件跳转
+				MIPS_BEQ(t8, 0, midcode[i].op2);
+			else
+				MIPS_BNE(t8, 0, midcode[i].op2);
 			break;
 		case SCAN:
 			ident = Search(midcode[i].res, 3);
-			if (ident->isglobal)
-				MIPS_LA(t0, ident->name);
-			else
-				MIPS_ADDI(t0, sp, ident->addr);
-			if (ident->type == INT)
+			if (ident->type == INT)		//系统调用
 				MIPS_LI(v0, 5);
 			else
 				MIPS_LI(v0, 12);
 			MIPS_SYSCALL();
-			MIPS_SW(v0, t0, 0);
+			if (ident->isglobal) {		//存元素
+				MIPS_LA(t8, ident->name);
+				MIPS_SW(v0, t8, 0);
+			}
+			else if (ident->reg >= 0)
+				MIPS_MOVE(ident->reg, v0);
+			else
+				MIPS_SW(v0, sp, ident->addr);
 			break;
 		case PRINTS:
 			MIPS_LA(a0, midcode[i].op1);
@@ -214,18 +224,16 @@ void GenerateMIPS32() {
 		case PRINTI:
 		case PRINTC:
 			ident1 = Search(midcode[i].op1, 3);
-			if (ident1 == NULL) {
-				value = atoi(midcode[i].op1);
-				MIPS_LI(a0, value);
+			if (ident1->kind == CONSTANT)		//取元素
+				MIPS_LI(a0, ident1->value);
+			else if (ident1->isglobal) {
+				MIPS_LA(a0, ident1->name);
+				MIPS_LW(a0, a0, 0);
 			}
-			else {
-				if (ident1->isglobal) {
-					MIPS_LA(a0, ident1->name);
-					MIPS_LW(a0, a0, 0);
-				}
-				else
-					MIPS_LW(a0, sp, ident1->addr);
-			}
+			else if (ident1->reg >= 0)
+				MIPS_MOVE(a0, ident1->reg);
+			else
+				MIPS_LW(a0, sp, ident1->addr);
 			if (midcode[i].op == PRINTI)
 				MIPS_LI(v0, 1);
 			else
@@ -233,22 +241,22 @@ void GenerateMIPS32() {
 			MIPS_SYSCALL();
 			break;
 		case RET:
-			if (strcmp(midcode[i].op1, "") != 0) {
-				ident = Search(midcode[i].op1, 3);
-				if (ident != NULL)		//返回值
-					if (ident->isglobal) {
-						MIPS_LA(v0, ident->name);
-						MIPS_LW(v0, v0, 0);
-					}
-					else
-						MIPS_LW(v0, sp, ident->addr);
-				else {
-					value = atoi(midcode[i].op1);
-					MIPS_LI(v0, value);
+			ident1 = Search(midcode[i].op1, 3);
+			if (ident1 != NULL)		//返回值
+				if (ident1->kind == CONSTANT)
+					MIPS_LI(v0, ident1->value);
+				else if (ident1->isglobal) {
+					MIPS_LA(v0, ident->name);
+					MIPS_LW(v0, v0, 0);
 				}
-			}
+				else if (ident1->reg >= 0)
+					MIPS_MOVE(v0, ident1->reg);
+				else
+					MIPS_LW(v0, sp, ident->addr);
 			MIPS_LW(ra, sp, -4);		//退栈
 			MIPS_LW(sp, sp, 0);
+			for (int offset = 2; offset < 10; offset++)		//恢复全局寄存器
+				MIPS_LW(s0 + offset - 2, sp, -offset * DATASIZE);
 			MIPS_JR(ra);
 			break;
 		case PLUS:
@@ -264,89 +272,104 @@ void GenerateMIPS32() {
 			ident1 = Search(midcode[i].op1, 3);
 			ident2 = Search(midcode[i].op2, 3);
 			ident = Search(midcode[i].res, 3);
-			if (ident1 == NULL) {
-				value = atoi(midcode[i].op1);
-				MIPS_LI(t0, value);
+			if (ident1->kind == CONSTANT && ident2->kind == CONSTANT) {		//常数合并
+				if (ident->isglobal) {
+					MIPS_LA(t8, ident->name);
+					MIPS_LI(t9, Calc(midcode[i].op, ident1->value, ident2->value));
+					MIPS_SW(t9, t8, 0);
+				}
+				else if (ident->reg >= 0)
+					MIPS_LI(ident->reg, Calc(midcode[i].op, ident1->value, ident2->value));
+				else {
+					MIPS_LI(t9, Calc(midcode[i].op, ident1->value, ident2->value));
+					MIPS_SW(t9, sp, ident->addr);
+				}
 			}
 			else {
-				if (ident1->isglobal) {
-					MIPS_LA(t0, ident1->name);
-					MIPS_LW(t0, t0, 0);
+				if (ident1->kind == CONSTANT)		//取元素
+					MIPS_LI(t8, ident1->value);
+				else if (ident1->isglobal) {
+					MIPS_LA(t8, ident1->name);
+					MIPS_LW(t8, t8, 0);
 				}
+				else if (ident1->reg >= 0)
+					MIPS_MOVE(t8, ident1->reg);
 				else
-					MIPS_LW(t0, sp, ident1->addr);
-			}
-			if (ident2 == NULL) {
-				value = atoi(midcode[i].op2);
-				MIPS_LI(t1, value);
-			}
-			else {
-				if (ident2->isglobal) {
-					MIPS_LA(t1, ident2->name);
-					MIPS_LW(t1, t1, 0);
+					MIPS_LW(t8, sp, ident1->addr);
+				if (ident2->kind == CONSTANT)		//取元素
+					MIPS_LI(t9, ident2->value);
+				else if (ident2->isglobal) {
+					MIPS_LA(t9, ident2->name);
+					MIPS_LW(t9, t9, 0);
 				}
+				else if (ident2->reg >= 0)
+					MIPS_MOVE(t9, ident2->reg);
 				else
-					MIPS_LW(t1, sp, ident2->addr);
+					MIPS_LW(t9, sp, ident2->addr);
+				switch (midcode[i].op) {		//运算
+				case PLUS:
+					MIPS_ADD(t8, t8, t9);
+					break;
+				case MINUS:
+					MIPS_SUB(t8, t8, t9);
+					break;
+				case TIMES:
+					MIPS_MUL(t8, t8, t9);
+					break;
+				case DIVIDE:
+					MIPS_DIV(t8, t9);
+					MIPS_MFLO(t8);
+					break;
+				case EQU:
+					MIPS_SEQ(t8, t8, t9);
+					break;
+				case LES:
+					MIPS_SLT(t8, t8, t9);
+					break;
+				case GTR:
+					MIPS_SGT(t8, t8, t9);
+					break;
+				case LEQ:
+					MIPS_SLE(t8, t8, t9);
+					break;
+				case GEQ:
+					MIPS_SGE(t8, t8, t9);
+					break;
+				case NEQ:
+					MIPS_SNE(t8, t8, t9);
+					break;
+				}
+				if (ident->isglobal) {		//存元素		
+					MIPS_LA(t9, ident->name);
+					MIPS_SW(t8, t9, 0);
+				}
+				else if (ident->reg >= 0)
+					MIPS_MOVE(ident->reg, t8);
+				else
+					MIPS_SW(t8, sp, ident->addr);
 			}
-			if (ident->isglobal)
-				MIPS_LA(t2, ident->name);
-			else
-				MIPS_ADDI(t2, sp, ident->addr);
-			switch (midcode[i].op) {
-			case PLUS:
-				MIPS_ADD(t3, t0, t1);
-				break;
-			case MINUS:
-				MIPS_SUB(t3, t0, t1);
-				break;
-			case TIMES:
-				MIPS_MUL(t3, t0, t1);
-				break;
-			case DIVIDE:
-				MIPS_DIV(t0, t1);
-				MIPS_MFLO(t3);
-				break;
-			case EQU:
-				MIPS_SEQ(t3, t0, t1);
-				break;
-			case LES:
-				MIPS_SLT(t3, t0, t1);
-				break;
-			case GTR:
-				MIPS_SGT(t3, t0, t1);
-				break;
-			case LEQ:
-				MIPS_SLE(t3, t0, t1);
-				break;
-			case GEQ:
-				MIPS_SGE(t3, t0, t1);
-				break;
-			case NEQ:
-				MIPS_SNE(t3, t0, t1);
-				break;
-			}
-			MIPS_SW(t3, t2, 0);
 			break;
 		case ASN:
 			ident1 = Search(midcode[i].op1, 3);
 			ident = Search(midcode[i].res, 3);
-			if (ident1 == NULL) {
-				value = atoi(midcode[i].op1);
-				MIPS_LI(t0, value);
+			if (ident1->kind == CONSTANT)		//取元素
+				MIPS_LI(t8, ident1->value);
+			else if (ident1->isglobal) {
+				MIPS_LA(t8, ident1->name);
+				MIPS_LW(t8, t8, 0);
 			}
-			else {
-				if (ident1->isglobal) {
-					MIPS_LA(t0, ident1->name);
-					MIPS_LW(t0, t0, 0);
-				}
-				else
-					MIPS_LW(t0, sp, ident1->addr);
-			}
-			if (ident->isglobal)
-				MIPS_LA(t1, ident->name);
+			else if (ident1->reg >= 0)
+				MIPS_MOVE(t8, ident1->reg);
 			else
-				MIPS_ADDI(t1, sp, ident->addr);
-			MIPS_SW(t0, t1, 0);
+				MIPS_LW(t8, sp, ident1->addr);
+			if (ident->isglobal) {		//存元素
+				MIPS_LA(t9, ident->name);
+				MIPS_SW(t8, t9, 0);
+			}
+			else if (ident->reg >= 0)
+				MIPS_MOVE(ident->reg, t8);
+			else
+				MIPS_SW(t8, sp, ident->addr);
 			break;
 		}
 }
@@ -355,43 +378,49 @@ void AllocGlobal(Identity* ident, char* name, char* value) {
 	if (ident == NULL)
 		fprintf(targetcode, "%s: .asciiz %s\n", name, value);
 	else {
-		if (ident->kind == DELETED)
-			return;
 		if (ident->kind == ARRAY) 
 			fprintf(targetcode, "%s: .space %d\n", ident->name, ident->size * DATASIZE);
-		else if(ident->kind == CONSTANT || ident->kind == VARIABLE)
+		else if(ident->kind == VARIABLE)
 			fprintf(targetcode, "%s: .word %d\n", ident->name, ident->value);
 	}
 }
 void AllocLocal(Identity *&ident) {
-	if (ident->kind == DELETED)
+	if (!ident->isused)
+		return;
+	if (ident->kind == CONSTANT)
+		return;
+	if (ident->reg >= 0)
 		return;
 	ident->addr = -offset * DATASIZE;
-	if (ident->kind == CONSTANT) {
-		MIPS_LI(t0, ident->value);
-		MIPS_SW(t0, sp, -offset * DATASIZE);
-	}
 	if (ident->kind == ARRAY)
 		offset += ident->size;
 	else
 		offset++;
 }
 void PopPara(Identity ident) {
-	MIPS_LW(t0, gp, top++ * DATASIZE);
-	MIPS_SW(t0, sp, ident.addr);
-}
-void PushPara(Identity* ident, int value) {
-	if (ident == NULL)
-		MIPS_LI(t1, value);
+	if (ident.reg >= 0)
+		MIPS_LW(ident.reg, gp, top++ * DATASIZE);
 	else {
-		if (ident->isglobal) {
-			MIPS_LA(t0, ident->name);
-			MIPS_LW(t1, t0, 0);
-		}
-		else
-			MIPS_LW(t1, sp, ident->addr);
+		MIPS_LW(t8, gp, top++ * DATASIZE);
+		MIPS_SW(t8, sp, ident.addr);
 	}
-	MIPS_SW(t1, gp, 0);
+}
+void PushPara(Identity ident) {
+	if (ident.kind == CONSTANT) {
+		MIPS_LI(t8, ident.value);
+		MIPS_SW(t8, gp, 0);
+	}
+	else if (ident.isglobal) {
+		MIPS_LA(t8, ident.name);
+		MIPS_LW(t9, t8, 0);
+		MIPS_SW(t9, gp, 0);
+	}
+	else if(ident.reg >= 0)
+		MIPS_SW(ident.reg, gp, 0);
+	else {
+		MIPS_LW(t8, sp, ident.addr);
+		MIPS_SW(t8, gp, 0);
+	}
 	MIPS_ADDI(gp, gp, 4);
 }
 char* StringLabel(int str) {
@@ -433,13 +462,13 @@ void MIPS_ADD(int rd, int rs, int rt) {
 	fprintf(targetcode, "\t add  %s, %s, %s\n", reg[rd], reg[rs], reg[rt]);
 }
 void MIPS_ADDI(int rt, int rs, int value) {
-	fprintf(targetcode, "\t addi %s, %s, 0x%x\n", reg[rt], reg[rs], value);
+	fprintf(targetcode, "\t addi %s, %s, %d\n", reg[rt], reg[rs], value);
 }
 void MIPS_SUB(int rd, int rs, int rt) {
 	fprintf(targetcode, "\t sub  %s, %s, %s\n", reg[rd], reg[rs], reg[rt]);
 }
 void MIPS_SUBI(int rt, int rs, int value) {
-	fprintf(targetcode, "\t subi %s, %s, 0x%x\n", reg[rt], reg[rs], value);
+	fprintf(targetcode, "\t subi %s, %s, %d\n", reg[rt], reg[rs], value);
 }
 void MIPS_MUL(int rd, int rs, int rt) {
 	fprintf(targetcode, "\t mul  %s, %s, %s\n", reg[rd], reg[rs], reg[rt]);
@@ -476,4 +505,20 @@ void MIPS_SNE(int rd, int rs, int rt) {
 }
 void MIPS_SYSCALL() {
 	fprintf(targetcode, "\t syscall\n");
+}
+
+int Calc(int op, int op1, int op2) {
+	switch (op) {
+	case PLUS:   return op1 + op2;
+	case MINUS:  return op1 - op2;
+	case TIMES:  return op1 * op2;
+	case DIVIDE: return op1 / op2;
+	case EQU:    return op1 == op2 ? 1 : 0;
+	case LES:    return op1 < op2 ? 1 : 0;
+	case GTR:    return op1 > op2 ? 1 : 0;
+	case LEQ:    return op1 <= op2 ? 1 : 0;
+	case GEQ:    return op1 >= op2 ? 1 : 0;
+	case NEQ:    return op1 != op2 ? 1 : 0;
+	}
+	return 0;
 }

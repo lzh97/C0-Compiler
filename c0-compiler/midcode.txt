@@ -29,10 +29,10 @@
  label,      $lab1,           ,           
     <=,          a,          b,      $tmp9
     jz,      $tmp9,      $lab2,           
-     -,          0,      $tmp8,     $tmp11
-   ret,     $tmp11,           ,           
- label,      $lab2,           ,           
+     -,     $tmp11,      $tmp8,     $tmp12
    ret,     $tmp12,           ,           
+ label,      $lab2,           ,           
+   ret,     $tmp13,           ,           
   proc,           ,           ,       line
   para,           ,           ,          n
   para,           ,           ,          m
@@ -47,122 +47,119 @@
    var,        int,           ,        po1
    var,        int,           ,        po2
    var,        int,           ,        st2
-     =,     $tmp13,           ,          i
-     =,     $tmp13,           ,          j
+     =,     $tmp14,           ,          i
+     =,     $tmp14,           ,          j
  label,      $lab3,           ,           
   sarr,          i,          i,      stpos
   sarr,          i,          i,      posst
-     +,          i,     $tmp13,          i
-    <=,          i,          n,     $tmp17
-   jnz,     $tmp17,      $lab3,           
-     =,     $tmp13,           ,          i
+     +,          i,     $tmp14,          i
+    <=,          i,          n,     $tmp18
+   jnz,     $tmp18,      $lab3,           
+     =,     $tmp14,           ,          i
  label,      $lab4,           ,           
-    ==,          i,     $tmp13,     $tmp20
-    jz,     $tmp20,      $lab5,           
-     =,     $tmp21,           ,          p
-     =,     $tmp22,           ,          q
+    ==,          i,     $tmp14,     $tmp21
+    jz,     $tmp21,      $lab5,           
+     =,     $tmp22,           ,          p
+     =,     $tmp23,           ,          q
  label,      $lab5,           ,           
-    ==,          i,     $tmp22,     $tmp24
-    jz,     $tmp24,      $lab6,           
-     =,     $tmp25,           ,          p
-     -,          0,     $tmp21,          q
+    ==,          i,     $tmp23,     $tmp25
+    jz,     $tmp25,      $lab6,           
+     =,     $tmp26,           ,          p
+     -,     $tmp28,     $tmp22,          q
  label,      $lab6,           ,           
-    ==,          i,     $tmp21,     $tmp29
-    jz,     $tmp29,      $lab7,           
-     =,     $tmp21,           ,          p
-     -,          0,     $tmp22,          q
+    ==,          i,     $tmp22,     $tmp31
+    jz,     $tmp31,      $lab7,           
+     =,     $tmp22,           ,          p
+     -,     $tmp28,     $tmp23,          q
  label,      $lab7,           ,           
-    !=,          q,     $tmp33,     $tmp34
-    jz,     $tmp34,      $lab8,           
+    !=,          q,     $tmp28,     $tmp37
+    jz,     $tmp37,      $lab8,           
    val,          q,           ,           
-   val,     $tmp33,           ,           
+   val,     $tmp28,           ,           
   call,    compare,           ,       move
      *,       move,          q,        end
   larr,      stpos,          p,        po1
  label,      $lab9,           ,           
-     +,        po1,       move,     $tmp39
-  larr,      posst,     $tmp39,        st2
+     +,        po1,       move,     $tmp42
+  larr,      posst,     $tmp42,        st2
   larr,      stpos,        st2,        po2
   sarr,        st2,        po1,      posst
   sarr,        po1,        st2,      stpos
      =,        po2,           ,        po1
-     +,          j,     $tmp13,          j
-    <=,          j,        end,     $tmp44
-   jnz,     $tmp44,      $lab9,           
+     +,          j,     $tmp14,          j
+    <=,          j,        end,     $tmp47
+   jnz,     $tmp47,      $lab9,           
   sarr,          p,        po2,      posst
-  larr,      stpos,          p,     $tmp45
-     +,     $tmp45,          q,     $tmp46
-  sarr,     $tmp46,          p,      stpos
+  larr,      stpos,          p,     $tmp48
+     +,     $tmp48,          q,     $tmp49
+  sarr,     $tmp49,          p,      stpos
  label,      $lab8,           ,           
-     +,          i,     $tmp13,          i
-    <=,          i,          m,     $tmp49
-   jnz,     $tmp49,      $lab4,           
-  larr,      posst,     $tmp13,     $tmp51
-printi,     $tmp51,           ,           
-     =,     $tmp22,           ,          i
+     +,          i,     $tmp14,          i
+    <=,          i,          m,     $tmp52
+   jnz,     $tmp52,      $lab4,           
+  larr,      posst,     $tmp14,     $tmp54
+printi,     $tmp54,           ,           
+     =,     $tmp23,           ,          i
  label,     $lab10,           ,           
-  larr,      posst,          i,     $tmp53
-printi,     $tmp53,           ,           
-     +,          i,     $tmp13,          i
-    <=,          i,          n,     $tmp56
-   jnz,     $tmp56,     $lab10,           
-   ret,           ,           ,           
+  larr,      posst,          i,     $tmp56
+printi,     $tmp56,           ,           
+     +,          i,     $tmp14,          i
+    <=,          i,          n,     $tmp59
+   jnz,     $tmp59,     $lab10,           
    ret,           ,           ,           
   func,       char,           ,         f2
   para,           ,           ,          x
    var,        int,           ,         z2
-     =,     $tmp57,           ,         z2
+     =,     $tmp60,           ,         z2
      +,          x,         z2,          x
    ret,          x,           ,           
   func,        int,           ,        fib
   para,           ,           ,          n
    var,        int,           ,     result
-    ==,          n,     $tmp59,     $tmp60
-    jz,     $tmp60,     $lab11,           
-   ret,     $tmp59,           ,           
- label,     $lab11,           ,           
     ==,          n,     $tmp62,     $tmp63
-    jz,     $tmp63,     $lab12,           
+    jz,     $tmp63,     $lab11,           
    ret,     $tmp62,           ,           
+ label,     $lab11,           ,           
+    ==,          n,     $tmp65,     $tmp66
+    jz,     $tmp66,     $lab12,           
+   ret,     $tmp65,           ,           
  label,     $lab12,           ,           
-     -,          n,     $tmp62,     $tmp66
-   val,     $tmp66,           ,           
-  call,        fib,           ,     $tmp67
-     -,          n,     $tmp68,     $tmp69
+     -,          n,     $tmp65,     $tmp69
    val,     $tmp69,           ,           
   call,        fib,           ,     $tmp70
-     +,     $tmp67,     $tmp70,     result
+     -,          n,     $tmp71,     $tmp72
+   val,     $tmp72,           ,           
+  call,        fib,           ,     $tmp73
+     +,     $tmp70,     $tmp73,     result
    ret,     result,           ,           
   proc,           ,           ,       nest
    arr,        int,         15,          a
    arr,        int,         15,          b
-  sarr,     $tmp73,     $tmp72,          a
-  sarr,     $tmp75,     $tmp73,          b
-  sarr,     $tmp77,     $tmp75,          a
-  sarr,     $tmp79,     $tmp77,          b
-  sarr,     $tmp81,     $tmp79,          a
-  larr,          a,     $tmp72,     $tmp83
-  larr,          b,     $tmp83,     $tmp84
-  larr,          a,     $tmp84,     $tmp85
-  larr,          b,     $tmp85,     $tmp86
-  larr,          a,     $tmp86,     $tmp87
-  sarr,     $tmp88,     $tmp87,          b
-  larr,          b,     $tmp81,     $tmp92
-     +,     $tmp83,     $tmp92,     $tmp93
-printi,     $tmp93,           ,           
-   ret,           ,           ,           
+  sarr,     $tmp76,     $tmp75,          a
+  sarr,     $tmp78,     $tmp76,          b
+  sarr,     $tmp80,     $tmp78,          a
+  sarr,     $tmp82,     $tmp80,          b
+  sarr,     $tmp84,     $tmp82,          a
+  larr,          a,     $tmp75,     $tmp86
+  larr,          b,     $tmp86,     $tmp87
+  larr,          a,     $tmp87,     $tmp88
+  larr,          b,     $tmp88,     $tmp89
+  larr,          a,     $tmp89,     $tmp90
+  sarr,     $tmp91,     $tmp90,          b
+  larr,          b,     $tmp84,     $tmp95
+     +,     $tmp86,     $tmp95,     $tmp96
+printi,     $tmp96,           ,           
    ret,           ,           ,           
   proc,           ,           ,          t
   para,           ,           ,          x
-     >,          x,     $tmp94,     $tmp95
-    jz,     $tmp95,     $lab13,           
+     >,          x,     $tmp97,     $tmp98
+    jz,     $tmp98,     $lab13,           
    ret,           ,           ,           
  label,     $lab13,           ,           
-     +,          x,     $tmp96,          x
+     +,          x,     $tmp99,          x
 printc,          x,           ,           
    val,          x,           ,           
   call,          t,           ,           
-   ret,           ,           ,           
    ret,           ,           ,           
   proc,           ,           ,       main
  const,        int,          3,        coz
@@ -176,173 +173,170 @@ printc,          x,           ,
    var,        int,           ,        cho
    arr,       char,          5,         sz
    var,       char,           ,          e
-     =,     $tmp98,           ,        chc
-     =,     $tmp99,           ,        chd
+     =,    $tmp101,           ,        chc
+     =,    $tmp102,           ,        chd
      =,        coz,           ,          b
-     =,    $tmp101,           ,          i
-     -,          0,    $tmp102,          c
-     =,    $tmp104,           ,        key
+     =,    $tmp104,           ,          i
+     -,    $tmp104,    $tmp105,          c
+     =,    $tmp108,           ,        key
   scan,           ,           ,        cho
-    ==,        cho,          0,    $tmp105
-    jz,    $tmp105,     $lab14,           
+    ==,        cho,    $tmp104,    $tmp109
+    jz,    $tmp109,     $lab14,           
 prints, "test line:",           ,           
-   val,    $tmp106,           ,           
+   val,    $tmp111,           ,           
    val,        coz,           ,           
   call,       line,           ,           
  label,     $lab14,           ,           
-    ==,        cho,          1,    $tmp108
-    jz,    $tmp108,     $lab15,           
+    ==,        cho,    $tmp108,    $tmp113
+    jz,    $tmp113,     $lab15,           
 prints, "test fib:",           ,           
    val,        coz,           ,           
   call,        fib,           ,          d
 prints,     "fib=",           ,           
 printi,          d,           ,           
  label,     $lab15,           ,           
-    ==,        cho,          2,    $tmp110
-    jz,    $tmp110,     $lab16,           
+    ==,        cho,    $tmp105,    $tmp116
+    jz,    $tmp116,     $lab24,           
  label,     $lab17,           ,           
   sarr,       conb,          i,         sz
   sarr,          i,          i,        sz2
-     +,          i,    $tmp104,          i
-     <,          i,    $tmp114,    $tmp115
-   jnz,    $tmp115,     $lab17,           
+     +,          i,    $tmp108,          i
+     <,          i,    $tmp121,    $tmp122
+   jnz,    $tmp122,     $lab17,           
   scan,           ,           ,        key
   scan,           ,           ,          a
-     <,        key,        coz,    $tmp117
-    jz,    $tmp117,     $lab18,           
+     <,        key,        coz,    $tmp124
+    jz,    $tmp124,     $lab18,           
      +,          a,          b,          a
 printi,          a,           ,           
  label,     $lab18,           ,           
-    <=,        key,        coz,    $tmp120
-    jz,    $tmp120,     $lab19,           
+    <=,        key,        coz,    $tmp127
+    jz,    $tmp127,     $lab19,           
      -,          b,          a,          b
-  larr,        sz2,    $tmp101,    $tmp124
-     +,    $tmp124,          b,    $tmp125
-  sarr,    $tmp125,    $tmp101,        sz2
-  larr,         sz,    $tmp101,    $tmp128
-     +,    $tmp128,    $tmp104,    $tmp130
-  sarr,    $tmp130,    $tmp101,         sz
+  larr,        sz2,    $tmp104,    $tmp131
+     +,    $tmp131,          b,    $tmp132
+  sarr,    $tmp132,    $tmp104,        sz2
+  larr,         sz,    $tmp104,    $tmp135
+     +,    $tmp135,    $tmp108,    $tmp137
+  sarr,    $tmp137,    $tmp104,         sz
 printi,          b,           ,           
-  larr,         sz,    $tmp101,    $tmp132
-printc,    $tmp132,           ,           
-  larr,        sz2,    $tmp101,    $tmp134
-printi,    $tmp134,           ,           
+  larr,         sz,    $tmp104,    $tmp139
+printc,    $tmp139,           ,           
+  larr,        sz2,    $tmp104,    $tmp141
+printi,    $tmp141,           ,           
  label,     $lab19,           ,           
-     >,        key,    $tmp135,    $tmp136
-    jz,    $tmp136,     $lab20,           
+     >,        key,    $tmp142,    $tmp143
+    jz,    $tmp143,     $lab20,           
      *,          a,          b,          c
-  larr,        sz2,    $tmp104,    $tmp140
-     +,    $tmp140,          c,    $tmp141
-  sarr,    $tmp141,    $tmp104,        sz2
-  larr,         sz,    $tmp104,    $tmp144
-     +,    $tmp144,    $tmp104,    $tmp146
-  sarr,    $tmp146,    $tmp104,         sz
+  larr,        sz2,    $tmp108,    $tmp147
+     +,    $tmp147,          c,    $tmp148
+  sarr,    $tmp148,    $tmp108,        sz2
+  larr,         sz,    $tmp108,    $tmp151
+     +,    $tmp151,    $tmp108,    $tmp153
+  sarr,    $tmp153,    $tmp108,         sz
 printi,          c,           ,           
-  larr,         sz,    $tmp104,    $tmp148
-printc,    $tmp148,           ,           
-  larr,        sz2,    $tmp104,    $tmp150
-printi,    $tmp150,           ,           
+  larr,         sz,    $tmp108,    $tmp155
+printc,    $tmp155,           ,           
+  larr,        sz2,    $tmp108,    $tmp157
+printi,    $tmp157,           ,           
  label,     $lab20,           ,           
-    >=,        key,    $tmp135,    $tmp152
-    jz,    $tmp152,     $lab21,           
+    >=,        key,    $tmp142,    $tmp159
+    jz,    $tmp159,     $lab21,           
      /,          a,          b,          d
-  larr,        sz2,    $tmp102,    $tmp156
-     +,    $tmp156,          d,    $tmp157
-  sarr,    $tmp157,    $tmp102,        sz2
-  larr,         sz,    $tmp102,    $tmp160
-     +,    $tmp160,    $tmp104,    $tmp162
-  sarr,    $tmp162,    $tmp102,         sz
+  larr,        sz2,    $tmp105,    $tmp163
+     +,    $tmp163,          d,    $tmp164
+  sarr,    $tmp164,    $tmp105,        sz2
+  larr,         sz,    $tmp105,    $tmp167
+     +,    $tmp167,    $tmp108,    $tmp169
+  sarr,    $tmp169,    $tmp105,         sz
 printi,          d,           ,           
-  larr,         sz,    $tmp102,    $tmp164
-printc,    $tmp164,           ,           
-  larr,        sz2,    $tmp102,    $tmp166
-printi,    $tmp166,           ,           
+  larr,         sz,    $tmp105,    $tmp171
+printc,    $tmp171,           ,           
+  larr,        sz2,    $tmp105,    $tmp173
+printi,    $tmp173,           ,           
  label,     $lab21,           ,           
-    !=,        key,    $tmp167,    $tmp168
-    jz,    $tmp168,     $lab22,           
-     /,    $tmp104,        coz,    $tmp170
-     -,          a,    $tmp170,          a
-  larr,        sz2,        coz,    $tmp174
-     +,    $tmp174,          a,    $tmp175
-     +,    $tmp175,    $tmp176,    $tmp177
-  sarr,    $tmp177,        coz,        sz2
-  larr,         sz,        coz,    $tmp180
-     +,    $tmp180,    $tmp104,    $tmp182
-  sarr,    $tmp182,        coz,         sz
+    !=,        key,    $tmp174,    $tmp175
+    jz,    $tmp175,     $lab22,           
+     /,    $tmp108,        coz,    $tmp177
+     -,          a,    $tmp177,          a
+  larr,        sz2,        coz,    $tmp181
+     +,    $tmp181,          a,    $tmp182
+     +,    $tmp182,    $tmp183,    $tmp184
+  sarr,    $tmp184,        coz,        sz2
+  larr,         sz,        coz,    $tmp187
+     +,    $tmp187,    $tmp108,    $tmp189
+  sarr,    $tmp189,        coz,         sz
 printi,          a,           ,           
-  larr,         sz,        coz,    $tmp184
-printc,    $tmp184,           ,           
-  larr,        sz2,        coz,    $tmp186
-printi,    $tmp186,           ,           
+  larr,         sz,        coz,    $tmp191
+printc,    $tmp191,           ,           
+  larr,        sz2,        coz,    $tmp193
+printi,    $tmp193,           ,           
  label,     $lab22,           ,           
-    ==,        key,    $tmp167,    $tmp188
-    jz,    $tmp188,     $lab23,           
-     *,    $tmp102,        coz,    $tmp191
-  larr,         sz,    $tmp167,    $tmp195
-     +,    $tmp195,    $tmp104,    $tmp197
-  sarr,    $tmp197,    $tmp167,         sz
-     -,          0,          a,    $tmp189
-     +,    $tmp189,    $tmp191,          a
+    ==,        key,    $tmp174,    $tmp195
+    jz,    $tmp195,     $lab23,           
+     *,    $tmp105,        coz,    $tmp199
+  larr,         sz,    $tmp174,    $tmp203
+     +,    $tmp203,    $tmp108,    $tmp205
+  sarr,    $tmp205,    $tmp174,         sz
+     -,    $tmp104,          a,    $tmp197
+     +,    $tmp197,    $tmp199,          a
 printi,          a,           ,           
-  larr,         sz,    $tmp167,    $tmp199
-printc,    $tmp199,           ,           
-  larr,        sz2,    $tmp167,    $tmp201
-printi,    $tmp201,           ,           
+  larr,         sz,    $tmp174,    $tmp207
+printc,    $tmp207,           ,           
+  larr,        sz2,    $tmp174,    $tmp209
+printi,    $tmp209,           ,           
  label,     $lab23,           ,           
     jz,        key,     $lab24,           
 printi,          a,           ,           
  label,     $lab24,           ,           
- label,     $lab16,           ,           
-    ==,        cho,          3,    $tmp202
-    jz,    $tmp202,     $lab25,           
+    ==,        cho,        coz,    $tmp210
+    jz,    $tmp210,     $lab25,           
 prints, "test function:",           ,           
     jz,        key,     $lab26,           
-     -,          0,    $tmp102,    $tmp205
-   val,    $tmp205,           ,           
+     -,    $tmp104,    $tmp105,    $tmp215
+   val,    $tmp215,           ,           
    val,        coz,           ,           
-  call,          f,           ,    $tmp207
-     +,    $tmp114,    $tmp104,    $tmp210
-     *,    $tmp210,        coz,    $tmp211
-     +,    $tmp207,    $tmp211,    $tmp212
-  sarr,    $tmp212,    $tmp167,        sz2
+  call,          f,           ,    $tmp217
+     +,    $tmp121,    $tmp108,    $tmp220
+     *,    $tmp220,        coz,    $tmp221
+     +,    $tmp217,    $tmp221,    $tmp222
+  sarr,    $tmp222,    $tmp174,        sz2
  label,     $lab26,           ,           
    val,       conb,           ,           
   call,          t,           ,           
    val,       conb,           ,           
-  call,         f2,           ,    $tmp214
-printc,    $tmp214,           ,           
-  larr,        sz2,    $tmp167,    $tmp216
-printi,    $tmp216,           ,           
+  call,         f2,           ,    $tmp224
+printc,    $tmp224,           ,           
+  larr,        sz2,    $tmp174,    $tmp226
+printi,    $tmp226,           ,           
  label,     $lab25,           ,           
-    ==,        cho,          4,    $tmp217
-    jz,    $tmp217,     $lab27,           
+    ==,        cho,    $tmp174,    $tmp227
+    jz,    $tmp227,     $lab32,           
 prints, "test switch:",           ,           
   scan,           ,           ,        key
-     *,        key,    $tmp104,    $tmp219
-    ==,    $tmp219,          0,    $tmp220
-    jz,    $tmp220,     $lab28,           
+     *,        key,    $tmp108,    $tmp230
+    ==,    $tmp230,    $tmp104,    $tmp231
+    jz,    $tmp231,     $lab28,           
 prints, "key is 0",           ,           
  label,     $lab28,           ,           
-    ==,    $tmp219,          1,    $tmp221
-    jz,    $tmp221,     $lab29,           
+    ==,    $tmp230,    $tmp108,    $tmp233
+    jz,    $tmp233,     $lab29,           
 prints,  "key is ",           ,           
 printi,        key,           ,           
  label,     $lab29,           ,           
-    ==,    $tmp219,          2,    $tmp222
-    jz,    $tmp222,     $lab30,           
+    ==,    $tmp230,    $tmp105,    $tmp235
+    jz,    $tmp235,     $lab30,           
 prints, "key is 2",           ,           
  label,     $lab30,           ,           
   scan,           ,           ,          e
-    ==,          e,         97,    $tmp223
-    jz,    $tmp223,     $lab31,           
-printi,    $tmp102,           ,           
+    ==,          e,       conb,    $tmp237
+    jz,    $tmp237,     $lab31,           
+printi,    $tmp105,           ,           
  label,     $lab31,           ,           
-    ==,          e,         98,    $tmp225
-    jz,    $tmp225,     $lab32,           
-     +,    $tmp102,    $tmp227,    $tmp228
-printi,    $tmp228,           ,           
+    ==,          e,    $tmp241,    $tmp240
+    jz,    $tmp240,     $lab32,           
+     +,    $tmp105,    $tmp243,    $tmp244
+printi,    $tmp244,           ,           
  label,     $lab32,           ,           
- label,     $lab27,           ,           
   call,       nest,           ,           
-   ret,           ,           ,           
    ret,           ,           ,           

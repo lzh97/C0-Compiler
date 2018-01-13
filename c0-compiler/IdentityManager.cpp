@@ -42,6 +42,8 @@ Identity* AddConst(char name[], int type, int value, bool isglobal) {
 		global[gsize].kind = CONSTANT;
 		global[gsize].type = type;
 		global[gsize].value = value;
+		global[gsize].weight = 0;
+		global[gsize].isused = false;
 		global[gsize].isglobal = true;
 		global[gsize++].hash = Hash(name);
 		return &global[gsize - 1];
@@ -55,6 +57,9 @@ Identity* AddConst(char name[], int type, int value, bool isglobal) {
 		local[lsize].kind = CONSTANT;
 		local[lsize].type = type;
 		local[lsize].value = value;
+		local[lsize].weight = 0;
+		local[lsize].reg = -1;
+		local[lsize].isused = false;
 		local[lsize].isglobal = false;
 		local[lsize++].hash = Hash(name);
 		if (current != NULL)current->r++;
@@ -72,6 +77,8 @@ Identity* AddVar(char name[], int type, bool isglobal) {
 		global[gsize].kind = VARIABLE;
 		global[gsize].type = type;
 		global[gsize].value = type == INT ? INT_INIT : CHAR_INIT;
+		global[gsize].weight = 0;
+		global[gsize].isused = false;
 		global[gsize].isglobal = true;
 		global[gsize++].hash = Hash(name);
 		return &global[gsize - 1];
@@ -85,6 +92,9 @@ Identity* AddVar(char name[], int type, bool isglobal) {
 		local[lsize].kind = VARIABLE;
 		local[lsize].type = type;
 		local[lsize].value = type == INT ? INT_INIT : CHAR_INIT;
+		local[lsize].weight = 0;
+		local[lsize].reg = -1;
+		local[lsize].isused = false;
 		local[lsize].isglobal = false;
 		local[lsize++].hash = Hash(name);
 		if (current != NULL)current->r++;
@@ -100,6 +110,9 @@ void AddPara(char name[], int type) {
 	strcpy_s(local[lsize].name, name);
 	local[lsize].kind = PARAMETER;
 	local[lsize].type = type;
+	local[lsize].weight = 0;
+	local[lsize].reg = -1;
+	local[lsize].isused = false;
 	local[lsize].isglobal = false;
 	local[lsize++].hash = Hash(name);
 	if (current != NULL)current->r++;
@@ -112,6 +125,7 @@ Identity* AddProc(char name[]) {
 	}
 	strcpy_s(global[gsize].name, name);
 	global[gsize].kind = PROCEDURE;
+	global[gsize].isused = false;
 	global[gsize].isglobal = true;
 	global[gsize++].hash = Hash(name);
 	return &global[gsize - 1];
@@ -125,6 +139,7 @@ Identity* AddFunc(char name[], int type) {
 	strcpy_s(global[gsize].name, name);
 	global[gsize].kind = FUNCTION;
 	global[gsize].type = type;
+	global[gsize].isused = false;
 	global[gsize].isglobal = true;
 	global[gsize++].hash = Hash(name);
 	return &global[gsize - 1];
@@ -139,8 +154,9 @@ void AddArray(char name[], int type, int size, bool isglobal) {
 		strcpy_s(global[gsize].name, name);
 		global[gsize].kind = ARRAY;
 		global[gsize].type = type;
+		global[gsize].weight = 0;
+		global[gsize].isused = false;
 		global[gsize].size = size;
-		global[gsize].value = type == INT ? INT_INIT : CHAR_INIT;
 		global[gsize].isglobal = true;
 		global[gsize++].hash = Hash(name);
 	}
@@ -152,8 +168,10 @@ void AddArray(char name[], int type, int size, bool isglobal) {
 		strcpy_s(local[lsize].name, name);
 		local[lsize].kind = ARRAY;
 		local[lsize].type = type;
+		local[lsize].weight = 0;
+		local[lsize].reg = -1;
+		local[lsize].isused = false;
 		local[lsize].size = size;
-		local[lsize].value = type == INT ? INT_INIT : CHAR_INIT;
 		local[lsize].isglobal = false;
 		local[lsize++].hash = Hash(name);
 		if(current != NULL)current->r++;

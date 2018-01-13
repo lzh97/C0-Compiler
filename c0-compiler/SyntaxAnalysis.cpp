@@ -11,6 +11,7 @@ int value;
 int type;
 int size;
 int paratype;
+double weight = 1;
 
 int funcdefinestate = 0;
 int maindefinestate = 0;
@@ -581,6 +582,7 @@ void Statement() {
 //<条件语句>::=if'('<条件>')'<语句>
 void IfStatement() {
 	SyntaxTest(28);
+	weight /= 2;
 	branchlevel++;
 	NextSymbol();
 	if (symbol == lpare)
@@ -598,12 +600,14 @@ void IfStatement() {
 	Statement();
 	GenerateMidCode(LABEL, Label(l), "", "");
 	branchlevel--;
+	weight *= 2;
 	SyntaxTest(29);
 }
 
 //<循环语句>::=do<语句>while'('<条件>')'
 void DoWhileStatement() {
 	SyntaxTest(30);
+	weight *= 3;
 	int l = NewLabel();
 	GenerateMidCode(LABEL, Label(l), "", "");
 	NextSymbol();
@@ -623,12 +627,14 @@ void DoWhileStatement() {
 		NextSymbol();
 	else
 		Error(MISSING_RIGHT_PARENTHESIS_ERROR);
+	weight /= 3;
 	SyntaxTest(31);
 }
 
 //<情况语句>::=switch'('<表达式>')''{'<情况表>'}'
 void SwitchStatement() {
 	SyntaxTest(32);
+	weight /= 4;
 	branchlevel++;
 	NextSymbol();
 	if (symbol == lpare)
@@ -651,6 +657,7 @@ void SwitchStatement() {
 	else
 		Error(MISSING_RIGHT_BRACE_ERROR);
 	branchlevel--;
+	weight *= 4;
 	SyntaxTest(33);
 }
 
@@ -894,7 +901,8 @@ void SwitchTable(Identity ident) {
 			Error(UNMATCHED_TYPE_ERROR);
 		else {
 			Identity* ident1 = AddVar(TempVar(NewTempVar()), type, false);
-			GenerateMidCode(EQU, ident.name, Int2String(value), ident1->name);
+			Identity* ident2 = AddConst(TempVar(NewTempVar()), type, value, false);
+			GenerateMidCode(EQU, ident.name, ident2->name, ident1->name);
 			int l = NewLabel();
 			GenerateMidCode(JZ, ident1->name, Label(l), "");
 			if (symbol == colon)
@@ -945,16 +953,17 @@ void Expression(Identity *&ident) {
 		sign = symbol == minus ? -1 : 1;
 		NextSymbol();
 	}
-	Identity *ident1 = NULL, *ident3 = NULL;
+	Identity *ident1 = NULL, *ident2 = NULL, *ident3 = NULL;
 	Term(ident1);
 	if (sign == -1) {
+		ident2 = AddConst(TempVar(NewTempVar()), INT, 0, false);
 		ident3 = AddVar(TempVar(NewTempVar()), INT, false);
-		GenerateMidCode(MINUS, Int2String(0), ident1->name, ident3->name);
+		GenerateMidCode(MINUS, ident2->name, ident1->name, ident3->name);
 		ident1 = ident3;
 	}
 	while (isAddingOp(&op)) {
 		NextSymbol();
-		Identity* ident2 = NULL;
+		ident2 = NULL;
 		Term(ident2);
 		ident3 = AddVar(TempVar(NewTempVar()), INT, false);
 		GenerateMidCode(op, ident1->name, ident2->name, ident3->name);
