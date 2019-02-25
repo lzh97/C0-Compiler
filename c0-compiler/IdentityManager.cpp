@@ -121,7 +121,7 @@ void AddPara(char name[], int type) {
 Identity* AddProc(char name[]) {
 	if (Search(name, 2) != NULL) {
 		Error(DUPLICATE_DEFINATION_ERROR);
-		return NULL;
+		exit(0);
 	}
 	strcpy_s(global[gsize].name, name);
 	global[gsize].kind = PROCEDURE;
@@ -134,7 +134,7 @@ Identity* AddProc(char name[]) {
 Identity* AddFunc(char name[], int type) {
 	if (Search(name, 2) != NULL) {
 		Error(DUPLICATE_DEFINATION_ERROR);
-		return NULL;
+		exit(0);
 	}
 	strcpy_s(global[gsize].name, name);
 	global[gsize].kind = FUNCTION;

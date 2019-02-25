@@ -135,6 +135,7 @@ void InsertDAG(Quadruple code) {
 		AddNode_1(code.op, code.op1, code.res);
 		break;
 	case VAL:
+	case J:
 	case PRINTS:
 	case PRINTI:
 	case PRINTC:
@@ -219,6 +220,7 @@ void ExportDAG() {
 			case ASN:
 				GenerateTempCode(nodes[p].op, nodes[nodes[p].lchild].name, "", nodes[p].name);
 				break;
+			case J:
 			case VAL:
 			case PRINTS:
 			case PRINTI:

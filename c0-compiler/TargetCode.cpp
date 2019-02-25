@@ -11,10 +11,8 @@ extern int gsize;
 
 int offset;
 int top = 0;
-int str = 0;
+int str;
 char res[10];
-
-int Calc(int op, int op1, int op2);
 
 void AllocGlobal(Identity* ident, char* name, char* value);
 void AllocLocal(Identity *&ident);
@@ -55,11 +53,11 @@ void GenerateMIPS32() {
 		ident = &global[i];
 		AllocGlobal(ident, NULL, NULL);
 	}
+	str = 0;
 	for(int i = 0; i < cnt; i++)	//字符串常量分配
-		if (midcode[i].op == PRINTS) {
-			AllocGlobal(NULL, StringLabel(str), midcode[i].op1);
-			strcpy_s(midcode[i].op1, StringLabel(str++));
-		}
+		if (midcode[i].op == PRINTS)
+			AllocGlobal(NULL, StringLabel(str++), midcode[i].op1);
+	str = 0;
 	fprintf(targetcode, ".text\n");
 	MIPS_JAL("main");
 	MIPS_LI(v0, 10);
@@ -71,7 +69,8 @@ void GenerateMIPS32() {
 			top = offset = 0;
 			current = Search(midcode[i].res, 2);
 			MIPS_LABEL(midcode[i].res);
-			MIPS_SUBI(gp, gp, current->size * DATASIZE);
+			if(current->size > 0)		//参数栈退栈
+				MIPS_SUBI(gp, gp, current->size * DATASIZE);
 			MIPS_SW(fp, sp, -offset++ * DATASIZE);		//保存退栈信息
 			MIPS_SW(ra, sp, -offset++ * DATASIZE);
 			offset += s7 - s0 + 1;		//全局寄存器分配
@@ -92,15 +91,18 @@ void GenerateMIPS32() {
 			PushPara(*ident1);
 			break;
 		case CALL:
-			ident1 = Search(midcode[i].op1, 2);
 			ident = Search(midcode[i].res, 3);
-			for (int offset = 2; offset < 10; offset++)		//保存全局寄存器
-				MIPS_SW(s0 + offset - 2, sp, -offset * DATASIZE);
+			for (int off = 2; off < 10; off++)		//保存全局寄存器
+				MIPS_SW(s0 + off - 2, sp, -off * DATASIZE);
 			MIPS_MOVE(fp, sp);
 			MIPS_SUBI(sp, sp, offset * DATASIZE);		//压栈
 			MIPS_JAL(midcode[i].op1);
-			if (ident != NULL) {
-				if (ident->reg >= 0)
+			if (ident != NULL) {		//返回值
+				if (ident->isglobal) {
+					MIPS_LA(t8, ident->name);
+					MIPS_SW(v0, t8, 0);
+				}
+				else if (ident->reg >= 0)
 					MIPS_MOVE(ident->reg, v0);
 				else
 					MIPS_SW(v0, sp, ident->addr);
@@ -182,6 +184,9 @@ void GenerateMIPS32() {
 				MIPS_LW(t9, sp, ident1->addr);
 			MIPS_SW(t9, t8, 0);		//存元素
 			break;
+		case J:
+			MIPS_J(midcode[i].op1);
+			break;
 		case JZ:
 		case JNZ:
 			ident1 = Search(midcode[i].op1, 3);
@@ -217,7 +222,7 @@ void GenerateMIPS32() {
 				MIPS_SW(v0, sp, ident->addr);
 			break;
 		case PRINTS:
-			MIPS_LA(a0, midcode[i].op1);
+			MIPS_LA(a0, StringLabel(str++));
 			MIPS_LI(v0, 4);
 			MIPS_SYSCALL();
 			break;
@@ -246,17 +251,17 @@ void GenerateMIPS32() {
 				if (ident1->kind == CONSTANT)
 					MIPS_LI(v0, ident1->value);
 				else if (ident1->isglobal) {
-					MIPS_LA(v0, ident->name);
+					MIPS_LA(v0, ident1->name);
 					MIPS_LW(v0, v0, 0);
 				}
 				else if (ident1->reg >= 0)
 					MIPS_MOVE(v0, ident1->reg);
 				else
-					MIPS_LW(v0, sp, ident->addr);
+					MIPS_LW(v0, sp, ident1->addr);
 			MIPS_LW(ra, sp, -4);		//退栈
 			MIPS_LW(sp, sp, 0);
-			for (int offset = 2; offset < 10; offset++)		//恢复全局寄存器
-				MIPS_LW(s0 + offset - 2, sp, -offset * DATASIZE);
+			for (int off = 2; off < 10; off++)		//恢复全局寄存器
+				MIPS_LW(s0 + off - 2, sp, -off * DATASIZE);
 			MIPS_JR(ra);
 			break;
 		case PLUS:
@@ -385,9 +390,7 @@ void AllocGlobal(Identity* ident, char* name, char* value) {
 	}
 }
 void AllocLocal(Identity *&ident) {
-	if (!ident->isused)
-		return;
-	if (ident->kind == CONSTANT)
+	if (ident->kind == CONSTANT || ident->kind == DELETED)
 		return;
 	if (ident->reg >= 0)
 		return;
@@ -505,20 +508,4 @@ void MIPS_SNE(int rd, int rs, int rt) {
 }
 void MIPS_SYSCALL() {
 	fprintf(targetcode, "\t syscall\n");
-}
-
-int Calc(int op, int op1, int op2) {
-	switch (op) {
-	case PLUS:   return op1 + op2;
-	case MINUS:  return op1 - op2;
-	case TIMES:  return op1 * op2;
-	case DIVIDE: return op1 / op2;
-	case EQU:    return op1 == op2 ? 1 : 0;
-	case LES:    return op1 < op2 ? 1 : 0;
-	case GTR:    return op1 > op2 ? 1 : 0;
-	case LEQ:    return op1 <= op2 ? 1 : 0;
-	case GEQ:    return op1 >= op2 ? 1 : 0;
-	case NEQ:    return op1 != op2 ? 1 : 0;
-	}
-	return 0;
 }

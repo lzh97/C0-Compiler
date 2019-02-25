@@ -157,6 +157,12 @@ void Warning(int code) {
 	case PROC_RETURN_VALUE_WARNING:
 		printf("In line %d, there is return value", lc);
 		break;
+	case DUPLICATE_CASE_WARNING:
+		printf("In line %d, there is duplicate case", lc);
+		break;
+	case UNUSED_IDENTITY_WARNING:
+		printf("Unused \"%s\"", name);
+		break;
 	}
 	printf("\n");
 }

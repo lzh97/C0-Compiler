@@ -41,7 +41,7 @@ void ReturnStatement();
 void FuncCallStatement(Identity ident);
 void ProcCallStatement(Identity ident);
 void Condition(Identity *&ident);
-void SwitchTable(Identity ident);
+void SwitchTable(Identity ident, int label);
 void ValueParaTable(Identity ident);
 void Expression(Identity *&ident);
 void Term(Identity *&ident);
@@ -651,7 +651,9 @@ void SwitchStatement() {
 		NextSymbol();
 	else
 		Error(MISSING_LEFT_BRACE_ERROR);
-	SwitchTable(*ident);
+	int label = NewLabel();
+	SwitchTable(*ident, label);
+	GenerateMidCode(LABEL, Label(label), "", "");
 	if (symbol == rbrac)
 		NextSymbol();
 	else
@@ -889,8 +891,10 @@ void Condition(Identity *&ident) {
 
 //<情况表>::=<情况子语句>{<情况子语句>}
 //<情况子语句>::=case<常量>:<语句>
-void SwitchTable(Identity ident) {
+void SwitchTable(Identity ident, int label) {
 	SyntaxTest(48);
+	int table[CodeMaxNum];
+	int cnt = 0;
 	do {
 		if (symbol == casesym)
 			NextSymbol();
@@ -900,6 +904,12 @@ void SwitchTable(Identity ident) {
 		if (ident.type != type)
 			Error(UNMATCHED_TYPE_ERROR);
 		else {
+			for(int i = 0; i < cnt; i++)
+				if (value == table[i]) {
+					Warning(DUPLICATE_CASE_WARNING);
+					break;
+				}
+			table[cnt++] = value;
 			Identity* ident1 = AddVar(TempVar(NewTempVar()), type, false);
 			Identity* ident2 = AddConst(TempVar(NewTempVar()), type, value, false);
 			GenerateMidCode(EQU, ident.name, ident2->name, ident1->name);
@@ -910,6 +920,7 @@ void SwitchTable(Identity ident) {
 			else
 				Error(MISSING_COLON_ERROR);
 			Statement();
+			GenerateMidCode(J, Label(label), "", "");
 			GenerateMidCode(LABEL, Label(l), "", "");
 		}
 	} while (symbol == casesym);
@@ -1015,7 +1026,7 @@ void Factor(Identity *&ident) {
 					Expression(ident2);
 					if (ident2->type == CHAR)
 						Error(INDEX_TYPE_ERROR);
-					else if (ident2->kind == CONST && (ident2->value < 0 || ident2->value > ident1->size))
+					else if (ident2->kind == CONSTANT && (ident2->value < 0 || ident2->value > ident1->size))
 						Error(INDEX_OUTOFRANGE_ERROR);
 					else {
 						ident = AddVar(TempVar(NewTempVar()), ident1->type, false);
@@ -1028,6 +1039,7 @@ void Factor(Identity *&ident) {
 				}
 			}
 			else if (symbol == lpare) {
+				ident1 = Search(name, 2);
 				if (ident1->kind != FUNCTION) {
 					Error(NOT_FUNCTION_ERROR);
 					SkipFactor();

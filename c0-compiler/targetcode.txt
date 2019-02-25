@@ -2,15 +2,15 @@
 base: .space 800
 exp: .space 800
 cnt: .word 0
-$str0: .asciiz "Number is out of range."
-$str1: .asciiz "Number is out of range."
-$str2: .asciiz "="
-$str3: .asciiz "*"
-$str4: .asciiz "^"
-$str5: .asciiz "Number is out of range."
-$str6: .asciiz "Number is out of range."
-$str7: .asciiz "Prime numbers:"
-$str8: .asciiz " "
+$str9: .asciiz $str0
+$str10: .asciiz $str1
+$str11: .asciiz $str2
+$str12: .asciiz $str3
+$str13: .asciiz $str4
+$str14: .asciiz $str5
+$str15: .asciiz $str6
+$str16: .asciiz $str7
+$str17: .asciiz $str8
 .text
 	 jal  main
 	 li   $v0, 10
@@ -344,7 +344,7 @@ main:
 	 move $a1, $t8
 	 move $t8, $a1
 	 beq  $t8, $0, $lab8
-	 la   $a0, $str0
+	 la   $a0, $str9
 	 li   $v0, 4
 	 syscall
 	 lw   $ra, -4($sp)
@@ -365,7 +365,7 @@ $lab8:
 	 move $a1, $t8
 	 move $t8, $a1
 	 beq  $t8, $0, $lab9
-	 la   $a0, $str1
+	 la   $a0, $str10
 	 li   $v0, 4
 	 syscall
 	 lw   $ra, -4($sp)
@@ -399,7 +399,7 @@ $lab9:
 	 move $a0, $s1
 	 li   $v0, 1
 	 syscall
-	 la   $a0, $str2
+	 la   $a0, $str11
 	 li   $v0, 4
 	 syscall
 	 li   $t8, 0
@@ -422,7 +422,7 @@ $lab10:
 	 beq  $t8, $0, $lab11
 	 move $t8, $s3
 	 beq  $t8, $0, $lab12
-	 la   $a0, $str3
+	 la   $a0, $str12
 	 li   $v0, 4
 	 syscall
 $lab12:
@@ -449,7 +449,7 @@ $lab12:
 	 move $a3, $t8
 	 move $t8, $a3
 	 beq  $t8, $0, $lab13
-	 la   $a0, $str4
+	 la   $a0, $str13
 	 li   $v0, 4
 	 syscall
 	 la   $t8, exp
@@ -490,7 +490,7 @@ $lab7:
 	 move $a1, $t8
 	 move $t8, $a1
 	 beq  $t8, $0, $lab15
-	 la   $a0, $str5
+	 la   $a0, $str14
 	 li   $v0, 4
 	 syscall
 	 lw   $ra, -4($sp)
@@ -511,7 +511,7 @@ $lab15:
 	 move $a1, $t8
 	 move $t8, $a1
 	 beq  $t8, $0, $lab16
-	 la   $a0, $str6
+	 la   $a0, $str15
 	 li   $v0, 4
 	 syscall
 	 lw   $ra, -4($sp)
@@ -526,13 +526,13 @@ $lab15:
 	 lw   $s7, -36($sp)
 	 jr   $ra
 $lab16:
-	 la   $a0, $str7
+	 la   $a0, $str16
 	 li   $v0, 4
 	 syscall
 	 li   $t8, 0
 	 move $s0, $t8
 $lab17:
-	 la   $a0, $str8
+	 la   $a0, $str17
 	 li   $v0, 4
 	 syscall
 	 la   $t8, base

@@ -22,38 +22,59 @@ bool success = true;
 FILE *source;
 FILE *compilerecord;
 FILE *tablerecord;
-FILE *middlecode_o;
 FILE *middlecode;
 FILE *targetcode;
 
 int _tmain(int argc, _TCHAR* argv[]) {
-	char filepath[IdentityMaxLen];
-	scanf("%s", filepath);
-	fopen_s(&source, filepath, "r");
+	char src[IdentityMaxLen];
+	char res[IdentityMaxLen];
+	char path[IdentityMaxLen];
+	scanf("%s", src);
+	strcpy_s(path, src);
+	int len = strnlen_s(path, IdentityMaxLen);
+	while (len > 0)
+		if (path[--len] == '\\')
+			break;
+	path[len == 0 ? len : len + 1] = '\0';
+	fopen_s(&source, src, "r");
 	if (source == NULL) {
 		Error(FILE_NOT_EXIST_ERROR);
 		exit(0);
 	}
-	fopen_s(&compilerecord, "record.txt", "w");
-	fopen_s(&tablerecord, "table.txt", "w");
-	fopen_s(&middlecode_o, "midcode_origin.txt", "w");
-	fopen_s(&middlecode, "midcode.txt", "w");
-	int len = strnlen_s(filepath, IdentityMaxLen);
-	while (len > 0)
-		if (filepath[--len] == '.')
-			break;
-	filepath[len] = '\0';
-	strcat_s(filepath, ".asm");
-	fopen_s(&targetcode, filepath, "w");
+	strcpy_s(res, path);
+	strcat_s(res, "record.txt");
+	fopen_s(&compilerecord, res, "w");
+	strcpy_s(res, path);
+	strcat_s(res, "table.txt");
+	fopen_s(&tablerecord, res, "w");
+	
 	Program();
 	if (success) {
-		QuadrupleTest(false);
+		strcpy_s(res, path);
+		strcat_s(res, "midcode_origin.txt");
+		fopen_s(&middlecode, res, "w");
+		QuadrupleTest();
+		strcpy_s(res, path);
+		strcat_s(res, "targetcode_origin.asm");
+		fopen_s(&targetcode, res, "w");
+		GenerateMIPS32();
+		fclose(targetcode);
 		DeleteInvalidCode();
+		ConstantCombination();
 		CommonSubexpressionElimination();
+		ClearUnusedVar();
 		AllocGlobalReg();
 		AllocTempReg();
-		QuadrupleTest(true);
+		strcpy_s(res, path);
+		strcat_s(res, "midcode.txt.txt");
+		fopen_s(&middlecode, res, "w");
+		QuadrupleTest();
+		fclose(middlecode);
+		strcpy_s(res, path);
+		strcat_s(res, "targetcode.asm");
+		fopen_s(&targetcode, res, "w");
 		GenerateMIPS32();
+		fclose(targetcode);
 		printf("Compile successfully.\n");
 	}
 	else
@@ -61,7 +82,5 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	fclose(source);
 	fclose(compilerecord);
 	fclose(tablerecord);
-	fclose(middlecode);
-	fclose(middlecode_o);
 	return 0;
 }

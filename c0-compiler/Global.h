@@ -60,4 +60,4 @@ void LexicalTest();
 void SyntaxTest(int code);
 void LocalTableTest();
 void GlobalTableTest();
-void QuadrupleTest(bool isOpti);
+void QuadrupleTest();

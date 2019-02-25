@@ -3,7 +3,6 @@
 extern FILE *source;
 extern FILE *compilerecord;
 extern FILE *tablerecord;
-extern FILE *middlecode_o;
 extern FILE *middlecode;
 extern int cc, ll;
 extern Symbol symbol;
@@ -385,13 +384,10 @@ void LocalTableTest() {
 	fprintf(tablerecord, "\n\n");
 }
 
-void QuadrupleTest(bool isOpti) {
+void QuadrupleTest() {
 	for (int i = 0; i < cnt; i++)
 		if (midcode[i].op != DEL)
-			if (isOpti)
-				fprintf(middlecode, "%6s, %10s, %10s, %10s\n", Op2String(midcode[i].op), midcode[i].op1, midcode[i].op2, midcode[i].res);
-			else
-				fprintf(middlecode_o, "%6s, %10s, %10s, %10s\n", Op2String(midcode[i].op), midcode[i].op1, midcode[i].op2, midcode[i].res);
+			fprintf(middlecode, "%6s, %10s, %10s, %10s\n", Op2String(midcode[i].op), midcode[i].op1, midcode[i].op2, midcode[i].res);
 }
 
 void Tab() {
@@ -416,6 +412,7 @@ char* Op2String(int op) {
 	case CALL:return "call";
 	case LARR:return "larr";
 	case SARR:return "sarr";
+	case J:return "j";
 	case JZ:return "jz";
 	case JNZ:return "jnz";
 	case SCAN:return "scan";

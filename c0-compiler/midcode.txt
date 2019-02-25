@@ -1,342 +1,313 @@
- const,        int,         10,       cona
- const,       char,         97,       conb
- const,       char,         54,       conc
-   var,        int,           ,       _cha
-   arr,        int,          6,        chb
-   var,       char,           ,        chc
-   var,       char,           ,        chd
-  func,        int,           ,          f
+ const,        int,       1000,        max
+ const,        int,          2,        min
+ const,       char,         97,          a
+ const,       char,        122,          z
+   arr,        int,        200,       base
+   arr,        int,        200,        exp
+   var,        int,           ,        cnt
+  func,        int,           ,        mod
   para,           ,           ,          x
   para,           ,           ,          y
- const,        int,          1,          z
-     >,          x,          z,      $tmp2
-    jz,      $tmp2,      $lab0,           
-     +,          x,          z,      $tmp3
+     /,          x,          y,      $tmp1
+     *,      $tmp1,          y,      $tmp2
+     -,          x,      $tmp2,      $tmp3
    ret,      $tmp3,           ,           
- label,      $lab0,           ,           
-     +,          x,          z,          x
-   val,          x,           ,           
-   val,          y,           ,           
-  call,          f,           ,           
-     +,          x,          y,      $tmp6
-   ret,      $tmp6,           ,           
-  func,        int,           ,    compare
-  para,           ,           ,          a
-  para,           ,           ,          b
-     >,          a,          b,      $tmp7
-    jz,      $tmp7,      $lab1,           
-   ret,      $tmp8,           ,           
- label,      $lab1,           ,           
-    <=,          a,          b,      $tmp9
-    jz,      $tmp9,      $lab2,           
-     -,     $tmp11,      $tmp8,     $tmp12
-   ret,     $tmp12,           ,           
- label,      $lab2,           ,           
-   ret,     $tmp13,           ,           
-  proc,           ,           ,       line
-  para,           ,           ,          n
-  para,           ,           ,          m
+  proc,           ,           ,       init
+   arr,        int,       1005,        tag
    var,        int,           ,          i
    var,        int,           ,          j
-   arr,        int,        100,      stpos
-   arr,        int,        100,      posst
-   var,        int,           ,          p
-   var,        int,           ,          q
-   var,        int,           ,       move
-   var,        int,           ,        end
-   var,        int,           ,        po1
-   var,        int,           ,        po2
-   var,        int,           ,        st2
-     =,     $tmp14,           ,          i
-     =,     $tmp14,           ,          j
- label,      $lab3,           ,           
-  sarr,          i,          i,      stpos
-  sarr,          i,          i,      posst
-     +,          i,     $tmp14,          i
-    <=,          i,          n,     $tmp18
-   jnz,     $tmp18,      $lab3,           
-     =,     $tmp14,           ,          i
+     =,        min,           ,          i
+     =,      $tmp4,           ,        cnt
+ label,      $lab0,           ,           
+  sarr,      $tmp5,          i,        tag
+     +,          i,      $tmp5,      $tmp7
+     =,      $tmp7,           ,          i
+    <=,          i,        max,      $tmp8
+   jnz,      $tmp8,      $lab0,           
+     =,        min,           ,          i
+ label,      $lab1,           ,           
+  larr,        tag,          i,      $tmp9
+    jz,      $tmp9,      $lab2,           
+  sarr,          i,        cnt,       base
+  sarr,      $tmp4,        cnt,        exp
+     +,        cnt,      $tmp5,     $tmp12
+     =,     $tmp12,           ,        cnt
+     =,        min,           ,          j
+     *,          i,          j,     $tmp14
+    <=,     $tmp14,        max,     $tmp15
+    jz,     $tmp15,      $lab3,           
  label,      $lab4,           ,           
-    ==,          i,     $tmp14,     $tmp21
-    jz,     $tmp21,      $lab5,           
-     =,     $tmp22,           ,          p
-     =,     $tmp23,           ,          q
- label,      $lab5,           ,           
-    ==,          i,     $tmp23,     $tmp25
-    jz,     $tmp25,      $lab6,           
-     =,     $tmp26,           ,          p
-     -,     $tmp28,     $tmp22,          q
- label,      $lab6,           ,           
-    ==,          i,     $tmp22,     $tmp31
-    jz,     $tmp31,      $lab7,           
-     =,     $tmp22,           ,          p
-     -,     $tmp28,     $tmp23,          q
- label,      $lab7,           ,           
-    !=,          q,     $tmp28,     $tmp37
-    jz,     $tmp37,      $lab8,           
-   val,          q,           ,           
-   val,     $tmp28,           ,           
-  call,    compare,           ,       move
-     *,       move,          q,        end
-  larr,      stpos,          p,        po1
- label,      $lab9,           ,           
-     +,        po1,       move,     $tmp42
-  larr,      posst,     $tmp42,        st2
-  larr,      stpos,        st2,        po2
-  sarr,        st2,        po1,      posst
-  sarr,        po1,        st2,      stpos
-     =,        po2,           ,        po1
-     +,          j,     $tmp14,          j
-    <=,          j,        end,     $tmp47
-   jnz,     $tmp47,      $lab9,           
-  sarr,          p,        po2,      posst
-  larr,      stpos,          p,     $tmp48
-     +,     $tmp48,          q,     $tmp49
-  sarr,     $tmp49,          p,      stpos
- label,      $lab8,           ,           
-     +,          i,     $tmp14,          i
-    <=,          i,          m,     $tmp52
-   jnz,     $tmp52,      $lab4,           
-  larr,      posst,     $tmp14,     $tmp54
-printi,     $tmp54,           ,           
+     *,          i,          j,     $tmp16
+  sarr,      $tmp4,     $tmp16,        tag
+     +,          j,      $tmp5,     $tmp19
+     =,     $tmp19,           ,          j
+     *,          i,          j,     $tmp20
+    <=,     $tmp20,        max,     $tmp21
+   jnz,     $tmp21,      $lab4,           
+ label,      $lab3,           ,           
+ label,      $lab2,           ,           
+     +,          i,      $tmp5,     $tmp23
      =,     $tmp23,           ,          i
- label,     $lab10,           ,           
-  larr,      posst,          i,     $tmp56
-printi,     $tmp56,           ,           
-     +,          i,     $tmp14,          i
-    <=,          i,          n,     $tmp59
-   jnz,     $tmp59,     $lab10,           
+    <=,          i,        max,     $tmp24
+   jnz,     $tmp24,      $lab1,           
    ret,           ,           ,           
-  func,       char,           ,         f2
-  para,           ,           ,          x
-   var,        int,           ,         z2
-     =,     $tmp60,           ,         z2
-     +,          x,         z2,          x
-   ret,          x,           ,           
-  func,        int,           ,        fib
-  para,           ,           ,          n
-   var,        int,           ,     result
-    ==,          n,     $tmp62,     $tmp63
-    jz,     $tmp63,     $lab11,           
-   ret,     $tmp62,           ,           
- label,     $lab11,           ,           
-    ==,          n,     $tmp65,     $tmp66
-    jz,     $tmp66,     $lab12,           
-   ret,     $tmp65,           ,           
- label,     $lab12,           ,           
-     -,          n,     $tmp65,     $tmp69
-   val,     $tmp69,           ,           
-  call,        fib,           ,     $tmp70
-     -,          n,     $tmp71,     $tmp72
-   val,     $tmp72,           ,           
-  call,        fib,           ,     $tmp73
-     +,     $tmp70,     $tmp73,     result
-   ret,     result,           ,           
-  proc,           ,           ,       nest
-   arr,        int,         15,          a
-   arr,        int,         15,          b
-  sarr,     $tmp76,     $tmp75,          a
-  sarr,     $tmp78,     $tmp76,          b
-  sarr,     $tmp80,     $tmp78,          a
-  sarr,     $tmp82,     $tmp80,          b
-  sarr,     $tmp84,     $tmp82,          a
-  larr,          a,     $tmp75,     $tmp86
-  larr,          b,     $tmp86,     $tmp87
-  larr,          a,     $tmp87,     $tmp88
-  larr,          b,     $tmp88,     $tmp89
-  larr,          a,     $tmp89,     $tmp90
-  sarr,     $tmp91,     $tmp90,          b
-  larr,          b,     $tmp84,     $tmp95
-     +,     $tmp86,     $tmp95,     $tmp96
-printi,     $tmp96,           ,           
+  proc,           ,           ,    resolve
+  para,           ,           ,        num
+  para,           ,           ,        pos
+    ==,        num,     $tmp25,     $tmp26
+    jz,     $tmp26,      $lab5,           
    ret,           ,           ,           
-  proc,           ,           ,          t
-  para,           ,           ,          x
-     >,          x,     $tmp97,     $tmp98
-    jz,     $tmp98,     $lab13,           
+ label,      $lab5,           ,           
+   val,        num,           ,           
+  larr,       base,        pos,     $tmp27
+   val,     $tmp27,           ,           
+  call,        mod,           ,     $tmp28
+    ==,     $tmp28,     $tmp29,     $tmp30
+    jz,     $tmp30,      $lab6,           
+  larr,        exp,        pos,     $tmp31
+     +,     $tmp31,     $tmp25,     $tmp33
+  sarr,     $tmp33,        pos,        exp
+  larr,       base,        pos,     $tmp34
+     /,        num,     $tmp34,     $tmp35
+   val,     $tmp35,           ,           
+   val,        pos,           ,           
+  call,    resolve,           ,           
    ret,           ,           ,           
- label,     $lab13,           ,           
-     +,          x,     $tmp99,          x
-printc,          x,           ,           
-   val,          x,           ,           
-  call,          t,           ,           
+ label,      $lab6,           ,           
+   val,        num,           ,           
+     +,        pos,     $tmp25,     $tmp37
+   val,     $tmp37,           ,           
+  call,    resolve,           ,           
    ret,           ,           ,           
   proc,           ,           ,       main
- const,        int,          3,        coz
-   var,        int,           ,          a
-   var,        int,           ,          b
-   var,        int,           ,          c
-   var,        int,           ,          d
-   var,        int,           ,        key
+   var,       char,           ,       func
+   var,        int,           ,        num
    var,        int,           ,          i
-   arr,        int,          5,        sz2
-   var,        int,           ,        cho
-   arr,       char,          5,         sz
-   var,       char,           ,          e
-     =,    $tmp101,           ,        chc
-     =,    $tmp102,           ,        chd
-     =,        coz,           ,          b
-     =,    $tmp104,           ,          i
-     -,    $tmp104,    $tmp105,          c
-     =,    $tmp108,           ,        key
-  scan,           ,           ,        cho
-    ==,        cho,    $tmp104,    $tmp109
-    jz,    $tmp109,     $lab14,           
-prints, "test line:",           ,           
-   val,    $tmp111,           ,           
-   val,        coz,           ,           
-  call,       line,           ,           
- label,     $lab14,           ,           
-    ==,        cho,    $tmp108,    $tmp113
-    jz,    $tmp113,     $lab15,           
-prints, "test fib:",           ,           
-   val,        coz,           ,           
-  call,        fib,           ,          d
-prints,     "fib=",           ,           
-printi,          d,           ,           
+   var,        int,           ,          j
+  call,       init,           ,           
+  scan,           ,           ,       func
+  scan,           ,           ,        num
+    ==,       func,     $tmp39,     $tmp38
+    jz,     $tmp38,      $lab7,           
+     <,        num,        min,     $tmp40
+    jz,     $tmp40,      $lab8,           
+prints, "Number is out of range.",           ,           
+   ret,           ,           ,           
+ label,      $lab8,           ,           
+     >,        num,        max,     $tmp41
+    jz,     $tmp41,      $lab9,           
+prints, "Number is out of range.",           ,           
+   ret,           ,           ,           
+ label,      $lab9,           ,           
+   val,        num,           ,           
+   val,     $tmp42,           ,           
+  call,    resolve,           ,           
+printi,        num,           ,           
+prints,        "=",           ,           
+     =,     $tmp42,           ,          j
+     =,     $tmp42,           ,          i
+ label,     $lab10,           ,           
+  larr,        exp,          i,     $tmp45
+     >,     $tmp45,     $tmp42,     $tmp47
+    jz,     $tmp47,     $lab11,           
+    jz,          j,     $lab12,           
+prints,        "*",           ,           
+ label,     $lab12,           ,           
+  larr,       base,          i,     $tmp48
+printi,     $tmp48,           ,           
+  larr,        exp,          i,     $tmp49
+     >,     $tmp49,     $tmp50,     $tmp51
+    jz,     $tmp51,     $lab13,           
+prints,        "^",           ,           
+  larr,        exp,          i,     $tmp52
+printi,     $tmp52,           ,           
+ label,     $lab13,           ,           
+     =,     $tmp50,           ,          j
+ label,     $lab11,           ,           
+     +,          i,     $tmp50,     $tmp55
+     =,     $tmp55,           ,          i
+     <,          i,        cnt,     $tmp56
+   jnz,     $tmp56,     $lab10,           
+ label,      $lab7,           ,           
+    ==,       func,     $tmp58,     $tmp57
+    jz,     $tmp57,     $lab14,           
+     <,        num,        min,     $tmp59
+    jz,     $tmp59,     $lab15,           
+prints, "Number is out of range.",           ,           
+   ret,           ,           ,           
  label,     $lab15,           ,           
-    ==,        cho,    $tmp105,    $tmp116
-    jz,    $tmp116,     $lab24,           
+     >,        num,        max,     $tmp60
+    jz,     $tmp60,     $lab16,           
+prints, "Number is out of range.",           ,           
+   ret,           ,           ,           
+ label,     $lab16,           ,           
+prints, "Prime numbers:",           ,           
+     =,     $tmp42,           ,          i
  label,     $lab17,           ,           
-  sarr,       conb,          i,         sz
-  sarr,          i,          i,        sz2
-     +,          i,    $tmp108,          i
-     <,          i,    $tmp121,    $tmp122
-   jnz,    $tmp122,     $lab17,           
-  scan,           ,           ,        key
-  scan,           ,           ,          a
-     <,        key,        coz,    $tmp124
-    jz,    $tmp124,     $lab18,           
-     +,          a,          b,          a
-printi,          a,           ,           
+prints,        " ",           ,           
+  larr,       base,          i,     $tmp62
+printi,     $tmp62,           ,           
+     +,          i,     $tmp50,     $tmp64
+     =,     $tmp64,           ,          i
+    >=,          i,        cnt,     $tmp65
+    jz,     $tmp65,     $lab18,           
+   ret,           ,           ,           
  label,     $lab18,           ,           
-    <=,        key,        coz,    $tmp127
-    jz,    $tmp127,     $lab19,           
-     -,          b,          a,          b
-  larr,        sz2,    $tmp104,    $tmp131
-     +,    $tmp131,          b,    $tmp132
-  sarr,    $tmp132,    $tmp104,        sz2
-  larr,         sz,    $tmp104,    $tmp135
-     +,    $tmp135,    $tmp108,    $tmp137
-  sarr,    $tmp137,    $tmp104,         sz
-printi,          b,           ,           
-  larr,         sz,    $tmp104,    $tmp139
-printc,    $tmp139,           ,           
-  larr,        sz2,    $tmp104,    $tmp141
-printi,    $tmp141,           ,           
- label,     $lab19,           ,           
-     >,        key,    $tmp142,    $tmp143
-    jz,    $tmp143,     $lab20,           
-     *,          a,          b,          c
-  larr,        sz2,    $tmp108,    $tmp147
-     +,    $tmp147,          c,    $tmp148
-  sarr,    $tmp148,    $tmp108,        sz2
-  larr,         sz,    $tmp108,    $tmp151
-     +,    $tmp151,    $tmp108,    $tmp153
-  sarr,    $tmp153,    $tmp108,         sz
-printi,          c,           ,           
-  larr,         sz,    $tmp108,    $tmp155
-printc,    $tmp155,           ,           
-  larr,        sz2,    $tmp108,    $tmp157
-printi,    $tmp157,           ,           
- label,     $lab20,           ,           
-    >=,        key,    $tmp142,    $tmp159
-    jz,    $tmp159,     $lab21,           
-     /,          a,          b,          d
-  larr,        sz2,    $tmp105,    $tmp163
-     +,    $tmp163,          d,    $tmp164
-  sarr,    $tmp164,    $tmp105,        sz2
-  larr,         sz,    $tmp105,    $tmp167
-     +,    $tmp167,    $tmp108,    $tmp169
-  sarr,    $tmp169,    $tmp105,         sz
-printi,          d,           ,           
-  larr,         sz,    $tmp105,    $tmp171
-printc,    $tmp171,           ,           
-  larr,        sz2,    $tmp105,    $tmp173
-printi,    $tmp173,           ,           
- label,     $lab21,           ,           
-    !=,        key,    $tmp174,    $tmp175
-    jz,    $tmp175,     $lab22,           
-     /,    $tmp108,        coz,    $tmp177
-     -,          a,    $tmp177,          a
-  larr,        sz2,        coz,    $tmp181
-     +,    $tmp181,          a,    $tmp182
-     +,    $tmp182,    $tmp183,    $tmp184
-  sarr,    $tmp184,        coz,        sz2
-  larr,         sz,        coz,    $tmp187
-     +,    $tmp187,    $tmp108,    $tmp189
-  sarr,    $tmp189,        coz,         sz
-printi,          a,           ,           
-  larr,         sz,        coz,    $tmp191
-printc,    $tmp191,           ,           
-  larr,        sz2,        coz,    $tmp193
-printi,    $tmp193,           ,           
- label,     $lab22,           ,           
-    ==,        key,    $tmp174,    $tmp195
-    jz,    $tmp195,     $lab23,           
-     *,    $tmp105,        coz,    $tmp199
-  larr,         sz,    $tmp174,    $tmp203
-     +,    $tmp203,    $tmp108,    $tmp205
-  sarr,    $tmp205,    $tmp174,         sz
-     -,    $tmp104,          a,    $tmp197
-     +,    $tmp197,    $tmp199,          a
-printi,          a,           ,           
-  larr,         sz,    $tmp174,    $tmp207
-printc,    $tmp207,           ,           
-  larr,        sz2,    $tmp174,    $tmp209
-printi,    $tmp209,           ,           
- label,     $lab23,           ,           
-    jz,        key,     $lab24,           
-printi,          a,           ,           
- label,     $lab24,           ,           
-    ==,        cho,        coz,    $tmp210
-    jz,    $tmp210,     $lab25,           
-prints, "test function:",           ,           
-    jz,        key,     $lab26,           
-     -,    $tmp104,    $tmp105,    $tmp215
-   val,    $tmp215,           ,           
-   val,        coz,           ,           
-  call,          f,           ,    $tmp217
-     +,    $tmp121,    $tmp108,    $tmp220
-     *,    $tmp220,        coz,    $tmp221
-     +,    $tmp217,    $tmp221,    $tmp222
-  sarr,    $tmp222,    $tmp174,        sz2
- label,     $lab26,           ,           
-   val,       conb,           ,           
-  call,          t,           ,           
-   val,       conb,           ,           
-  call,         f2,           ,    $tmp224
-printc,    $tmp224,           ,           
-  larr,        sz2,    $tmp174,    $tmp226
-printi,    $tmp226,           ,           
- label,     $lab25,           ,           
-    ==,        cho,    $tmp174,    $tmp227
-    jz,    $tmp227,     $lab32,           
-prints, "test switch:",           ,           
-  scan,           ,           ,        key
-     *,        key,    $tmp108,    $tmp230
-    ==,    $tmp230,    $tmp104,    $tmp231
-    jz,    $tmp231,     $lab28,           
-prints, "key is 0",           ,           
- label,     $lab28,           ,           
-    ==,    $tmp230,    $tmp108,    $tmp233
-    jz,    $tmp233,     $lab29,           
-prints,  "key is ",           ,           
-printi,        key,           ,           
- label,     $lab29,           ,           
-    ==,    $tmp230,    $tmp105,    $tmp235
-    jz,    $tmp235,     $lab30,           
-prints, "key is 2",           ,           
- label,     $lab30,           ,           
-  scan,           ,           ,          e
-    ==,          e,       conb,    $tmp237
-    jz,    $tmp237,     $lab31,           
-printi,    $tmp105,           ,           
- label,     $lab31,           ,           
-    ==,          e,    $tmp241,    $tmp240
-    jz,    $tmp240,     $lab32,           
-     +,    $tmp105,    $tmp243,    $tmp244
-printi,    $tmp244,           ,           
- label,     $lab32,           ,           
-  call,       nest,           ,           
+  larr,       base,          i,     $tmp66
+    <=,     $tmp66,        num,     $tmp67
+   jnz,     $tmp67,     $lab17,           
+ label,     $lab14,           ,           
+   ret,           ,           ,           
+ const,        int,       1000,        max
+ const,        int,          2,        min
+ const,       char,         97,          a
+ const,       char,        122,          z
+   arr,        int,        200,       base
+   arr,        int,        200,        exp
+   var,        int,           ,        cnt
+  func,        int,           ,        mod
+  para,           ,           ,          x
+  para,           ,           ,          y
+     /,          x,          y,      $tmp1
+     *,      $tmp1,          y,      $tmp2
+     -,          x,      $tmp2,      $tmp3
+   ret,      $tmp3,           ,           
+  proc,           ,           ,       init
+   arr,        int,       1005,        tag
+   var,        int,           ,          i
+   var,        int,           ,          j
+     =,        min,           ,          i
+     =,      $tmp4,           ,        cnt
+ label,      $lab0,           ,           
+  sarr,      $tmp5,          i,        tag
+     +,          i,      $tmp5,          i
+    <=,          i,        max,      $tmp8
+   jnz,      $tmp8,      $lab0,           
+     =,        min,           ,          i
+ label,      $lab1,           ,           
+  larr,        tag,          i,      $tmp9
+    jz,      $tmp9,      $lab3,           
+  sarr,          i,        cnt,       base
+  sarr,      $tmp4,        cnt,        exp
+     +,        cnt,      $tmp5,        cnt
+     =,        min,           ,          j
+     *,          i,          j,     $tmp14
+    <=,     $tmp14,        max,     $tmp15
+    jz,     $tmp15,      $lab3,           
+ label,      $lab4,           ,           
+     *,          i,          j,     $tmp16
+  sarr,      $tmp4,     $tmp16,        tag
+     +,          j,      $tmp5,          j
+     *,          i,          j,     $tmp20
+    <=,     $tmp20,        max,     $tmp21
+   jnz,     $tmp21,      $lab4,           
+ label,      $lab3,           ,           
+     +,          i,      $tmp5,          i
+    <=,          i,        max,     $tmp24
+   jnz,     $tmp24,      $lab1,           
+   ret,           ,           ,           
+  proc,           ,           ,    resolve
+  para,           ,           ,        num
+  para,           ,           ,        pos
+    ==,        num,     $tmp25,     $tmp26
+    jz,     $tmp26,      $lab5,           
+   ret,           ,           ,           
+ label,      $lab5,           ,           
+   val,        num,           ,           
+  larr,       base,        pos,     $tmp27
+   val,     $tmp27,           ,           
+  call,        mod,           ,     $tmp28
+    ==,     $tmp28,     $tmp29,     $tmp30
+    jz,     $tmp30,      $lab6,           
+  larr,        exp,        pos,     $tmp31
+     +,     $tmp31,     $tmp25,     $tmp33
+  sarr,     $tmp33,        pos,        exp
+  larr,       base,        pos,     $tmp34
+     /,        num,     $tmp34,     $tmp35
+   val,     $tmp35,           ,           
+   val,        pos,           ,           
+  call,    resolve,           ,           
+   ret,           ,           ,           
+ label,      $lab6,           ,           
+   val,        num,           ,           
+     +,        pos,     $tmp25,     $tmp37
+   val,     $tmp37,           ,           
+  call,    resolve,           ,           
+   ret,           ,           ,           
+  proc,           ,           ,       main
+   var,       char,           ,       func
+   var,        int,           ,        num
+   var,        int,           ,          i
+   var,        int,           ,          j
+  call,       init,           ,           
+  scan,           ,           ,       func
+  scan,           ,           ,        num
+    ==,       func,     $tmp39,     $tmp38
+    jz,     $tmp38,      $lab7,           
+     <,        num,        min,     $tmp40
+    jz,     $tmp40,      $lab8,           
+prints, "Number is out of range.",           ,           
+   ret,           ,           ,           
+ label,      $lab8,           ,           
+     >,        num,        max,     $tmp41
+    jz,     $tmp41,      $lab9,           
+prints, "Number is out of range.",           ,           
+   ret,           ,           ,           
+ label,      $lab9,           ,           
+   val,        num,           ,           
+   val,     $tmp42,           ,           
+  call,    resolve,           ,           
+printi,        num,           ,           
+prints,        "=",           ,           
+     =,     $tmp42,           ,          j
+     =,     $tmp42,           ,          i
+ label,     $lab10,           ,           
+  larr,        exp,          i,     $tmp45
+     >,     $tmp45,     $tmp42,     $tmp47
+    jz,     $tmp47,     $lab11,           
+    jz,          j,     $lab12,           
+prints,        "*",           ,           
+ label,     $lab12,           ,           
+  larr,       base,          i,     $tmp48
+printi,     $tmp48,           ,           
+  larr,        exp,          i,     $tmp49
+     >,     $tmp49,     $tmp50,     $tmp51
+    jz,     $tmp51,     $lab13,           
+prints,        "^",           ,           
+  larr,        exp,          i,     $tmp52
+printi,     $tmp52,           ,           
+ label,     $lab13,           ,           
+     =,     $tmp50,           ,          j
+ label,     $lab11,           ,           
+     +,          i,     $tmp50,          i
+     <,          i,        cnt,     $tmp56
+   jnz,     $tmp56,     $lab10,           
+ label,      $lab7,           ,           
+    ==,       func,     $tmp58,     $tmp57
+    jz,     $tmp57,     $lab14,           
+     <,        num,        min,     $tmp59
+    jz,     $tmp59,     $lab15,           
+prints, "Number is out of range.",           ,           
+   ret,           ,           ,           
+ label,     $lab15,           ,           
+     >,        num,        max,     $tmp60
+    jz,     $tmp60,     $lab16,           
+prints, "Number is out of range.",           ,           
+   ret,           ,           ,           
+ label,     $lab16,           ,           
+prints, "Prime numbers:",           ,           
+     =,     $tmp42,           ,          i
+ label,     $lab17,           ,           
+prints,        " ",           ,           
+  larr,       base,          i,     $tmp62
+printi,     $tmp62,           ,           
+     +,          i,     $tmp50,          i
+    >=,          i,        cnt,     $tmp65
+    jz,     $tmp65,     $lab18,           
+   ret,           ,           ,           
+ label,     $lab18,           ,           
+  larr,       base,          i,     $tmp66
+    <=,     $tmp66,        num,     $tmp67
+   jnz,     $tmp67,     $lab17,           
+ label,     $lab14,           ,           
    ret,           ,           ,           

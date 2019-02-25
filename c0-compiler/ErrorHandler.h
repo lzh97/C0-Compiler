@@ -43,6 +43,8 @@
 #define ASSIGN_INTTOCHAR_WARNING 300			//整型赋值字符型
 #define MAY_MISSING_RETURN_VALUE_WARNING 301	//可能缺失返回值
 #define PROC_RETURN_VALUE_WARNING 302			//过程返回非空值
+#define DUPLICATE_CASE_WARNING 303				//重复定义情况
+#define UNUSED_IDENTITY_WARNING 304				//未使用标识符
 
 void Error(int code);
 void Warning(int code);
